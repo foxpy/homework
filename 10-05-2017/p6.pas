@@ -2,6 +2,6 @@ VAR
     C : REAL;
 BEGIN
     readln(C);
-    writelb('S: ', 4*pi*C*C);
+    writeln('S: ', C*C/(4*pi):10:3);
 END.
 
