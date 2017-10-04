@@ -8,8 +8,8 @@ BEGIN
     c := sqrt(sqr(x1-x3) + sqr(y1-y3));
     s := (a + b + c) / 2;
 
-    write('a: ', a, ' b: ', b, 'c: ', c, ' ');
-    write('P: ', a+b+c, ' ');
-    writeln('S: ' sqrt(s * (s-a) * (s-b) * (s-c)));
+    write('a: ', a:10:3, ' b: ', b:10:3, ' c: ', c:10:3, ' ');
+    write('P: ', a+b+c:10:3, ' ');
+    writeln('S: ', sqrt(s * (s-a) * (s-b) * (s-c)):10:3);
 END.
 
