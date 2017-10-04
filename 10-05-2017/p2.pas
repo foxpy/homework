@@ -1,5 +1,5 @@
 VAR
-    a : INTEGER;
+    a : REAL;
 BEGIN
     readln(a);
     write('P: ', 3*a, ' ');

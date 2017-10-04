@@ -1,5 +1,5 @@
 VAR
-    R, al : INTEGER;
+    R, al : REAL;
 BEGIN
     readln(R, al);
     writeln('S: ', pi*R*R*360/al);

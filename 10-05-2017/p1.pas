@@ -1,5 +1,5 @@
 VAR
-    a, b : INTEGER;
+    a, b : REAL;
 BEGIN
     readln(a, b);
     write('c: ', sqrt(a*a + b*b):3:5, ' ');
