@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     float y = atof(argv[3]);
     float z = atof(argv[4]);
 
-    printf("Arguments: %f, %f, %f.\n", x, y, z);
+    printf("Arguments: %12.3f, %12.3f, %12.3f.\n", x, y, z);
 
     switch (atoi (argv[1])) {
         case 1:
@@ -50,24 +50,24 @@ int main(int argc, char *argv[]) {
 void task_1(float x, float y, float z) {
     float a = ((pow(x, 2) + pow(y, 3) - x*y*z) / (sqrt(fabs(x - y)) + sqrt(fabs(z + x)) + 1));
     float b = (x / y * atan(z + pow(E, x*y*z)));
-    printf("Answer: %f %f\n", a, b);
+    printf("Answer: %12.3f, %12.3f.\n", a, b);
 }
 
 void task_2(float x, float y, float z) {
     float a = ((cos(pow(x, 2) + PI/3)*PI/180) + 3*pow(y, 2) - sin(z*PI/180)) / (sqrt(fabs(sin(x*PI/180)) + fabs(y) + 3));
     float b = 4 - pow(E, x+y+z) / (pow(x, 2) + 1);
-    printf("Answer: %f %f\n", a, b);
+    printf("Answer: %12.3f, %12.3f.\n", a, b);
 }
 
 void task_3(float x, float y, float z) {
     float a = (sin((x + z)*PI/180) - cos((PI/4 + y)*PI/180)) / (6 + sqrt(fabs(atan(x)) + fabs(cos(y*z*PI/180))));
     float b = pow(cos((atan(z*a*y) / (pow(x, 3) + 1))*PI/180), 4);
-    printf("Answer: %f %f\n", a, b);
+    printf("Answer: %12.3f, %12.3f.\n", a, b);
 }
 
 void task_4(float x, float y, float z) {
     float a = log((sin((x*y + z)*PI/180) + 1) / (2 + sqrt(fabs(atan(x)) + fabs(cos(y*z*PI/180)))));
     float b = 3 * pow(a, 3) + 4 * pow(x, 2) - a + 5;
-    printf("Answer: %f %f\n", a, b);
+    printf("Answer: %12.3f, %12.3f.\n", a, b);
 }
 
