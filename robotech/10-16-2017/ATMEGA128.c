@@ -3,6 +3,9 @@
 #define TRUE    1
 #define FALSE   0
 
+void set_leds(char mode);
+void set_motors(char mode);
+
 
 
 int main(void) {
