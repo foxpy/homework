@@ -22,7 +22,7 @@ int main(void) {
             set_leds(behaviour_mode);
             set_motors(behaviour_mode);
 
-            if (behaviour_mode = 3) {
+            if (behaviour_mode == 3) {
                 // reset behaviour mode to 0 (it would be 1 with next iteration)
                 behaviour_mode = 0;
             }
