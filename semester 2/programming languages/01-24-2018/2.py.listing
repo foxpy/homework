@@ -1,0 +1,4 @@
+Function accepts two values which should be an angles of the VALID triangle and
+returns the third angle.
+Function will raise exception if triangle is not valid.
+
