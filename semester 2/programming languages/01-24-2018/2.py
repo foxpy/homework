@@ -4,4 +4,3 @@ def third_angle(first_angle, second_angle):
     else:
         raise ValueError("Not a triangle.")
 
-
