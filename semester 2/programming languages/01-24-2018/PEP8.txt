@@ -1,0 +1,58 @@
+====
+PEP8
+
+
+============
+Introduction
+
+Python developers left us a guide which should be followed when writing programs
+in Python. The guide could be found here:
+	https://www.python.org/dev/peps/pep-0008/
+
+
+
+============
+Main of PEP8
+
+First thing to know about Python is an indentation style. Using 4 spaces per
+level is recommended. Avoid tabs. Python 3 disallows mixing the use of tabs and
+spaces for indentation!
+
+Also there is a line length limit of 79 characters. I find this part ridiculous
+and use 120 characters per line limit in my projects but still try to follow
+PEP8 in Python code. Meh.
+
+PEP8 contains a useful information on binary operators position. There are two
+common styles: leaving operator at the end of the string or putting it at the
+beginning. PEP8 allows using both of them. I prefer second, like:
+
+sum_of_values = (value1
+		+ value2
+		+ value3)
+
+It is nice to leave two blank lines between classes and one between methods.
+
+For encoding it is better to use ASCII or UTF-8. If you use something else:
+1) type `# -*- coding: your-encoding-here -*-` at the beginning of the file
+(under shebang if exists).
+2) kill yourself.
+
+Imports are placed at separate lines, like:
+
+import magic
+import shine
+
+Imports location is always at the top of the file under shebang or encoding (if
+exist).
+
+There is no difference between single and double quotes: use whatever you like.
+
+Comments should be complete sentences. AVOID non-English comments.
+Inline comments should be indent by at least of two spaces from master line.
+
+This is not fobidden to use unix_hacker_snake_case naming style so I use it.
+
+However, modules should have suchnaming.
+
+ClassNamesAreCapWords.
+
