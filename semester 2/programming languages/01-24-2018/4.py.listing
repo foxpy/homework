@@ -1,0 +1,5 @@
+Distance we could beat is calculated using mpg consumption and fuel left.
+Distance = fuel left / consumption.
+If distance we could beat higher or equal to distance we have to beat - return
+true.
+
