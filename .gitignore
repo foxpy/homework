@@ -2,4 +2,5 @@
 *.o
 *.so
 .vscode/
+__pycache__/
 
