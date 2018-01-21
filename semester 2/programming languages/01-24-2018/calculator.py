@@ -1,22 +1,29 @@
-def calc(a, b, action):
-    if action == "add":
-        return a + b
-    elif action == "subtract":
-        return a - b
-    elif action == "multiply":
-        return a * b
-    elif action == "divide":
-        return int(round(a / b, 0))
-    elif action == "divide_float":
-        return round(a / b, 2)
-    elif action == "remainder":
+from math import log
+
+
+def addition(a, b):
+    return a + b
+
+def subtraction(a, b):
+    return a - b
+
+def multiplication(a, b):
+    return a * b
+
+def division(a, b, division_type=""):
+    if division_type == "float":
+        return a / b
+    elif division_type == "remainder":
         return a % b
-    elif action == "logarithm":
-        return round(__import__('math').log(a, b), 2)
-    elif action == "power":
-        return a ** b
-    elif action == "root":
-        return round(a ** (1 / b), 2)
     else:
-        raise ValueError("Unsupported action.")
+        return a // b
+
+def logarithm(a, b):
+    return log(a, b)
+
+def power(a, b):
+    return a ** b
+
+def root(a, b=2):
+    return a ** (1 / b)
 
