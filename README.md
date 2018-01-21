@@ -17,6 +17,5 @@
 ### programming languages
 
 - [x] 01-16-2018
-
 - [x] 01-24-2018
 
