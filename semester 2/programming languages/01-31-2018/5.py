@@ -5,7 +5,7 @@ def second_maximum(values):
     # discard first maximum as well
     values.discard(max(values))
 
-    if len(values) < 2:
+    if len(values) < 1:
         # it has no second maximum
         return "No"
 
