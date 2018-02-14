@@ -1,2 +1,2 @@
-Simple function, accepts two ints and returns string "odd" or "even".
+Simple function, accepts int and returns string "odd" or "even".
 
