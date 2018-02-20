@@ -4,10 +4,12 @@ import sys
 import os
 import cv2 as cv
 import numpy as np
+from scipy import ndimage
+
 
 def main():
     filters = ["copy", "edges", "blur", "psycho", "noise",
-               "blue", "green", "red", "gray", "hsv"]
+               "blue", "green", "red", "gray", "hsv", "magic"]
 
     if len(sys.argv) != 4\
         or sys.argv[2] not in filters:
@@ -39,6 +41,12 @@ def main():
         frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
     elif filter_type == "hsv":
         frame = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+    elif filter_type == "magic":
+        k_3x3 = np.array([[0, 1, 0],
+                          [1, 2, 1],
+                          [0, 1, 0]])
+        for i in range(3):
+            frame[:, :, i] = ndimage.convolve(frame[:, :, i], k_3x3)
 
     if cv.imwrite(out_file, frame):
         exit(0)
