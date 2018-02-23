@@ -11,9 +11,7 @@ def main():
     filters = ["copy", "edges", "blur", "psycho", "noise",
                "blue", "green", "red", "gray", "hsv", "magic"]
 
-    if len(sys.argv) != 4\
-        or sys.argv[2] not in filters:
-        # Stop execution if arguments passed wrong
+    if len(sys.argv) != 4 or sys.argv[2] not in filters:
         print("\tArguments: <INPUT> <FILTER> <OUTPUT>\n"\
                 + "\tAvailable filters: " + " ".join(filters))
         exit(1)
