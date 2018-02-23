@@ -1,6 +1,7 @@
 *.out
 *.o
 *.so
+*.swp
 .vscode/
 __pycache__/
 
