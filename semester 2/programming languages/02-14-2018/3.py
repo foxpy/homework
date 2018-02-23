@@ -48,9 +48,7 @@ def main():
         for i in range(3):
             frame[:, :, i] = ndimage.convolve(frame[:, :, i], k_3x3)
 
-    if cv.imwrite(out_file, frame):
-        exit(0)
-    else:
+    if not cv.imwrite(out_file, frame):
         exit(-1)
 
 
