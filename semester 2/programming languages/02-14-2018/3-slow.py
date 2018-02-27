@@ -59,9 +59,6 @@ def main():
     print(log_time_elapsed(delta_time, "yuv", w*h))
 
 
-    print("Execution took {} seconds.".format(round(time.time() - start_time, 2)))
-
-
 
 if __name__ == '__main__':
     main()
