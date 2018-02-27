@@ -9,6 +9,12 @@ import time
 # Python is slow for raw calculations and we are going to prove that
 start_time = time.time()
 
+
+def get_cpu_freq():
+    # Put your OS dependent code here. I use Linux, so
+    return int(open('/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq',
+        'r').read())
+
 image = Image.open("input.jpg")
 draw = ImageDraw.Draw(image)
 
@@ -26,8 +32,7 @@ image.save("gray.jpg", "JPEG")
 print("[{}]: Gray image processed in {} seconds with {} CPU cycles per pixel."
         .format(round(time.time() - start_time, 2),
             round(time.time() - delta_time, 2),
-            int(int(open('/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq',
-                'r').read())*10**3*(time.time() - delta_time)/(w*h))))
+            int(get_cpu_freq()*10**3*(time.time() - delta_time)/(w*h))))
 
 print("Execution took {} seconds.".format(round(time.time() - start_time, 2)))
 
