@@ -36,13 +36,27 @@ def main():
         print("Image too big. You can drink some coffee.")
     frame = image.load()
 
-
     delta_time = time.time()
     for x in range(w):
         for y in range(h):
             draw.point((x, y), ((sum(frame[x, y]) // 3,)*3))
     image.save("gray.jpg", "JPEG")
     print(log_time_elapsed(delta_time, "gray", w*h))
+
+
+    image = Image.open("input.jpg")
+    draw = ImageDraw.Draw(image)
+    frame = image.load()
+
+    delta_time = time.time()
+    for x in range(w):
+        for y in range(h):
+            Y = int(0.299*frame[x, y][0] + 0.587*frame[x, y][1] + 0.114*frame[x, y][2])
+            U = int(0.492*(frame[x, y][2] - Y))
+            V = int(0.877*(frame[x, y][0] - Y))
+            draw.point((x, y), (Y, U, V))
+    image.save("yuv.jpg", "JPEG")
+    print(log_time_elapsed(delta_time, "yuv", w*h))
 
 
     print("Execution took {} seconds.".format(round(time.time() - start_time, 2)))
