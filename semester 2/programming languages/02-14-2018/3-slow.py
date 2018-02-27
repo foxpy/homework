@@ -7,7 +7,6 @@ import time
 
 
 # Python is slow for raw calculations and we are going to prove that
-print("Applying filters. Please wait...")
 start_time = time.time()
 
 image = Image.open("input.jpg")
