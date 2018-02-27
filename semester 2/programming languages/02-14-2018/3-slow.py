@@ -59,6 +59,30 @@ def main():
     print(log_time_elapsed(delta_time, "yuv", w*h))
 
 
+    image = Image.open("input.jpg")
+    draw = ImageDraw.Draw(image)
+    frame = image.load()
+
+    delta_time = time.time()
+    for x in range(w):
+        for y in range(h):
+            R, G, B = frame[x, y]
+            if (R == 0) and (G == 0) and (B == 0):
+                draw.point((x, y), (0, 0, 0))
+                continue
+            C = 1 - R/255
+            M = 1 - G/255
+            Y = 1 - B/255
+
+            min_CMY = min(C, M, Y)
+            C = int((C - min_CMY) / (1 - min_CMY) * 255)
+            M = int((M - min_CMY) / (1 - min_CMY) * 255)
+            Y = int((Y - min_CMY) / (1 - min_CMY) * 255)
+            draw.point((x, y), (C, M, Y))
+    image.save("cmy.jpg", "JPEG")
+    print(log_time_elapsed(delta_time, "cmy", w*h))
+
+
 
 if __name__ == '__main__':
     main()
