@@ -13,7 +13,16 @@ start_time = time.time()
 def get_cpu_freq():
     # Put your OS dependent code here. I use Linux, so
     return int(open('/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq',
-        'r').read())
+        'r').read())*10**3
+
+
+def log_time_elapsed(timestep, image_type, image_size):
+    return "[{}]: {} image processed in {} seconds with {} CPU cycles per pixel".format(
+            round(time.time() - start_time, 2),
+            image_type,
+            round(time.time() - timestep, 2),
+            int(get_cpu_freq()*(time.time() - timestep)/image_size))
+
 
 image = Image.open("input.jpg")
 draw = ImageDraw.Draw(image)
@@ -29,10 +38,7 @@ for x in range(w):
     for y in range(h):
         draw.point((x, y), ((sum(frame[x, y]) // 3,)*3))
 image.save("gray.jpg", "JPEG")
-print("[{}]: Gray image processed in {} seconds with {} CPU cycles per pixel."
-        .format(round(time.time() - start_time, 2),
-            round(time.time() - delta_time, 2),
-            int(get_cpu_freq()*10**3*(time.time() - delta_time)/(w*h))))
+print(log_time_elapsed(delta_time, "gray", w*h))
 
 print("Execution took {} seconds.".format(round(time.time() - start_time, 2)))
 
