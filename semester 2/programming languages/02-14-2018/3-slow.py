@@ -6,6 +6,7 @@ from PIL import Image, ImageDraw
 import time
 
 
+
 # Python is slow for raw calculations and we are going to prove that
 start_time = time.time()
 
@@ -24,21 +25,30 @@ def log_time_elapsed(timestep, image_type, image_size):
             int(get_cpu_freq()*(time.time() - timestep)/image_size))
 
 
-image = Image.open("input.jpg")
-draw = ImageDraw.Draw(image)
 
-w, h = image.size
-print("Image size is {}x{}.".format(*image.size))
-if w*h > 640*480:
-    print("Image too big. You can drink some coffee.")
-frame = image.load()
+def main():
+    image = Image.open("input.jpg")
+    draw = ImageDraw.Draw(image)
 
-delta_time = time.time()
-for x in range(w):
-    for y in range(h):
-        draw.point((x, y), ((sum(frame[x, y]) // 3,)*3))
-image.save("gray.jpg", "JPEG")
-print(log_time_elapsed(delta_time, "gray", w*h))
+    w, h = image.size
+    print("Image size is {}x{}.".format(*image.size))
+    if w*h > 640*480:
+        print("Image too big. You can drink some coffee.")
+    frame = image.load()
 
-print("Execution took {} seconds.".format(round(time.time() - start_time, 2)))
+
+    delta_time = time.time()
+    for x in range(w):
+        for y in range(h):
+            draw.point((x, y), ((sum(frame[x, y]) // 3,)*3))
+    image.save("gray.jpg", "JPEG")
+    print(log_time_elapsed(delta_time, "gray", w*h))
+
+
+    print("Execution took {} seconds.".format(round(time.time() - start_time, 2)))
+
+
+
+if __name__ == '__main__':
+    main()
 
