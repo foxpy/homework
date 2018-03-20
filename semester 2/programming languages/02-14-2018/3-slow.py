@@ -32,7 +32,7 @@ def main():
 
     w, h = image.size
     print("Image size is {}x{}.".format(*image.size))
-    if w*h > 640*480:
+    if w*h > 1920*1080:
         print("Image too big. You can drink some coffee.")
     frame = image.load()
 
