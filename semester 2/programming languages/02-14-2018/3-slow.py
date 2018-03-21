@@ -3,6 +3,7 @@
 # requirements. So I have written a slow, but verbose version.
 
 from PIL import Image, ImageDraw
+import numpy as np
 import time
 
 
@@ -81,6 +82,25 @@ def main():
             draw.point((x, y), (C, M, Y))
     image.save("cmy.jpg", "JPEG")
     print(log_time_elapsed(delta_time, "cmy", w*h))
+
+
+    image = Image.open("input.jpg")
+    draw = ImageDraw.Draw(image)
+    frame = image.load()
+
+    delta_time = time.time()
+    k_5x5 = np.ones((5, 5))
+    for x in range(5, w-5):
+        for y in range(5, h-5):
+            pixel = [0, 0, 0]
+            for i in range(5):
+                for j in range(5):
+                    for k in range(3):
+                        pixel[k] += frame[x+i, y+j][k] * k_5x5[i, j]
+            pixel[:] = [l%255 for l in pixel]
+            draw.point((x, y), tuple(map(int, pixel)))
+    image.save("hpf.jpg")
+    print(log_time_elapsed(delta_time, "hpf", w*h))
 
 
 
