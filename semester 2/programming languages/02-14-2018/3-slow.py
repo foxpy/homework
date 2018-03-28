@@ -86,17 +86,23 @@ def main():
 
     image = Image.open("input.jpg")
     draw = ImageDraw.Draw(image)
-    frame = image.load()
+    expanded = Image.new("RGB", (w+4, h+4), (0,)*3)
+    frame = expanded.load()
+    expanded.paste(image, (2, 2, w+2, h+2))
 
     delta_time = time.time()
-    k_5x5 = np.ones((5, 5))
-    for x in range(5, w-5):
-        for y in range(5, h-5):
+    k_5x5 = [[2, 2, 2, 2, 2],
+             [2, 1, 1, 1, 2],
+             [2, 1, 0, 1, 2],
+             [2, 1, 1, 1, 2],
+             [2, 2, 2, 2, 2]]
+    for x in range(3, w-3):
+        for y in range(3, h-3):
             pixel = [0, 0, 0]
             for i in range(5):
                 for j in range(5):
                     for k in range(3):
-                        pixel[k] += frame[x+i, y+j][k] * k_5x5[i, j]
+                        pixel[k] += frame[x+2, y+j][k] * k_5x5[i][j]
             pixel[:] = [l%255 for l in pixel]
             draw.point((x, y), tuple(map(int, pixel)))
     image.save("hpf.jpg")
