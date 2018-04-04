@@ -96,13 +96,13 @@ def main():
              [2, 1, 0, 1, 2],
              [2, 1, 1, 1, 2],
              [2, 2, 2, 2, 2]]
-    for x in range(3, w-3):
-        for y in range(3, h-3):
+    for x in range(w):
+        for y in range(h):
             pixel = [0, 0, 0]
             for i in range(5):
                 for j in range(5):
                     for k in range(3):
-                        pixel[k] += frame[x+2, y+j][k] * k_5x5[i][j]
+                        pixel[k] += frame[x+i, y+j][k] * k_5x5[i][j]
             pixel[:] = [l%255 for l in pixel]
             draw.point((x, y), tuple(map(int, pixel)))
     image.save("hpf.jpg")
