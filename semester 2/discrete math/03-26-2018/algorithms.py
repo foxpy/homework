@@ -8,7 +8,7 @@ def dijkstra_shortest_pathways(adjacency_matrix, number_of_nodes, start_node_num
     e. g.           a  b  c
                 a [[0, 3, I],
                 b  [I, 0, 2],
-                c  [6, 4, I]].
+                c  [6, 4, 0]].
     I stands for infinity: float('inf')."""
 
     unchecked = [True]*number_of_nodes
