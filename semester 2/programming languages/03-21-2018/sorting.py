@@ -15,6 +15,16 @@ def insertion_sort(array):
     return array
 
 
+def selection_sort(array):
+    for i in range(len(array)-1):
+        selection = i
+        for j in range(i+1, len(array)):
+            if array[j] < array[selection]:
+                selection = j
+        array[i], array[selection] = array[selection], array[i]
+    return array
+
+
 
 
 ###########################################################
