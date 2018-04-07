@@ -15,6 +15,13 @@ def insertion_sort(array):
     return array
 
 
+
+
+###########################################################
+# These functions are not really related to homework task #
+###########################################################
+
+
 def quick_sort(array):
     if len(array) > 1:
         index = len(array) // 2
