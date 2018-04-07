@@ -39,3 +39,8 @@ def quick_sort(array):
         quick_sort(large)
         array[:] = small + [array[index]] + large
         return array
+
+
+def really_quick_sort(array):
+    array.sort()
+    return array
