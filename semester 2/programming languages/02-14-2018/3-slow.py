@@ -84,32 +84,33 @@ def main():
     print(log_time_elapsed(delta_time, "cmy", w*h))
 
 
+
+    kernel = [[0, 1, 0],
+              [1, 2, 1],
+              [0, 1, 0]]
+    k_length = len(kernel)
+    expansion = k_length // 2
+
     image = Image.open("input.jpg")
+    expanded = Image.new("RGB", (w + expansion*2, h + expansion*2), (127,)*3)
     draw = ImageDraw.Draw(image)
-    expanded = Image.new("RGB", (w+4, h+4), (0,)*3)
     frame = expanded.load()
-    expanded.paste(image, (2, 2, w+2, h+2))
+    expanded.paste(image, (expansion,)*2 + (w + expansion, h + expansion))
 
     delta_time = time.time()
-    k_5x5 = [[2, 2, 2, 2, 2],
-             [2, 1, 1, 1, 2],
-             [2, 1, 0, 1, 2],
-             [2, 1, 1, 1, 2],
-             [2, 2, 2, 2, 2]]
-    for x in range(w):
-        for y in range(h):
-            pixel = [0, 0, 0]
-            for i in range(5):
-                for j in range(5):
-                    for k in range(3):
-                        pixel[k] += frame[x+i, y+j][k] * k_5x5[i][j]
-            pixel[:] = [l%255 for l in pixel]
-            draw.point((x, y), tuple(map(int, pixel)))
-    image.save("hpf.jpg")
+    for x in range(expansion+1, w + expansion+1):
+        for y in range(expansion+1, h + expansion+1):
+            pixel = [0,]*3
+            for color in range(3):
+                for i in range(k_length):
+                    for j in range(k_length):
+                        pixel[color] += frame[x+i - (expansion+1), y+j - (expansion+1)][color]*kernel[i][j]
+            pixel[:] = [int(k*1/k_length**2) for k in pixel]
+            draw.point((x - expansion+1, y - expansion+1), tuple(pixel))
+    image.save("hpf.jpg", "JPEG")
     print(log_time_elapsed(delta_time, "hpf", w*h))
 
 
 
 if __name__ == '__main__':
     main()
-
