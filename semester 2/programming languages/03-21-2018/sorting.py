@@ -29,7 +29,7 @@ def binary_search(array, search_item):
     low = 0
     high = len(array)
     while low < high:
-        index = low + (high - low)//2
+        index = (high + low)//2
         value = array[index]
         if search_item == value:
             return index
