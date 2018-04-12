@@ -98,15 +98,15 @@ def main():
     expanded.paste(image, (expansion,)*2 + (w + expansion, h + expansion))
 
     delta_time = time.time()
-    for x in range(expansion+1, w + expansion+1):
-        for y in range(expansion+1, h + expansion+1):
+    for x in range(w):
+        for y in range(h):
             pixel = [0,]*3
             for color in range(3):
                 for i in range(k_length):
                     for j in range(k_length):
-                        pixel[color] += frame[x+i - (expansion+1), y+j - (expansion+1)][color]*kernel[i][j]
+                        pixel[color] += frame[x+i, y+j][color]*kernel[i][j]
             pixel[:] = [int(k*1/k_length**2) for k in pixel]
-            draw.point((x - expansion+1, y - expansion+1), tuple(pixel))
+            draw.point((x, y), tuple(pixel))
     image.save("hpf.jpg", "JPEG")
     print(log_time_elapsed(delta_time, "hpf", w*h))
 
