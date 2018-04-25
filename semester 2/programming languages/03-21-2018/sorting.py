@@ -38,18 +38,17 @@ def selection_sort(array):
 
 def binary_search(array, search_item):
     low = 0
-    high = len(array)
+    high = len(array)-1
     while low < high:
         index = (high + low)//2
-        value = array[index]
-        if search_item == value:
+        if search_item == array[index]:
             return index
-        elif search_item > value:
-            if low == index:
-                break
-            low = index
-        elif search_item < value:
+        elif search_item > array[index]:
+            low = index+1
+        elif search_item < array[index]:
             high = index
+    else:
+        raise ValueError("There is no such item or list is not sorted")
 
 
 
