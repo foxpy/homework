@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 	if (D < 0) {
 		puts("Sorry. I cannot solve this equation.");
-		puts("Basically because I know nothing about imaginary numbers. :)");
+		puts("Basically because I know nothing about complex numbers. :)");
 		exit(1);
 	}
 
