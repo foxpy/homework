@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 int main(int argc, char *argv[]) {
-	float A, B, C, D;
+	float A, B, C, D, x1, x2;
 	puts("Ax^2+Bx+C=0");
 
 	printf("Enter A: ");
@@ -22,7 +23,11 @@ int main(int argc, char *argv[]) {
 		exit(1);
 	}
 
-	printf("Calculated D: %f.\n", D);
+	x1 = (-B + sqrt(D))/2/A;
+	x2 = (-B - sqrt(D))/2/A;
+
+	puts("Answers:");
+	printf("x1: %f\nx2: %f.\n", x1, x2);
 
 	return 0;
 }
