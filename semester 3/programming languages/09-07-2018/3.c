@@ -16,18 +16,24 @@ int main(int argc, char *argv[]) {
 	int lines = 0;
 
 	char c;
+	char in_word = FALSE;
 	while (scanf("%c", &c) != EOF) {
 		bytes++;
-		if (c == ' ') {
+
+		if ((is_letter(c)) && !(in_word)) {
+			in_word = TRUE;
 			words++;
+		} else if (!(is_letter(c))) {
+			in_word = FALSE;
 		}
+
 		if (c == '\n') {
 			lines++;
 		}
 	}
 
 	printf("Bytes: %d.\n", bytes-1);
-	printf("Words: %d.\n", words+1);
+	printf("Words: %d.\n", words);
 	printf("Lines: %d.\n", lines);
 
 	return 0;
