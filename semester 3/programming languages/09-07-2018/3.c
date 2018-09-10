@@ -3,7 +3,7 @@
 int main(int argc, char *argv[]) {
 	int bytes = 0;
 	int words = 0;
-	int sentences = 0;
+	int lines = 0;
 
 	char c;
 	while (scanf("%c", &c) != EOF) {
@@ -11,14 +11,14 @@ int main(int argc, char *argv[]) {
 		if (c == ' ') {
 			words++;
 		}
-		if (c == '.') {
-			sentences++;
+		if (c == '\n') {
+			lines++;
 		}
 	}
 
 	printf("Bytes: %d.\n", bytes-1);
 	printf("Words: %d.\n", words+1);
-	printf("Sentences: %d.\n", sentences);
+	printf("Lines: %d.\n", lines);
 
 	return 0;
 }
