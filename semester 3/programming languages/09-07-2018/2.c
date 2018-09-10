@@ -23,12 +23,6 @@ int main(int argc, char *argv[]) {
 		exit(1);
 	}
 
-	if (D == 0) {
-		x1 = -B/2/A;
-		printf("Answer: %f.\n", x1);
-		return 0;
-	}
-
 	x1 = (-B + sqrt(D))/2/A;
 	x2 = (-B - sqrt(D))/2/A;
 
