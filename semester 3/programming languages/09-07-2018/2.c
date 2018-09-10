@@ -29,6 +29,5 @@ int main(int argc, char *argv[]) {
 	double x2 = (-B - sqrt(D))/2/A;
 
 	printf("x1: %f,\nx2: %f.\n", x1, x2);
-
 	return 0;
 }
