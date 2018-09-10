@@ -1,5 +1,6 @@
 # Homework
 
+
 ## Semester 1
 
 ### informatics
@@ -11,6 +12,7 @@
 
 - [x] 10-16-2017
 - [x] 11-22-2017
+
 
 ## Semester 2
 
@@ -25,3 +27,10 @@
 ### discrete math
 
 - [x] 03-26-2018
+
+
+## Semester 3
+
+### programming languages
+
+- [ ] 09-07-2018
