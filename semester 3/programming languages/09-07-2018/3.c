@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	printf("Bytes: %d.\n", bytes-1);
+	printf("Bytes: %d.\n", bytes);
 	printf("Words: %d.\n", words);
 	printf("Lines: %d.\n", lines+1);
 
