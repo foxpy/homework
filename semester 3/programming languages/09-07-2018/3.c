@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
 	printf("Bytes: %d.\n", bytes-1);
 	printf("Words: %d.\n", words);
-	printf("Lines: %d.\n", lines);
+	printf("Lines: %d.\n", lines+1);
 
 	return 0;
 }
