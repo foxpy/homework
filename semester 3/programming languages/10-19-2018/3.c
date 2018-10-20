@@ -37,6 +37,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Index = %ld.\n", start_sub);
-	printf("Time: %.0f microseconds.\n", elapsed_time / CLOCKS_PER_SEC*1000000);
+	printf("Time: %.0f microseconds.\n",
+			elapsed_time / CLOCKS_PER_SEC*1000000);
 	return 0;
 }
