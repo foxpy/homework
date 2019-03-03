@@ -51,16 +51,16 @@ std::string from_russian(char byte1, char byte2) {
 		case 0x8f: return(std::string("ia")); // я
 		case 0x90: return(std::string("A")); // А
 		case 0x92: return(std::string("V")); // В
-		default: printf("0x%02hhx, 0x%02hhx: WTF?\n", c1, c2);
+		default: printf("0x%02hhx, 0x%02hhx: unknown sequence\n", c1, c2);
 		}
 		break;
 	case 0xd0:
 		switch(c2) {
 		case 0x91: return(std::string("B")); // Б
-		default: printf("0x%02hhx, 0x%02hhx: WTF?\n", c1, c2);
+		default: printf("0x%02hhx, 0x%02hhx: unknown sequence\n", c1, c2);
 		}
 		break;
-	default: printf("0x%02hhx, 0x%02hhx: WTF?\n", c1, c2);
+	default: printf("0x%02hhx, 0x%02hhx: unknown sequence\n", c1, c2);
 	}
 	return("");
 }
