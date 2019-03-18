@@ -30,9 +30,8 @@ int main()
 		} else if(c < 0xf8) {
 			i += 4;
 		} else if(c < 0xfc) {
-			i += 5;
-		} else {
-			i += 6;
+			std::cerr << "Fatal error: invalid UTF-8 sequence. Panicing!" << std::endl;
+			return EXIT_FAILURE;
 		}
 	}
 
