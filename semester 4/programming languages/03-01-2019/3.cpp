@@ -21,13 +21,16 @@ int main()
 	while(i < input.length()) {
 		unsigned char c = *((unsigned char*) &input[i]);
 		if(c < 0x80) {
-			output.append(1, input[i]);
+			output.append(input, i, 1);
 			i += 1;
 		} else if(c < 0xe0) {
+			output.append(input, i, 2);
 			i += 2;
 		} else if(c < 0xf0) {
+			output.append(input, i, 3);
 			i += 3;
 		} else if(c < 0xf8) {
+			output.append(input, i, 4);
 			i += 4;
 		} else if(c < 0xfc) {
 			std::cerr << "Fatal error: invalid UTF-8 sequence. Panicing!" << std::endl;
