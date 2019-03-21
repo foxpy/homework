@@ -26,6 +26,19 @@ void multiply_by_min(T& array, size_t len)
 }
 
 template<class T>
+void replace_zeros_by_average(T& array, size_t len)
+{
+	long long average = 0;
+	// absolutely the same question as in line 16...
+	size_t i;
+	for (i = 0; i < len; i++) average += array[i];
+	average /= len;
+	for (i = 0; i < len; i++) {
+		if (array[i] == 0) array[i] = average;
+	}
+}
+
+template<class T>
 void show_array(T& array, size_t len)
 {
 	size_t i;
@@ -41,15 +54,26 @@ int main()
 	std::vector<int> test3 = ARRAY;
 
 	std::cout << "Working on C array:" << std::endl;
-	multiply_by_min(test1, 4);
-	show_array(test1, 4);
+	show_array(test1, ARRAY_SIZE);
+	multiply_by_min(test1, ARRAY_SIZE);
+	show_array(test1, ARRAY_SIZE);
+	replace_zeros_by_average(test1, ARRAY_SIZE);
+	show_array(test1, ARRAY_SIZE);
 
 	std::cout << "Working on C++ array:" << std::endl;
-	multiply_by_min(test2, 4);
-	show_array(test2, 4);
+	show_array(test2, ARRAY_SIZE);
+	multiply_by_min(test2, ARRAY_SIZE);
+	show_array(test2, ARRAY_SIZE);
+	replace_zeros_by_average(test2, ARRAY_SIZE);
+	show_array(test2, ARRAY_SIZE);
+
 
 	std::cout << "Working on C++ vector:" << std::endl;
-	multiply_by_min(test3, 4);
-	show_array(test3, 4);
+	show_array(test3, ARRAY_SIZE);
+	multiply_by_min(test3, ARRAY_SIZE);
+	show_array(test3, ARRAY_SIZE);
+	replace_zeros_by_average(test3, ARRAY_SIZE);
+	show_array(test3, ARRAY_SIZE);
+
 	return EXIT_SUCCESS;
 }
