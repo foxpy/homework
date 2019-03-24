@@ -44,8 +44,9 @@ void show_array(T& array, size_t len)
 {
 	size_t i;
 	for (i = 0; i < len; i++) {
-		std::cout << i << ": " << array[i] << std::endl;
+		std::cout << i << ": " << array[i] << "\t";
 	}
+	std::cout << std::endl;
 }
 
 template<class T>
