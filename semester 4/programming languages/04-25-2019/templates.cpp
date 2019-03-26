@@ -96,7 +96,8 @@ int main()
 	Stack<double> stack2;
 	Stack<std::string> stack3;
 
-	Dictionary<std::string, std::string> dictionary;
+	Dictionary<std::string, std::string> dictionary1;
+	Dictionary<std::uint16_t, std::string> dictionary2;
 
 
 	std::cout << "Task 1: function templates" << std::endl;
@@ -147,20 +148,29 @@ int main()
 
 	std::cout << std::endl << "Task 3:" << std::endl;
 
-	dictionary.add("Mary", "Washington");
-	dictionary.add("Paul", "New York");
-	std::cout << "Mary lives in " << dictionary.get("Mary") << std::endl;
-	std::cout << "Paul lives in " << dictionary.get("Paul") << std::endl;
-	dictionary.del("Mary");
+	std::cout << "Dictionary of string:string:" << std::endl;
+	dictionary1.add("Mary", "Washington");
+	dictionary1.add("Paul", "New York");
+	std::cout << "Mary lives in " << dictionary1.get("Mary") << std::endl;
+	std::cout << "Paul lives in " << dictionary1.get("Paul") << std::endl;
+	dictionary1.del("Mary");
 	std::cout << "And now Mary lives in..." << std::endl;
 	try {
-		std::string place = dictionary.get("Mary");
+		std::string place = dictionary1.get("Mary");
 		std::cout << "in " << place << std::endl;
 	}
 	catch (std::out_of_range& e) {
 		std::cout << "nowhere!" << std::endl;
 	}
-	std::cout << "Paul still lives in " << dictionary.get("Paul") << std::endl;
+	std::cout << "Paul still lives in " << dictionary1.get("Paul") << std::endl;
+
+	std::cout << "Dictionary of uint16_t:string:" << std::endl;
+	dictionary2.add(0, "Mary");
+	std::cout << "0 is " << dictionary2.get(0) << std::endl;
+	dictionary2.add(1, "Paul");
+	dictionary2.add(2, "Harry");
+	dictionary2.add(0, "Potter");
+	std::cout << "Now 0 is " << dictionary2.get(0) << std::endl;
 
 	return EXIT_SUCCESS;
 }
