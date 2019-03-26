@@ -68,6 +68,24 @@ T Stack<T>::pop()
 	}
 }
 
+template<class index_t, class value_t>
+void Dictionary<index_t, value_t>::add(index_t const& index, value_t const& value)
+{
+	dictionary[index] = value;
+}
+
+template<class index_t, class value_t>
+const value_t Dictionary<index_t, value_t>::get(index_t const& index)
+{
+	return dictionary.at(index);
+}
+
+template<class index_t, class value_t>
+void Dictionary<index_t, value_t>::del(index_t const& index)
+{
+	dictionary.erase(index);
+}
+
 int main()
 {
 	int array1[ARRAY_SIZE] = ARRAY;
@@ -77,6 +95,9 @@ int main()
 	Stack<size_t> stack1;
 	Stack<double> stack2;
 	Stack<std::string> stack3;
+
+	Dictionary<std::string, std::string> dictionary;
+
 
 	std::cout << "Task 1: function templates" << std::endl;
 
@@ -94,13 +115,13 @@ int main()
 	replace_zeros_by_average(array2, ARRAY_SIZE);
 	show_array(array2, ARRAY_SIZE);
 
-
 	std::cout << "Working on C++ vector:" << std::endl;
 	show_array(array3, ARRAY_SIZE);
 	multiply_by_min(array3, ARRAY_SIZE);
 	show_array(array3, ARRAY_SIZE);
 	replace_zeros_by_average(array3, ARRAY_SIZE);
 	show_array(array3, ARRAY_SIZE);
+
 
 	std::cout << std::endl << "Task 2: class templates" << std::endl;
 
@@ -122,6 +143,24 @@ int main()
 	stack3.push("I am not a cookie.");
 	stack3.pop();
 	std::cout << stack3.pop() << std::endl;
+
+
+	std::cout << std::endl << "Task 3:" << std::endl;
+
+	dictionary.add("Mary", "Washington");
+	dictionary.add("Paul", "New York");
+	std::cout << "Mary lives in " << dictionary.get("Mary") << std::endl;
+	std::cout << "Paul lives in " << dictionary.get("Paul") << std::endl;
+	dictionary.del("Mary");
+	std::cout << "And now Mary lives in..." << std::endl;
+	try {
+		std::string place = dictionary.get("Mary");
+		std::cout << "in " << place << std::endl;
+	}
+	catch (std::out_of_range& e) {
+		std::cout << "nowhere!" << std::endl;
+	}
+	std::cout << "Paul still lives in " << dictionary.get("Paul") << std::endl;
 
 	return EXIT_SUCCESS;
 }
