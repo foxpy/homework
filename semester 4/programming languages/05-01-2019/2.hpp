@@ -8,7 +8,7 @@ template<class T>
 class Stack
 {
 	private:
-		std::array<T, STACK_SIZE> stack = {0};
+		std::array<T, STACK_SIZE> stack = {{0}};
 		size_t sp = 0; // Stack Pointer
 
 	public:
@@ -26,7 +26,7 @@ template<class T>
 class MyStack
 {
 	private:
-		std::array<T, STACK_SIZE> stack = {0};
+		std::array<T, STACK_SIZE> stack = {{0}};
 		size_t sp = 0; // Stack Pointer
 
 	public:
