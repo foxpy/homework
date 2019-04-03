@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <stdexcept>
 #include <exception>
 
 #define GOOD_TRIANGLE 3, 4, 5
