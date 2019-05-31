@@ -1,0 +1,32 @@
+#include <string>
+#include <vector>
+#include <utility>
+
+struct Bolide {
+	std::string name;
+	double max_velocity; // kmph
+	double acceleration; // ms-2
+	double deceleration; // ms-2
+	unsigned num_of_gears;
+	bool abs;
+	bool fraction_control;
+	double mass; // kg
+	double downnfore; // g
+};
+
+class Race {
+	private:
+		// pair<vehicle, score>
+		std::vector<std::pair<Bolide, unsigned>> bolides;
+
+		double track_length; // m
+		unsigned number_of_turns;
+		double friction_coefficient;
+
+	public:
+		void add_bolide(Bolide bolide);
+
+	Race(double track_length,
+	     unsigned number_of_turns,
+	     double friction_coefficient);
+};
