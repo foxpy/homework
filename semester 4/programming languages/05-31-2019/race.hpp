@@ -9,9 +9,19 @@ struct Bolide {
 	double deceleration; // ms-2
 	unsigned num_of_gears;
 	bool abs;
-	bool fraction_control;
+	bool traction_control;
 	double mass; // kg
-	double downnfore; // g
+	double downnforce; // g
+
+	Bolide(std::string name,
+	       double max_velocity,
+	       double acceleration,
+	       double deceleration,
+	       unsigned num_of_gears,
+	       bool abs,
+	       bool traction_control,
+	       double mass,
+	       double downnforce);
 };
 
 class Race {
@@ -20,13 +30,13 @@ class Race {
 		std::vector<std::pair<Bolide, unsigned>> bolides;
 
 		double track_length; // m
-		unsigned number_of_turns;
+		unsigned num_of_turns;
 		double friction_coefficient;
 
 	public:
 		void add_bolide(Bolide bolide);
 
 	Race(double track_length,
-	     unsigned number_of_turns,
+	     unsigned num_of_turns,
 	     double friction_coefficient);
 };
