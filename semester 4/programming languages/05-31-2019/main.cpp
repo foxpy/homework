@@ -9,7 +9,7 @@ int main(void)
 	race.add_bolide(Bolide("Aston Martin DB9", // name
 				299.0f, // max_velocity (kmph)
 				21.7f, // acceleration (ms-2)
-				14.2f, // deceleration (ms-2)
+				17.2f, // deceleration (ms-2)
 				6, // num_of_gears
 				true, // abs
 				true, // traction_control
@@ -21,7 +21,7 @@ int main(void)
 				20.8f, // acceleration (ms-2)
 				18.9f, // deceleration (ms-2)
 				6, // num_of_gears
-				true, // abs
+				false, // abs
 				true, // traction_control
 				1660.0f, // mass (kg)
 				1.1f)); // downforce (g)
@@ -29,10 +29,10 @@ int main(void)
 	race.add_bolide(Bolide("BMW M3", // name
 				249.0f, // max_velocity (kmph)
 				25.6f, // acceleration (ms-2)
-				19.2f, // deceleration (ms-2)
+				14.2f, // deceleration (ms-2)
 				6, // num_of_gears
-				true, // abs
-				true, // traction_control
+				false, // abs
+				false, // traction_control
 				1655.0f, // mass (kg)
 				0.7f)); // downforce (g)
 
@@ -42,7 +42,7 @@ int main(void)
 				12.3f, // deceleration (ms-2)
 				6, // num_of_gears
 				false, // abs
-				true, // traction_control
+				false, // traction_control
 				1750.0f, // mass (kg)
 				0.6f)); // downforce (g)
 
@@ -56,10 +56,10 @@ int main(void)
 				908.0f, // mass (kg)
 				1.7f)); // downforce (g)
 
-	race.add_bolide(Bolide("Mazda RX-7 (FD) (Series 6)", // name
+	race.add_bolide(Bolide("Mazda RX-7 (FD)", // name
 				249.0f, // max_velocity (kmph)
 				18.2f, // acceleration (ms-2)
-				19.3f, // deceleration (ms-2)
+				22.3f, // deceleration (ms-2)
 				5, // num_of_gears
 				true, // abs
 				true, // traction_control
@@ -72,7 +72,7 @@ int main(void)
 				23.1f, // deceleration (ms-2)
 				6, // num_of_gears
 				true, // abs
-				true, // traction_control
+				false, // traction_control
 				1370.0f, // mass (kg)
 				0.7f)); // downforce (g)
 
@@ -86,7 +86,7 @@ int main(void)
 				1520.0f, // mass (kg)
 				0.8f)); // downforce (g)
 
-	race.add_bolide(Bolide("Porsche 911 GT3 RS (997(", // name
+	race.add_bolide(Bolide("Porsche 911 GT3 RS", // name
 				311.0f, // max_velocity (kmph)
 				25.0f, // acceleration (ms-2)
 				21.6f, // deceleration (ms-2)
