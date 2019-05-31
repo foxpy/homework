@@ -8,7 +8,7 @@ Bolide::Bolide(std::string name,
 		bool abs,
 		bool traction_control,
 		double mass,
-		double downnforce) {
+		double downforce) {
 	this->max_velocity = max_velocity;
 	this->acceleration = acceleration;
 	this->deceleration = deceleration;
@@ -16,7 +16,7 @@ Bolide::Bolide(std::string name,
 	this->abs = abs;
 	this->traction_control = traction_control;
 	this->mass = mass;
-	this->downnforce = downnforce;
+	this->downforce = downforce;
 }
 
 Race::Race(double track_length,

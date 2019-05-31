@@ -11,7 +11,7 @@ struct Bolide {
 	bool abs;
 	bool traction_control;
 	double mass; // kg
-	double downnforce; // g
+	double downforce; // g
 
 	Bolide(std::string name,
 	       double max_velocity,
@@ -21,7 +21,7 @@ struct Bolide {
 	       bool abs,
 	       bool traction_control,
 	       double mass,
-	       double downnforce);
+	       double downforce);
 };
 
 class Race {
