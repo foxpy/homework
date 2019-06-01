@@ -100,8 +100,9 @@ void Race::add_bolide(Bolide bolide) {
 void Race::print_stats() {
 	calculate_scores();
 
+	unsigned i = 1;
 	for (std::vector<std::pair<Bolide, unsigned>>::reverse_iterator it =
 			this->bolides.rbegin(); it != this->bolides.rend(); ++it) {
-		std::cout << it->first.name << ": " << it->second << std::endl;
+		std::cout << "[" << i++ << "] " << it->first.name << ": " << it->second << std::endl;
 	}
 }
