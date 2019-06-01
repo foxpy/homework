@@ -79,8 +79,8 @@ unsigned Race::calculate_vehicle_score(Bolide bolide) {
 					   this->track_length,
 					   this->num_of_turns,
 					   this->friction_coefficient);
-	double correction = score - score*random(0.8, 1.2);
-	return (unsigned) (score + correction/stability)/1000000;
+	double correction = score - score*random(0.1, 10.0);
+	return (unsigned) (score + correction*stability)/10000;
 }
 
 void Race::calculate_scores() {
