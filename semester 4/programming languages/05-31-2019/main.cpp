@@ -97,6 +97,16 @@ int main(void)
 				1325.0f, // mass (kg)
 				1.5f)); // downforce (g)
 
+	race.add_bolide(Bolide("Lamborgini Gallardo", // name
+				325.0f, // max_velocity (kmph)
+				27.8f, // acceleration (ms-2)
+				24.3f, // deceleration (ms-2)
+				6, // num_of_gears
+				true, // abs
+				true, // traction_control
+				1500.0f, // mass (kg)
+				1.9f)); // downforce (g)
+
 	race.print_stats();
 
 	return EXIT_SUCCESS;
