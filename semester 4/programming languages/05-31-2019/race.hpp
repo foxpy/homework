@@ -32,9 +32,14 @@ class Race {
 		double track_length; // m
 		unsigned num_of_turns;
 		double friction_coefficient;
+		bool scores_calculated = false;
+
+		unsigned calculate_vehicle_score(Bolide);
+		void calculate_scores();
 
 	public:
 		void add_bolide(Bolide bolide);
+		void print_stats();
 
 	Race(double track_length,
 	     unsigned num_of_turns,

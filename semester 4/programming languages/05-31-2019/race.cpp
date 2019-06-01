@@ -1,5 +1,11 @@
+#include <iostream>
 #include <stdexcept>
+#include <algorithm>
 #include "race.hpp"
+#include "scores.hpp"
+
+bool operator < (std::pair<Bolide, unsigned> l, std::pair<Bolide, unsigned> r)
+{ return l.second < r.second; }
 
 Bolide::Bolide(std::string name,
 		double max_velocity,
@@ -31,6 +37,7 @@ Bolide::Bolide(std::string name,
 			"Downforce should be positive");
 	}
 
+	this->name = name;
 	this->max_velocity = max_velocity;
 	this->acceleration = acceleration;
 	this->deceleration = deceleration;
@@ -49,7 +56,7 @@ Race::Race(double track_length,
 			"Track length should be positive");
 	}
 	if (!(friction_coefficient >= 0) && (friction_coefficient <= 1)) {
-		throw std::invalid_argument("Friction coefficient should be in rage [0; 1]");
+		throw std::invalid_argument("Friction coefficient should be in range [0; 1]");
 	}
 
 	this->track_length = track_length;
@@ -57,6 +64,44 @@ Race::Race(double track_length,
 	this->friction_coefficient = friction_coefficient;
 }
 
+unsigned Race::calculate_vehicle_score(Bolide bolide) {
+	// All the fun
+	double score = crude_score(bolide.max_velocity,
+			           bolide.acceleration,
+				   bolide.deceleration,
+				   bolide.num_of_gears,
+				   this->track_length);
+	double stability = stability_index(bolide.num_of_gears,
+			                   bolide.abs,
+					   bolide.traction_control,
+					   bolide.mass,
+					   bolide.downforce,
+					   this->track_length,
+					   this->num_of_turns,
+					   this->friction_coefficient);
+	double correction = score - score*random(0.8, 1.2);
+	return (unsigned) (score + correction/stability)/1000000;
+}
+
+void Race::calculate_scores() {
+	if (this->scores_calculated) return;
+	for(std::vector<std::pair<Bolide, unsigned>>::iterator it =
+			this->bolides.begin(); it != this->bolides.end(); ++it) {
+		it->second = calculate_vehicle_score(it->first);
+	}
+	std::sort(this->bolides.begin(), this->bolides.end());
+	this->scores_calculated = true;
+}
+
 void Race::add_bolide(Bolide bolide) {
 	this->bolides.push_back(std::make_pair(bolide, 0));
+}
+
+void Race::print_stats() {
+	calculate_scores();
+
+	for (std::vector<std::pair<Bolide, unsigned>>::reverse_iterator it =
+			this->bolides.rbegin(); it != this->bolides.rend(); ++it) {
+		std::cout << it->first.name << ": " << it->second << std::endl;
+	}
 }

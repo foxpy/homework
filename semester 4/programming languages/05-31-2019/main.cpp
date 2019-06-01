@@ -1,3 +1,4 @@
+#include <iostream>
 #include "race.hpp"
 
 int main(void)
@@ -95,5 +96,8 @@ int main(void)
 				true, // traction_control
 				1325.0f, // mass (kg)
 				1.5f)); // downforce (g)
+
+	race.print_stats();
+
 	return EXIT_SUCCESS;
 }
