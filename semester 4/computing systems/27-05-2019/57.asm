@@ -88,7 +88,6 @@ not_equal:
 	mov	rsi, no
 	mov	rdx, no_len
 	syscall
-	jmp	exit
 
 exit:
 	mov	rax, SYS_EXIT
