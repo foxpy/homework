@@ -2,7 +2,7 @@
 #include <random>
 
 double random(double low, double high) {
-	if (low < high) {
+	if (low > high) {
 		std::swap(low, high);
 	}
 	static std::random_device rdrand;
