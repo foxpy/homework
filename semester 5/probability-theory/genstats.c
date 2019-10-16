@@ -79,7 +79,7 @@ int collect_stats(FILE *power,
 		nanosleep(&rqtp, NULL);
 		buf[fread(buf, sizeof(char), BUF_SIZE-1, power)] = '\0';
 		power_now = (double) (atoi(buf))/1000/1000;
-		snprintf(buf, BUF_SIZE, "%.1f\n", power_now);
+		snprintf(buf, BUF_SIZE, "%.2f\n", power_now);
 		fputs(buf, stdout);
 		fputs(buf, output);
 		rewind(power);
