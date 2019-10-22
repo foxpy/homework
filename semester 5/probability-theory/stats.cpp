@@ -149,7 +149,7 @@ namespace plt {
 		               [](std::pair<double, unsigned> a, std::pair<double, unsigned> b) {
 			return a.second < b.second;
 		})->second;
-		gr.SetRanges(0, 1, 0, max);
+		gr.SetRanges(0, 1, 0, max+(1+max/10));
 		gr.Box();
 		gr.Axis("y");
 		gr.Plot(data);
