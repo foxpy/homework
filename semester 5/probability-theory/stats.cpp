@@ -6,6 +6,7 @@
 #include <iterator>
 #include <numeric>
 #include <cmath>
+#include <mgl2/mgl.h>
 
 namespace pt {
 	template<class InputIt>
@@ -24,9 +25,13 @@ namespace pt {
 	std::vector<double> histogram(InputIt first, InputIt last, unsigned len);
 }
 
+namespace plt {
+	void frequency_polygon(std::map<double, unsigned> src, std::string filename);
+	void histogram(std::vector<double> src, std::string filename);
+}
+
 int main(int argc, char *argv[]) {
 	std::vector<double> input;
-
 	if (argc != 2) {
 		std::clog << "Usage: " << argv[0] << " FILENAME" << std::endl;
 		exit(EXIT_FAILURE);
@@ -49,8 +54,8 @@ int main(int argc, char *argv[]) {
 	std::vector<double> histogram = pt::histogram(input.begin(), input.end(), 25);
 
 	std::cout << "Input data: ";
-	for (std::vector<double>::iterator i = input.begin(); i != input.end(); ++i)
-		std::cout << *i << ' ';
+	for (std::vector<double>::iterator it = input.begin(); it != input.end(); ++it)
+		std::cout << *it << ' ';
 	std::cout << std::endl;
 
 	std::cout << "Expected: " << expected << std::endl;
@@ -61,19 +66,14 @@ int main(int argc, char *argv[]) {
 	std::cout << "Corrected standard deviation: " << corrected_standard_deviation << std::endl;
 
 	std::cout << "Variation series: ";
-	for (std::vector<double>::iterator i = variation_series.begin(); i != variation_series.end(); ++i)
-		std::cout << *i << ' ';
+	for (std::vector<double>::iterator it = variation_series.begin(); it != variation_series.end(); ++it)
+		std::cout << *it << ' ';
 	std::cout << std::endl;
 
-	std::cout << "Frequency polygon:\t";
-	for (std::map<double, unsigned>::iterator i = frequency_polygon.begin(); i != frequency_polygon.end(); ++i)
-		std::cout << i-> first << '=' << i->second << '\t';
-	std::cout << std::endl;
-
-	std::cout << "Histogram: ";
-	for (std::vector<double>::iterator i = histogram.begin(); i != histogram.end(); ++i)
-		std::cout << *i << ' ';
-	std::cout << std::endl;
+	plt::histogram(histogram, "histogram.png");
+	std::cout << "Histogram saved in histogram.png" << std::endl;
+	plt::frequency_polygon(frequency_polygon, "frequency_polygon.png");
+	std::cout << "Frequency polygon saved in frequency_polygon.png" << std::endl;
 }
 
 namespace pt {
@@ -136,5 +136,35 @@ namespace pt {
 			result.push_back(sum/entries);
 		}
 		return result;
+	}
+}
+
+namespace plt {
+	void frequency_polygon(std::map<double, unsigned> src, std::string filename) {
+		mglGraph gr;
+		mglData data(src.size(), 1);
+		for (std::map<double, unsigned>::iterator it = src.begin(); it != src.end(); ++it)
+			data[std::distance(src.begin(), it)] = it->second;
+		unsigned max = std::max_element(src.begin(), src.end(),
+		               [](std::pair<double, unsigned> a, std::pair<double, unsigned> b) {
+			return a.second < b.second;
+		})->second;
+		gr.SetRanges(0, 1, 0, max);
+		gr.Box();
+		gr.Axis("y");
+		gr.Plot(data);
+		gr.WriteFrame(filename.c_str());
+	}
+	void histogram(std::vector<double> src, std::string filename) {
+		mglGraph gr;
+		mglData data(src.size(), 1);
+		for (std::vector<double>::iterator it = src.begin(); it != src.end(); ++it)
+			data[it-src.begin()] = *it;
+		double max = *std::max_element(src.begin(), src.end());
+		gr.SetRanges(0, 1, 0, 1.1*max);
+		gr.Box();
+		gr.Axis("y");
+		gr.Bars(data);
+		gr.WriteFrame(filename.c_str());
 	}
 }
