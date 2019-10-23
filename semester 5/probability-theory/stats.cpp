@@ -16,13 +16,13 @@ namespace pt {
 	double standard_deviation(double dispersion);
 	template<class InputIt>
 	double chosen_dispersion(InputIt first, InputIt last, double expected);
-	double corrected_dispersion(double chosen_dispersion, unsigned n);
+	double corrected_dispersion(double chosen_dispersion, std::size_t n);
 	template<class InputIt>
 	std::vector<double> variation_series(InputIt first, InputIt last);
 	template<class InputIt>
 	std::map<double, unsigned> frequency_polygon(InputIt first, InputIt last);
 	template<class InputIt>
-	std::vector<double> histogram(InputIt first, InputIt last, unsigned len);
+	std::vector<double> histogram(InputIt first, InputIt last, std::size_t len);
 }
 
 namespace plt {
@@ -79,13 +79,13 @@ int main(int argc, char *argv[]) {
 namespace pt {
 	template<class InputIt>
 	double expected(InputIt first, InputIt last) {
-		return std::accumulate(first, last, static_cast<double>(0)) / (last - first);
+		return std::accumulate(first, last, static_cast<double>(0)) / (std::distance(first, last));
 	}
 
 	template<class InputIt>
 	double dispersion(InputIt first, InputIt last) {
 		double sum = 0;
-		size_t len = last - first;
+		std::size_t len = static_cast<std::size_t>(std::distance(first, last));
 		for (; first != last; ++first)
 			sum += std::pow(*first, 2);
 		return sum / len;
@@ -98,13 +98,13 @@ namespace pt {
 	template<class InputIt>
 	double chosen_dispersion(InputIt first, InputIt last, double expected) {
 		double sum = 0;
-		size_t len = last - first;
+		std::size_t len = static_cast<std::size_t>(std::distance(first, last));
 		for (; first != last; ++first)
 			sum += std::pow((*first - expected), 2);
 		return sum / len;
 	}
 
-	double corrected_dispersion(double chosen_dispersion, unsigned n) {
+	double corrected_dispersion(double chosen_dispersion, std::size_t n) {
 		return static_cast<double>(n)/(n-1)*chosen_dispersion;
 	}
 
@@ -125,13 +125,13 @@ namespace pt {
 	}
 
 	template<class InputIt>
-	std::vector<double> histogram(InputIt first, InputIt last, unsigned len) {
-		size_t entries = (last - first)/len;
+	std::vector<double> histogram(InputIt first, InputIt last, std::size_t len) {
+		std::size_t entries = static_cast<std::size_t>(std::distance(first, last))/len;
 		std::vector<double> result;
 		double sum;
 		for (unsigned i = 0; i < len; ++i) {
 			sum = 0;
-			for (InputIt j = std::next(first, i); j < last; j = std::next(j, len))
+			for (InputIt j = std::next(first, i); j < last; std::advance(j, len))
 				sum += *j;
 			result.push_back(sum/entries);
 		}
@@ -142,7 +142,7 @@ namespace pt {
 namespace plt {
 	void frequency_polygon(std::map<double, unsigned> src, std::string filename) {
 		mglGraph gr;
-		mglData data(src.size(), 1);
+		mglData data(static_cast<long>(src.size()), 1);
 		for (std::map<double, unsigned>::iterator it = src.begin(); it != src.end(); ++it)
 			data[std::distance(src.begin(), it)] = it->second;
 		unsigned max = std::max_element(src.begin(), src.end(),
@@ -155,9 +155,10 @@ namespace plt {
 		gr.Plot(data);
 		gr.WriteFrame(filename.c_str());
 	}
+
 	void histogram(std::vector<double> src, std::string filename) {
 		mglGraph gr;
-		mglData data(src.size(), 1);
+		mglData data(static_cast<long>(src.size()), 1);
 		for (std::vector<double>::iterator it = src.begin(); it != src.end(); ++it)
 			data[it-src.begin()] = *it;
 		double max = *std::max_element(src.begin(), src.end());
