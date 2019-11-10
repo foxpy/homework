@@ -26,8 +26,8 @@ namespace pt {
 }
 
 namespace plt {
-	void frequency_polygon(std::map<double, unsigned> src, std::string filename);
-	void histogram(std::vector<double> src, std::string filename);
+	void frequency_polygon(std::map<double, unsigned> &src, std::string filename);
+	void histogram(std::vector<double> &src, std::string filename);
 }
 
 int main(int argc, char *argv[]) {
@@ -140,7 +140,7 @@ namespace pt {
 }
 
 namespace plt {
-	void frequency_polygon(std::map<double, unsigned> src, std::string filename) {
+	void frequency_polygon(std::map<double, unsigned> &src, std::string filename) {
 		mglGraph gr;
 		mglData data(static_cast<long>(src.size()), 1);
 		for (std::map<double, unsigned>::iterator it = src.begin(); it != src.end(); ++it)
@@ -156,7 +156,7 @@ namespace plt {
 		gr.WriteFrame(filename.c_str());
 	}
 
-	void histogram(std::vector<double> src, std::string filename) {
+	void histogram(std::vector<double> &src, std::string filename) {
 		mglGraph gr;
 		mglData data(static_cast<long>(src.size()), 1);
 		for (std::vector<double>::iterator it = src.begin(); it != src.end(); ++it)
