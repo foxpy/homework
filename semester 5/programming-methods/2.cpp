@@ -18,12 +18,13 @@ int main(void)
 	}
 
 	std::pair<std::vector<int>::iterator, std::vector<int>::iterator> rc;
-	for (std::vector<int>::iterator i = a2.begin(); i != a2.end(); ++i) {
-		if (!std::binary_search(a1.begin(), a1.end(), *i)) {
+	for (auto i = a2.begin(); i != a2.end(); ++i) {
+		rc = std::equal_range(a1.begin(), a1.end(), *i);
+		if (*rc.first != *i) {
 			std::cout << 0 << std::endl;
 			continue;
 		}
-		rc = std::equal_range(a1.begin(), a1.end(), *i);
-		std::cout << rc.first - a1.begin() + 1 << " " << rc.second - a1.begin() << std::endl;
+		std::cout << rc.first - a1.begin() + 1 << " "
+		          << rc.second - a1.begin() << std::endl;
 	}
 }
