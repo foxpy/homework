@@ -64,6 +64,4 @@ const char* const DiseaseNames[] = {
 	DISEASE_ENUM(UTIL_ENUM_MAKE_STRING)
 };
 
-std::ostream& operator<< (std::ostream &o, Disease d) {
-	return o << DiseaseNames[d];
-}
+std::ostream& operator<< (std::ostream &o, Disease d);
