@@ -1,10 +1,11 @@
-#include <iostream>
+#include <vector>
 
 #include "hospital.hpp"
+#include "patient.hpp"
 #include "disease.hpp"
 
 int main() {
 	Hospital hospital;
-	Disease disease = Disease::Acne;
-	std::cout << "Created disease " << disease << std::endl;
+	Patient patient1("John", 23);
+	Patient patient2("Carl", 30, (const std::vector<Disease>) {Disease::Alzheimer});
 }

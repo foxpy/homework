@@ -4,4 +4,5 @@ project(Hospital)
 add_executable(hospital
                main.cpp
                hospital.cpp
+               patient.cpp
                disease.cpp)
