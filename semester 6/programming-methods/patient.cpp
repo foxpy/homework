@@ -11,7 +11,7 @@ Patient::Patient(const std::string &name,
                  const unsigned age) {
 	this->name = name;
 	this->age = age;
-	std::clog << "Createt patient " << name << " " << age << " years old" << std::endl;
+	std::clog << "Created patient " << name << " " << age << " years old" << std::endl;
 }
 
 Patient::Patient(const std::string &name,
