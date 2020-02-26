@@ -1,5 +1,7 @@
 #include <iostream>
 
-int main() {
-	std::cout << "Hospital" << std::endl;
+#include "hospital.hpp"
+
+Hospital::Hospital() {
+	std::clog << "Created hospital" << std::endl;
 }
