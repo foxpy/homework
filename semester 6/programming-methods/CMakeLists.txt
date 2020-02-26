@@ -6,5 +6,6 @@ project(Hospital)
 add_executable(hospital
                main.cpp
                hospital.cpp
+               doctor.cpp
                patient.cpp
                disease.cpp)
