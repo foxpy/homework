@@ -18,4 +18,5 @@ public:
 	       const std::vector<Disease> &cures);
 	const char* name() const;
 	unsigned age() const;
+	bool can_cure(const Disease disease) const;
 };

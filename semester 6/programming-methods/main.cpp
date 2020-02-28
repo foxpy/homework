@@ -16,4 +16,8 @@ int main() {
 	hospital.add_patient(patient2);
 	std::cout << "Patient " << patient1.name() << " is " << ((patient1.is_ill()) ? "ill" : "healthy") << std::endl;
 	std::cout << "Patient " << patient2.name() << " is " << ((patient2.is_ill()) ? "ill" : "healthy") << std::endl;
+	std::cout << "Doctor " << doctor2.name() << ' ' << ((doctor2.can_cure(Disease::Flu)) ? "can" : "can't")
+	          << " cure disease " << Disease::Flu << std::endl;
+	std::cout << "Doctor " << doctor2.name() << ' ' << ((doctor2.can_cure(Disease::Hepatisis)) ? "can" : "can't")
+	          << " cure disease " << Disease::Hepatisis << std::endl;
 }

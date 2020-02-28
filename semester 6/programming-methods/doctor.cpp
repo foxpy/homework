@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <algorithm>
 
 #include "doctor.hpp"
 #include "disease.hpp"
@@ -32,4 +33,8 @@ const char* Doctor::name() const {
 
 unsigned Doctor::age() const {
 	return _age;
+}
+
+bool Doctor::can_cure(const Disease disease) const {
+	return std::find(cures.cbegin(), cures.cend(), disease) != cures.cend();
 }
