@@ -7,16 +7,16 @@
 
 Doctor::Doctor(const std::string &name,
                const unsigned age) {
-	this->name = name;
-	this->age = age;
+	_name = name;
+	_age = age;
 	std::clog << "Created doctor " << name << " " << age << " years old" << std::endl;
 }
 
 Doctor::Doctor(const std::string &name,
                const unsigned age,
                const std::vector<Disease> &cures) {
-	this->name = name;
-	this->age = age;
+	_name = name;
+	_age = age;
 	std::copy(cures.cbegin(), cures.cend(), std::back_inserter(this->cures));
 	std::clog << "Created doctor " << name << " " << age << " years old";
 	if (!cures.empty()) {
@@ -24,4 +24,12 @@ Doctor::Doctor(const std::string &name,
 		for (auto i : cures) std::clog << std::endl << '\t' << i;
 	}
 	std::clog << std::endl;
+}
+
+const char* const Doctor::name() const {
+	return _name.c_str();
+}
+
+const unsigned Doctor::age() const {
+	return _age;
 }

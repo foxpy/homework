@@ -7,8 +7,8 @@
 
 class Patient {
 private:
-	std::string name;
-	unsigned age;
+	std::string _name;
+	unsigned _age;
 	std::vector<Disease> diseases;
 public:
 	Patient(const std::string &name,
@@ -16,4 +16,6 @@ public:
 	Patient(const std::string &name,
 	        const unsigned age,
 	        const std::vector<Disease> &diseases);
+	const char* const name() const;
+	const unsigned age() const;
 };
