@@ -1,10 +1,27 @@
 #include <iostream>
+#include <vector>
+#include <iterator>
 
 #include "doctor.hpp"
+#include "disease.hpp"
 
 Doctor::Doctor(const std::string &name,
                const unsigned age) {
 	this->name = name;
 	this->age = age;
-	std::clog << "Created doctor " << name << std::endl;
+	std::clog << "Created doctor " << name << " " << age << " years old" << std::endl;
+}
+
+Doctor::Doctor(const std::string &name,
+               const unsigned age,
+               const std::vector<Disease> &cures) {
+	this->name = name;
+	this->age = age;
+	std::copy(cures.cbegin(), cures.cend(), std::back_inserter(this->cures));
+	std::clog << "Created doctor " << name << " " << age << " years old";
+	if (!cures.empty()) {
+		std::clog << " which cures several diseases:";
+		for (auto i : cures) std::clog << std::endl << '\t' << i;
+	}
+	std::clog << std::endl;
 }

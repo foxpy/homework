@@ -13,4 +13,7 @@ private:
 public:
 	Doctor(const std::string &name,
 	       const unsigned age);
+	Doctor(const std::string &name,
+	       const unsigned age,
+	       const std::vector<Disease> &cures);
 };
