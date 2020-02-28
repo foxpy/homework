@@ -26,10 +26,10 @@ Doctor::Doctor(const std::string &name,
 	std::clog << std::endl;
 }
 
-const char* const Doctor::name() const {
+const char* Doctor::name() const {
 	return _name.c_str();
 }
 
-const unsigned Doctor::age() const {
+unsigned Doctor::age() const {
 	return _age;
 }

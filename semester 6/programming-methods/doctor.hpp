@@ -16,6 +16,6 @@ public:
 	Doctor(const std::string &name,
 	       const unsigned age,
 	       const std::vector<Disease> &cures);
-	const char* const name() const;
-	const unsigned age() const;
+	const char* name() const;
+	unsigned age() const;
 };

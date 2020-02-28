@@ -28,10 +28,10 @@ Patient::Patient(const std::string &name,
 	std::clog << std::endl;
 }
 
-const char* const Patient::name() const {
+const char* Patient::name() const {
 	return _name.c_str();
 }
 
-const unsigned Patient::age() const {
+unsigned Patient::age() const {
 	return _age;
 }
