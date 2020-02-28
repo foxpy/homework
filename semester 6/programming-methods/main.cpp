@@ -11,4 +11,6 @@ int main() {
 	Doctor doctor2("Alex", 22, (const std::vector<Disease>) {Disease::Hepatisis});
 	Patient patient1("John", 23);
 	Patient patient2("Carl", 30, (const std::vector<Disease>) {Disease::Alzheimer});
+	hospital.add_doctor(doctor1);
+	hospital.add_patient(patient2);
 }
