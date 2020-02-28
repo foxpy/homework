@@ -18,4 +18,5 @@ public:
 	        const std::vector<Disease> &diseases);
 	const char* name() const;
 	unsigned age() const;
+	bool is_ill() const;
 };

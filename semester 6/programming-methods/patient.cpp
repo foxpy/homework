@@ -35,3 +35,7 @@ const char* Patient::name() const {
 unsigned Patient::age() const {
 	return _age;
 }
+
+bool Patient::is_ill() const {
+	return !diseases.empty();
+}
