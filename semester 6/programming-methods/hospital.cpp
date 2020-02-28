@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
 
 #include "hospital.hpp"
 
-Hospital::Hospital() {
-	std::clog << "Created hospital" << std::endl;
+Hospital::Hospital(const std::string &name) {
+	_name = name;
+	std::clog << "Created hospital " << name << std::endl;
 }

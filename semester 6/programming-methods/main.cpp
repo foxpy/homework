@@ -6,7 +6,7 @@
 #include "disease.hpp"
 
 int main() {
-	Hospital hospital;
+	Hospital hospital("Yellow house");
 	Doctor doctor1("Mike", 34);
 	Doctor doctor2("Alex", 22, (const std::vector<Disease>) {Disease::Hepatisis});
 	Patient patient1("John", 23);
