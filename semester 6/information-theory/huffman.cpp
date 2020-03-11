@@ -30,7 +30,6 @@ void print_codes(huffman_node* node, std::string str) {
 }
 
 void huffman_codes(std::map<char, unsigned> &stat) {
-	std::map<char, std::string> codes;
 	huffman_node *left, *right, *top;
 	std::priority_queue<huffman_node*, std::vector<huffman_node*>, huffman_compare> heap;
 	for (auto i : stat) heap.push(new huffman_node(i.first, i.second));
