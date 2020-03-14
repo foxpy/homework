@@ -11,12 +11,12 @@ Hospital::Hospital(const std::string &name) {
 	std::clog << "Created hospital " << name << std::endl;
 }
 
-void Hospital::add_doctor(Doctor doctor) {
+void Hospital::add_doctor(Doctor &doctor) {
 	doctors.push_back(doctor);
 	std::clog << "Added doctor " << doctor.name() << " to hospital " << _name << std::endl;
 }
 
-void Hospital::add_patient(Patient patient) {
+void Hospital::add_patient(Patient &patient) {
 	patients.push_back(patient);
 	std::clog << "Added patient " << patient.name() << " to hospital " << _name << std::endl;
 }

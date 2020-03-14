@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include <iterator>
 #include <algorithm>
@@ -7,17 +8,13 @@
 #include "disease.hpp"
 
 Doctor::Doctor(const std::string &name,
-               const unsigned age) {
-	_name = name;
-	_age = age;
+               unsigned age): Human(name, age) {
 	std::clog << "Created doctor " << name << " " << age << " years old" << std::endl;
 }
 
 Doctor::Doctor(const std::string &name,
-               const unsigned age,
-               const std::vector<Disease> &cures) {
-	_name = name;
-	_age = age;
+               unsigned age,
+               const std::vector<Disease> &cures): Human(name, age) {
 	std::copy(cures.cbegin(), cures.cend(), std::back_inserter(this->cures));
 	std::clog << "Created doctor " << name << " " << age << " years old";
 	if (!cures.empty()) {
@@ -27,14 +24,6 @@ Doctor::Doctor(const std::string &name,
 	std::clog << std::endl;
 }
 
-const char* Doctor::name() const {
-	return _name.c_str();
-}
-
-unsigned Doctor::age() const {
-	return _age;
-}
-
-bool Doctor::can_cure(const Disease disease) const {
+bool Doctor::can_cure(Disease disease) const {
 	return std::find(cures.cbegin(), cures.cend(), disease) != cures.cend();
 }

@@ -8,17 +8,13 @@
 #include "patient.hpp"
 
 Patient::Patient(const std::string &name,
-                 const unsigned age) {
-	_name = name;
-	_age = age;
+                 unsigned age): Human(name, age) {
 	std::clog << "Created patient " << name << " " << age << " years old" << std::endl;
 }
 
 Patient::Patient(const std::string &name,
-                 const unsigned age,
-                 const std::vector<Disease> &diseases) {
-	_name = name;
-	_age = age;
+                 unsigned age,
+                 const std::vector<Disease> &diseases): Human(name, age) {
 	std::copy(diseases.cbegin(), diseases.cend(), std::back_inserter(this->diseases));
 	std::clog << "Created patient " << name << " " << age << " years old";
 	if (!diseases.empty()) {
@@ -26,14 +22,6 @@ Patient::Patient(const std::string &name,
 		for (auto i : diseases) std::clog << std::endl << '\t' << i;
 	}
 	std::clog << std::endl;
-}
-
-const char* Patient::name() const {
-	return _name.c_str();
-}
-
-unsigned Patient::age() const {
-	return _age;
 }
 
 bool Patient::is_ill() const {

@@ -3,20 +3,17 @@
 #include <string>
 #include <vector>
 
+#include "human.hpp"
 #include "disease.hpp"
 
-class Patient {
-private:
-	std::string _name;
-	unsigned _age;
-	std::vector<Disease> diseases;
+class Patient: public Human {
 public:
 	Patient(const std::string &name,
-	        const unsigned age);
+	        unsigned age);
 	Patient(const std::string &name,
-	        const unsigned age,
+	        unsigned age,
 	        const std::vector<Disease> &diseases);
-	const char* name() const;
-	unsigned age() const;
 	bool is_ill() const;
+private:
+	std::vector<Disease> diseases;
 };
