@@ -48,7 +48,6 @@ void huffman_codes(std::map<char, unsigned> &stat) {
 
 int main(void) {
 	std::map<char, unsigned> stat;
-	unsigned fixed_length_bits = 0;
 	std::string input;
 	std::cout << "Enter input line: ";
 	std::getline(std::cin, input);
