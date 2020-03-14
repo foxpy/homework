@@ -17,6 +17,7 @@
 	DO(BrainCancer) \
 	DO(BreastCancer) \
 	DO(Cancer) \
+	DO(Coronavirus) \
 	DO(HeartFailure) \
 	DO(Dehydration) \
 	DO(Depression) \
@@ -41,7 +42,6 @@
 	DO(Migraine) \
 	DO(NailBiting) \
 	DO(NeckPain) \
-	DO(Osteomyelitis) \
 	DO(Osteoporosis) \
 	DO(OvarianCancer) \
 	DO(PanicAttack) \
