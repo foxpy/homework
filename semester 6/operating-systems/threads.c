@@ -7,7 +7,7 @@
 #include "reader.h"
 
 #define BUFFER_SIZE 0x100000
-#define ITERATIONS 64
+#define ITERATIONS 8
 #define SLEEP_INTERVAL_NSECS 10000
 
 int main(void) {
@@ -17,6 +17,7 @@ int main(void) {
 		BUFFER_SIZE,
 		SLEEP_INTERVAL_NSECS,
 		ITERATIONS,
+		PTHREAD_MUTEX_INITIALIZER,
 	};
 	pthread_t threads[2];
 
