@@ -19,15 +19,15 @@ void continious_writer(struct thread_data *args) {
 	uint8_t *data = args->ptr;
 	struct timespec rqtp = { 0, args->interval };
 	for (unsigned count = 0; count != args->count; ++count) {
-#ifdef SYN_MUTEX
-		pthread_mutex_lock(&args->mutex);
-#endif
+#		ifdef SYN_MUTEX
+			pthread_mutex_lock(&args->mutex);
+#		endif
 		for (size_t i = 0; i < args->len; ++i)
 			data[i] = xorshift32();
 		printf("[%u] Writer: 0x%08x\n", count, crc32(data, args->len));
-#ifdef SYN_MUTEX
-		pthread_mutex_unlock(&args->mutex);
-#endif
+#		ifdef SYN_MUTEX
+			pthread_mutex_unlock(&args->mutex);
+#		endif
 		nanosleep(&rqtp, NULL);
 	}
 	pthread_exit(NULL);

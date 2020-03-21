@@ -43,9 +43,9 @@ int main(int argc, char *argv[]) {
 		buffer_size,
 		sleep_interval,
 		iterations,
-#ifdef SYN_MUTEX
-		PTHREAD_MUTEX_INITIALIZER,
-#endif
+#		ifdef SYN_MUTEX
+			PTHREAD_MUTEX_INITIALIZER,
+#		endif
 	};
 	pthread_t threads[2];
 

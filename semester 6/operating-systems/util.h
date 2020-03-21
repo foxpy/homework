@@ -8,7 +8,7 @@ struct thread_data {
 	size_t len;            // length of memory buffer
 	unsigned interval;     // sleep for `interval` nsecs between memory actions
 	unsigned count;        // perform memory action `count` times
-#ifdef SYN_MUTEX
-	pthread_mutex_t mutex; // only one thread at time should access memory
-#endif
+#	ifdef SYN_MUTEX
+		pthread_mutex_t mutex; // only one thread at time should access memory
+#	endif
 };
