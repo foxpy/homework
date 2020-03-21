@@ -11,6 +11,9 @@
 #ifdef SYN_SEMA
 #include <semaphore.h>
 #endif
+#ifdef SYN_ATOM
+#include <stdatomic.h>
+#endif
 
 static uint8_t xorshift32() {
 	static uint32_t s = 0x92D68CA2;
@@ -30,6 +33,10 @@ void continious_writer(struct thread_data *args) {
 #		ifdef SYN_SEMA
 			sem_wait(&args->semaphore);
 #		endif
+#		ifdef SYN_ATOM
+			while (atomic_flag_test_and_set_explicit(
+			       &args->lock, memory_order_acquire)) {}
+#		endif
 		for (size_t i = 0; i < args->len; ++i)
 			data[i] = xorshift32();
 		printf("[%u] Writer: 0x%08x\n", count, crc32(data, args->len));
@@ -38,6 +45,9 @@ void continious_writer(struct thread_data *args) {
 #		endif
 #		ifdef SYN_SEMA
 			sem_post(&args->semaphore);
+#		endif
+#		ifdef SYN_ATOM
+			atomic_flag_clear_explicit(&args->lock, memory_order_release);
 #		endif
 		nanosleep(&rqtp, NULL);
 	}

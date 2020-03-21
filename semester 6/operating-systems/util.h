@@ -6,6 +6,9 @@
 #ifdef SYN_SEMA
 #include <semaphore.h>
 #endif
+#ifdef SYN_ATOM
+#include <stdatomic.h>
+#endif
 
 struct thread_data {
 	void *ptr;         // size of memory buffer
@@ -19,5 +22,8 @@ struct thread_data {
 #	endif
 #	ifdef SYN_SEMA
 		sem_t semaphore;
+#	endif
+#	ifdef SYN_ATOM
+		atomic_flag lock;
 #	endif
 };

@@ -11,6 +11,9 @@
 #ifdef SYN_SEMA
 #include <semaphore.h>
 #endif
+#ifdef SYN_ATOM
+#include <stdatomic.h>
+#endif
 
 #define DEFAULT_BUFFER_SIZE 0x100000
 #define DEFAULT_SLEEP_INTERVAL_NSECS 10000
@@ -52,6 +55,9 @@ int main(int argc, char *argv[]) {
 #		endif
 #		ifdef SYN_SEMA
 			0,
+#		endif
+#		ifdef SYN_ATOM
+			ATOMIC_FLAG_INIT,
 #		endif
 	};
 	pthread_t threads[2];
