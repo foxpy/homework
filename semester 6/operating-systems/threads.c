@@ -6,6 +6,7 @@
 #include "util.h"
 #include "writer.h"
 #include "reader.h"
+#include "config.h"
 
 #define DEFAULT_BUFFER_SIZE 0x100000
 #define DEFAULT_SLEEP_INTERVAL_NSECS 10000
@@ -42,7 +43,9 @@ int main(int argc, char *argv[]) {
 		buffer_size,
 		sleep_interval,
 		iterations,
+#ifdef SYN_MUTEX
 		PTHREAD_MUTEX_INITIALIZER,
+#endif
 	};
 	pthread_t threads[2];
 

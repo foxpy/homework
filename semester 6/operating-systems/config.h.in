@@ -1,0 +1,4 @@
+#pragma once
+#cmakedefine SYN_MUTEX
+#cmakedefine SYN_SEMA
+#cmakedefine SYN_ATOM
