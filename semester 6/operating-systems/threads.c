@@ -6,7 +6,11 @@
 #include "util.h"
 #include "writer.h"
 #include "reader.h"
+
 #include "config.h"
+#ifdef SYN_SEMA
+#include <semaphore.h>
+#endif
 
 #define DEFAULT_BUFFER_SIZE 0x100000
 #define DEFAULT_SLEEP_INTERVAL_NSECS 10000
@@ -46,9 +50,15 @@ int main(int argc, char *argv[]) {
 #		ifdef SYN_MUTEX
 			PTHREAD_MUTEX_INITIALIZER,
 #		endif
+#		ifdef SYN_SEMA
+			0,
+#		endif
 	};
 	pthread_t threads[2];
 
+#	ifdef SYN_SEMA
+		sem_init(&args.semaphore, 0, 1);
+#	endif
 	pthread_create(&threads[0], NULL, (void*) continious_writer, &args);
 	pthread_create(&threads[1], NULL, (void*) continious_reader, &args);
 	pthread_join(threads[0], NULL);

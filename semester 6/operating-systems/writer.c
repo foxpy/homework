@@ -7,6 +7,11 @@
 #include "writer.h"
 #include "crc.h"
 
+#include "config.h"
+#ifdef SYN_SEMA
+#include <semaphore.h>
+#endif
+
 static uint8_t xorshift32() {
 	static uint32_t s = 0x92D68CA2;
 	s ^= (s<<13);
@@ -22,11 +27,17 @@ void continious_writer(struct thread_data *args) {
 #		ifdef SYN_MUTEX
 			pthread_mutex_lock(&args->mutex);
 #		endif
+#		ifdef SYN_SEMA
+			sem_wait(&args->semaphore);
+#		endif
 		for (size_t i = 0; i < args->len; ++i)
 			data[i] = xorshift32();
 		printf("[%u] Writer: 0x%08x\n", count, crc32(data, args->len));
 #		ifdef SYN_MUTEX
 			pthread_mutex_unlock(&args->mutex);
+#		endif
+#		ifdef SYN_SEMA
+			sem_post(&args->semaphore);
 #		endif
 		nanosleep(&rqtp, NULL);
 	}
