@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 project(Hospital)
 
 option(DEBUG_INFO "Print debug information to stderr" ON)
-configure_file(config.h.in config.h)
+configure_file(config.hpp.in config.hpp)
 add_executable(hospital
                main.cpp
                hospital.cpp

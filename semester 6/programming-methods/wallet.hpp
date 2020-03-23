@@ -1,5 +1,4 @@
 #pragma once
-
 class Wallet {
 public:
 	virtual void pay(unsigned amount) = 0;

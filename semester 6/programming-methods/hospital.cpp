@@ -10,7 +10,7 @@
 
 Hospital::Hospital(const std::string &title,
                    std::size_t doctor_capacity,
-				   std::size_t patient_capacity) {
+                   std::size_t patient_capacity) {
 	_title = title;
 	size_doc = doctor_capacity;
 	size_pat = patient_capacity;

@@ -1,7 +1,5 @@
 #pragma once
-
 #include <ostream>
-
 #include "util/enum.hpp"
 
 #define DISEASE_ENUM(DO) \
