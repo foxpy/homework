@@ -12,6 +12,7 @@ public:
 	Hospital(const std::string &title,
 	         std::size_t doctor_capacity = 5,
 	         std::size_t patient_capacity = 10);
+	Hospital(const Hospital &hospital);
 	~Hospital();
 	const char* title() const;
 	void add_doctor(Doctor &doctor);

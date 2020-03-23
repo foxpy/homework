@@ -24,6 +24,24 @@ Hospital::Hospital(const std::string &title,
 #endif
 }
 
+Hospital::Hospital(const Hospital &hospital) {
+	_title = hospital._title;
+	_title.append(" (copy)");
+	size_doc = hospital.size_doc;
+	size_pat = hospital.size_pat;
+	num_doc = hospital.num_doc;
+	num_pat = hospital.num_pat;
+	doctors = static_cast<Doctor*> (::operator new(sizeof(Doctor) * size_doc));
+	patients = static_cast<Patient*> (::operator new(sizeof(Patient) * size_pat));
+	for (std::size_t i = 0; i < num_doc; ++i)
+		doctors[i] = hospital.doctors[i];
+	for (std::size_t i = 0; i < num_pat; ++i)
+		patients[i] = hospital.patients[i];
+#ifdef DEBUG_INFO
+	std::clog << "Copied hospital " << hospital._title << " to " << _title << std::endl;
+#endif
+}
+
 Hospital::~Hospital() {
 	delete doctors;
 	delete patients;
