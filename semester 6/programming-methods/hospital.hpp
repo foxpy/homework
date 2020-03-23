@@ -2,7 +2,6 @@
 
 #include <string>
 #include <cstddef>
-#include <vector>
 
 #include "doctor.hpp"
 #include "patient.hpp"

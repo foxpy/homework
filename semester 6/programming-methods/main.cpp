@@ -17,6 +17,9 @@ int main() {
 	hospital.add_patient(patient2);
 	Hospital another_hospital(hospital);
 	Hospital yet_another_hospital(another_hospital);
+	Doctor mutant(patient2);
+	std::cout << "Doctor " << mutant.name() << ' ' << ((mutant.can_cure(Disease::Alzheimer)) ? "can" : "can't")
+	          << " cure disease " << Disease::Alzheimer << std::endl;
 	yet_another_hospital << patient1 << patient2;
 	std::cout << "Patient " << patient1.name() << " is " << ((patient1.is_ill()) ? "ill" : "healthy") << std::endl;
 	std::cout << "Patient " << patient2.name() << " is " << ((patient2.is_ill()) ? "ill" : "healthy") << std::endl;

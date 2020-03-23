@@ -3,6 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <utility>
 
 #include "config.hpp"
 #include "doctor.hpp"
@@ -11,7 +12,7 @@
 
 Doctor::Doctor(const std::string &name,
                unsigned age): Human(name, age) {
-	money = 0;
+	_money = 0;
 #	ifdef DEBUG_INFO
 		std::clog << "Created doctor " << name << " " << age << " years old" << std::endl;
 #	endif
@@ -20,7 +21,7 @@ Doctor::Doctor(const std::string &name,
 Doctor::Doctor(const std::string &name,
                unsigned age,
                const std::vector<Disease> &cures): Human(name, age) {
-	money = 0;
+	_money = 0;
 	std::copy(cures.cbegin(), cures.cend(), std::back_inserter(this->cures));
 #	ifdef DEBUG_INFO
 		std::clog << "Created doctor " << name << " " << age << " years old";
@@ -32,22 +33,36 @@ Doctor::Doctor(const std::string &name,
 #	endif
 }
 
+Doctor::Doctor(const Patient &patient): Human(patient.name(), patient.age()) {
+	_money = patient.money();
+	std::pair<std::vector<Disease>::const_iterator, std::vector<Disease>::const_iterator> rc = patient.get_diseases();
+	std::copy(rc.first, rc.second, std::back_inserter(cures));
+
+#	ifdef DEBUG_INFO
+		std::clog << "Mutated patient " << patient.name() << " to doctor" << std::endl;
+#	endif
+}
+
 bool Doctor::can_cure(Disease disease) const {
 	return std::find(cures.cbegin(), cures.cend(), disease) != cures.cend();
 }
 
 void Doctor::pay(unsigned amount) {
-	money += amount;
+	_money += amount;
 #	ifdef DEBUG_INFO
 		std::clog << "Doctor " << name() << " has been payed with " << amount <<
-		             " of currency (now he has " << money << ')' << std::endl;
+		             " of currency (now he has " << _money << ')' << std::endl;
 #	endif
 }
 
 void Doctor::charge(unsigned amount) {
-	money -= amount;
+	_money -= amount;
 #	ifdef DEBUG_INFO
 		std::clog << "Doctor " << name() << " has been fined with " << amount <<
-		             " of currency (now he has " << money << ')' << std::endl;
+		             " of currency (now he has " << _money << ')' << std::endl;
 #	endif
+}
+
+int Doctor::money() const {
+	return _money;
 }
