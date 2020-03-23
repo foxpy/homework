@@ -8,8 +8,8 @@
 
 class Patient: public Human {
 public:
-	Patient(const std::string &name,
-	        unsigned age);
+	Patient(const std::string &name = "Alex",
+	        unsigned age = 42);
 	Patient(const std::string &name,
 	        unsigned age,
 	        const std::vector<Disease> &diseases);
