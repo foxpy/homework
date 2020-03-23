@@ -20,4 +20,8 @@ int main() {
 	          << " cure disease " << Disease::Flu << std::endl;
 	std::cout << "Doctor " << doctor2.name() << ' ' << ((doctor2.can_cure(Disease::Hepatisis)) ? "can" : "can't")
 	          << " cure disease " << Disease::Hepatisis << std::endl;
+	doctor1.pay(10);
+	doctor1.charge(20);
+	patient1.pay(5);
+	patient1.charge(25);
 }
