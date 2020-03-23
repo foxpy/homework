@@ -3,7 +3,7 @@
 #include <vector>
 #include <stdexcept>
 
-#include "config.h"
+#include "config.hpp"
 #include "hospital.hpp"
 #include "doctor.hpp"
 #include "patient.hpp"

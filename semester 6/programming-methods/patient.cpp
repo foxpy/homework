@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <iterator>
 
-#include "config.h"
+#include "config.hpp"
 #include "disease.hpp"
 #include "patient.hpp"
 #include "wallet.hpp"
