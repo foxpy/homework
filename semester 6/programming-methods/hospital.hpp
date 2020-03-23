@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <cstddef>
 #include <vector>
 
 #include "doctor.hpp"
@@ -8,11 +9,16 @@
 
 class Hospital {
 public:
-	Hospital(const std::string &title);
+	Hospital(const std::string &title,
+	         std::size_t doctor_capacity = 5,
+	         std::size_t patient_capacity = 10);
+	~Hospital();
+	const char* title() const;
 	void add_doctor(Doctor &doctor);
 	void add_patient(Patient &patient);
 private:
 	std::string _title;
-	std::vector<Doctor> doctors;
-	std::vector<Patient> patients;
+	std::size_t size_doc, size_pat, num_doc, num_pat;
+	Doctor *doctors;
+	Patient *patients;
 };
