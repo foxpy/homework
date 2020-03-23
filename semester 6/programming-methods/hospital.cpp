@@ -17,11 +17,11 @@ Hospital::Hospital(const std::string &title,
 	num_doc = num_pat = 0;
 	doctors = static_cast<Doctor*> (::operator new(sizeof(Doctor) * doctor_capacity));
 	patients = static_cast<Patient*> (::operator new(sizeof(Patient) * patient_capacity));
-#ifdef DEBUG_INFO
-	std::clog << "Created hospital " << title << " with capacity of " <<
-	             doctor_capacity << " doctors and " <<
-	             patient_capacity << " patients" << std::endl;
-#endif
+#	ifdef DEBUG_INFO
+		std::clog << "Created hospital " << title << " with capacity of " <<
+		             doctor_capacity << " doctors and " <<
+		             patient_capacity << " patients" << std::endl;
+#	endif
 }
 
 Hospital::Hospital(const Hospital &hospital) {
@@ -37,9 +37,9 @@ Hospital::Hospital(const Hospital &hospital) {
 		doctors[i] = hospital.doctors[i];
 	for (std::size_t i = 0; i < num_pat; ++i)
 		patients[i] = hospital.patients[i];
-#ifdef DEBUG_INFO
-	std::clog << "Copied hospital " << hospital._title << " to " << _title << std::endl;
-#endif
+#	ifdef DEBUG_INFO
+		std::clog << "Copied hospital " << hospital._title << " to " << _title << std::endl;
+#	endif
 }
 
 Hospital::~Hospital() {
@@ -51,18 +51,18 @@ void Hospital::add_doctor(Doctor &doctor) {
 	if (num_doc == size_doc)
 		throw std::overflow_error("No more place for doctors");
 	doctors[num_doc++] = doctor;
-#ifdef DEBUG_INFO
-	std::clog << "Added doctor " << doctor.name() << " to hospital " << _title << std::endl;
-#endif
+#	ifdef DEBUG_INFO
+		std::clog << "Added doctor " << doctor.name() << " to hospital " << _title << std::endl;
+#	endif
 }
 
 void Hospital::add_patient(Patient &patient) {
 	if (num_pat == size_pat)
 		throw std::overflow_error("No more place for patients");
 	patients[num_pat++] = patient;
-#ifdef DEBUG_INFO
-	std::clog << "Added patient " << patient.name() << " to hospital " << _title << std::endl;
-#endif
+#	ifdef DEBUG_INFO
+		std::clog << "Added patient " << patient.name() << " to hospital " << _title << std::endl;
+#	endif
 }
 
 const char* Hospital::title() const {
