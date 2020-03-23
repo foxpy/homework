@@ -15,8 +15,12 @@ public:
 	Hospital(const Hospital &hospital);
 	~Hospital();
 	const char* title() const;
-	void add_doctor(Doctor &doctor);
-	void add_patient(Patient &patient);
+	void add_doctor(const Doctor &doctor);
+	void add_patient(const Patient &patient);
+	friend Hospital& operator<< (Hospital &hospital,
+	                             const Doctor &doctor);
+	friend Hospital& operator<< (Hospital &hospital,
+	                             const Patient &patient);
 private:
 	std::string _title;
 	std::size_t size_doc, size_pat, num_doc, num_pat;

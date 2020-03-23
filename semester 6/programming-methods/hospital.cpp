@@ -47,7 +47,11 @@ Hospital::~Hospital() {
 	delete patients;
 }
 
-void Hospital::add_doctor(Doctor &doctor) {
+const char* Hospital::title() const {
+	return _title.c_str();
+}
+
+void Hospital::add_doctor(const Doctor &doctor) {
 	if (num_doc == size_doc)
 		throw std::overflow_error("No more place for doctors");
 	doctors[num_doc++] = doctor;
@@ -56,7 +60,7 @@ void Hospital::add_doctor(Doctor &doctor) {
 #	endif
 }
 
-void Hospital::add_patient(Patient &patient) {
+void Hospital::add_patient(const Patient &patient) {
 	if (num_pat == size_pat)
 		throw std::overflow_error("No more place for patients");
 	patients[num_pat++] = patient;
@@ -65,6 +69,14 @@ void Hospital::add_patient(Patient &patient) {
 #	endif
 }
 
-const char* Hospital::title() const {
-	return _title.c_str();
+Hospital& operator<< (Hospital &hospital,
+                      const Doctor &doctor) {
+	hospital.add_doctor(doctor);
+	return hospital;
+}
+
+Hospital& operator<< (Hospital &hospital,
+                      const Patient &patient) {
+	hospital.add_patient(patient);
+	return hospital;
 }

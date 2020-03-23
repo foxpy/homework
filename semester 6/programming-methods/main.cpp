@@ -13,9 +13,11 @@ int main() {
 	Patient patient1;
 	Patient patient2("John", 23, (const std::vector<Disease>) {Disease::Alzheimer});
 	hospital.add_doctor(doctor1);
+	hospital << doctor2;
 	hospital.add_patient(patient2);
 	Hospital another_hospital(hospital);
 	Hospital yet_another_hospital(another_hospital);
+	yet_another_hospital << patient1 << patient2;
 	std::cout << "Patient " << patient1.name() << " is " << ((patient1.is_ill()) ? "ill" : "healthy") << std::endl;
 	std::cout << "Patient " << patient2.name() << " is " << ((patient2.is_ill()) ? "ill" : "healthy") << std::endl;
 	std::cout << "Doctor " << doctor2.name() << ' ' << ((doctor2.can_cure(Disease::Flu)) ? "can" : "can't")
