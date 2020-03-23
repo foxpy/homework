@@ -8,11 +8,11 @@
 
 class Hospital {
 public:
-	Hospital(const std::string &name);
+	Hospital(const std::string &title);
 	void add_doctor(Doctor &doctor);
 	void add_patient(Patient &patient);
 private:
-	std::string _name;
+	std::string _title;
 	std::vector<Doctor> doctors;
 	std::vector<Patient> patients;
 };
