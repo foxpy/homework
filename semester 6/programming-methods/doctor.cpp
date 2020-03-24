@@ -35,7 +35,7 @@ Doctor::Doctor(const std::string &name,
 
 Doctor::Doctor(const Patient &patient): Human(patient.name(), patient.age()) {
 	_money = patient.money();
-	std::pair<std::vector<Disease>::const_iterator, std::vector<Disease>::const_iterator> rc = patient.get_diseases();
+	auto rc = patient.get_diseases();
 	std::copy(rc.first, rc.second, std::back_inserter(cures));
 
 #	ifdef DEBUG_INFO
