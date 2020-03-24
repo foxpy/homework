@@ -8,9 +8,9 @@
 
 int main() {
 	Hospital hospital("Yellow house");
-	Doctor doctor1;
+	Doctor doctor1("Carl", 35);
 	Doctor doctor2("Mike", 34, (const std::vector<Disease>) {Disease::Hepatisis});
-	Patient patient1;
+	Patient patient1("Alex", 21);
 	Patient patient2("John", 23, (const std::vector<Disease>) {Disease::Alzheimer});
 	hospital.add_doctor(doctor1);
 	hospital << doctor2;
