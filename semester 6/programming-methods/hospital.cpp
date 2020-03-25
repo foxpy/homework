@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <random>
 
 #include "config.hpp"
 #include "hospital.hpp"
@@ -66,6 +67,52 @@ void Hospital::add_patient(const Patient &patient) {
 #	ifdef DEBUG_INFO
 		std::clog << "Added patient " << patient.name() << " to hospital " << _title << std::endl;
 #	endif
+}
+
+bool Hospital::run() {
+	if (num_doc == 0) {
+		std::cout << "There are no doctors to cure anyone... end of working day" << std::endl;
+		return false;
+	}
+	std::cout << "Total doctors: " << num_doc << std::endl;
+	if (num_pat == 0) {
+		std::cout << "There are no patients to be cured... end of working day" << std::endl;
+		return false;
+	}
+	std::cout << "Total patients: " << num_pat << std::endl;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<unsigned> dis_pat(0, num_pat-1);
+	std::cout << "Picking patient at random... ";
+	unsigned rand_pat = dis_pat(gen);
+	std::cout << patients[rand_pat].name() << ", age: " << patients[rand_pat].age()
+	          << (patients[rand_pat].is_ill() ? ", ill" : ", healthy") << std::endl;
+	if (!patients[rand_pat].is_ill()) {
+		discharge_patient(rand_pat);
+		return true;
+	}
+	auto rc = patients[rand_pat].get_diseases();
+	for (auto it = rc.first; it != rc.second; ++it) {
+		for (std::size_t i = 0; i < num_doc; ++i) {
+			if (doctors[i].can_cure(*it)) {
+				patients[rand_pat].cure(*it);
+			}
+		}
+	}
+
+	return true;
+}
+
+void Hospital::discharge_patient(std::size_t id) {
+	if (num_pat == 0)
+		throw std::underflow_error("No patients to discharge");
+	if (id > num_pat)
+		throw std::invalid_argument("Patient out of range");
+#	ifdef DEBUG_INFO
+		std::clog << "Patient " << patients[id].name() << " has been discharged" << std::endl;
+#	endif
+	patients[id] = patients[num_pat--];
 }
 
 Hospital& operator<< (Hospital &hospital,

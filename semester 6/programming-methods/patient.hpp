@@ -17,6 +17,7 @@ public:
 	        const std::vector<Disease> &diseases);
 	bool is_ill() const;
 	std::pair<std::vector<Disease>::const_iterator, std::vector<Disease>::const_iterator> get_diseases() const;
+	void cure(Disease disease);
 	void pay(unsigned amount) override;
 	void charge(unsigned amount) override;
 	int money() const override;

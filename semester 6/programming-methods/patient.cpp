@@ -41,6 +41,19 @@ std::pair<std::vector<Disease>::const_iterator, std::vector<Disease>::const_iter
 	return std::make_pair(diseases.cbegin(), diseases.cend());
 }
 
+void Patient::cure(Disease disease) {
+#	ifdef DEBUG_INFO
+		std::clog << "Curing patient " << name() << " from " << disease << std::endl;
+#	endif
+	for (auto it = diseases.begin(); it != diseases.end(); ) {
+		if (*it == disease) {
+			it = diseases.erase(it);
+		} else {
+			++it;
+		}
+	}
+}
+
 void Patient::pay(unsigned amount) {
 	_money += amount;
 #	ifdef DEBUG_INFO

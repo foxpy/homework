@@ -31,4 +31,13 @@ int main() {
 	doctor1.charge(20);
 	patient1.pay(5);
 	patient1.charge(25);
+
+	std::cout << "=====START HOSPITAL EXECUTION=====" << std::endl;
+	Hospital num8("Number 8");
+	num8 << Patient("Mary", 16, (const std::vector<Disease>) {Disease::Headache, Disease::Flu});
+	num8 << Patient("Matt", 62, (const std::vector<Disease>) {Disease::Osteoporosis});
+	num8 << Patient("Max", 36);
+	num8 << Doctor("Richard", 26, (const std::vector<Disease>) {Disease::Headache, Disease::Osteoporosis});
+	num8 << Doctor("Michael", 43, (const std::vector<Disease>) {Disease::Flu, Disease::Malaria});
+	while (num8.run());
 }
