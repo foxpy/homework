@@ -36,7 +36,9 @@ int main(int argc, char *argv[]) {
 		perror("fopen(FILE)");
 		return EXIT_FAILURE;
 	}
-	if ((fifo = fopen(argv[3], fifo_open_mode)) == NULL) {
+	if (strcmp(argv[3], "-") == 0) {
+		fifo = (operation_mode == SENDER) ? stdout : stdin;
+	} else if ((fifo = fopen(argv[3], fifo_open_mode)) == NULL) {
 		perror("fopen(FIFO)");
 		return EXIT_FAILURE;
 	}
@@ -58,5 +60,7 @@ void help(const char *program_name) {
 	fputs("\tMODE: <sender/receiver>\n", stderr);
 	fputs("\tFILE: input file for sender mode, output file for receiver mode\n", stderr);
 	fputs("\t      use - for stdout/stdin\n", stderr);
-	fputs("\tFIFO: file to use for interprocess communication\n", stderr);
+	fputs("\tFIFO: named pipe to use for interprocess communication\n", stderr);
+	fputs("\t      use - for stdin/stdout\n", stderr);
+	fputs("\t      don't forget to use shell pipe in this case\n", stderr);
 }
