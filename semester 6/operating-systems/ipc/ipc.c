@@ -30,7 +30,9 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "Invalid operation MODE: \"%s\"\n", argv[1]);
 		return EXIT_FAILURE;
 	}
-	if ((file = fopen(argv[2], file_open_mode)) == NULL) {
+	if (strcmp(argv[2], "-") == 0) {
+		file = (operation_mode == SENDER) ? stdin : stdout;
+	} else if ((file = fopen(argv[2], file_open_mode)) == NULL) {
 		perror("fopen(FILE)");
 		return EXIT_FAILURE;
 	}
@@ -55,5 +57,6 @@ void help(const char *program_name) {
 	fprintf(stderr, "Usage: %s MODE FILE FIFO\n", program_name);
 	fputs("\tMODE: <sender/receiver>\n", stderr);
 	fputs("\tFILE: input file for sender mode, output file for receiver mode\n", stderr);
+	fputs("\t      use - for stdout/stdin\n", stderr);
 	fputs("\tFIFO: file to use for interprocess communication\n", stderr);
 }
