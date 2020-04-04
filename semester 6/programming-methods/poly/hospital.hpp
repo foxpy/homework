@@ -10,7 +10,6 @@ public:
 	Hospital(const Hospital&) = delete;
 	Hospital(const std::string &name);
 	const char* name() const;
-	template<class T> void add_person(T);
 	void add(const Patient &patient);
 	void add(const Doctor &doctor);
 	void run();
