@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <fstream>
 #include <iterator>
+#include <vector>
 
 enum StorageClass: unsigned char {
 	PatientClass,
@@ -47,4 +48,11 @@ private:
 	void open_and_create_if_not_exists(const std::string &path);
 	std::fstream file;
 	std::size_t entries;
+};
+
+struct Tui {
+	Tui(std::vector<Patient> *patients);
+	void run();
+private:
+	std::vector<Patient> *patients;
 };

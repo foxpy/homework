@@ -14,6 +14,8 @@ int main(int argc, char *argv[]) {
 	Filesystem fs(argv[1]);
 	std::vector<Patient> patients;
 	fs.read(std::back_inserter(patients));
+	Tui tui(&patients);
+	tui.run();
 	fs.write(patients.cbegin(), patients.cend());
 }
 
