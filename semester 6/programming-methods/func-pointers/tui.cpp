@@ -1,12 +1,8 @@
 #include <vector>
 #include <iostream>
 #include <cstddef>
+#include <algorithm>
 #include "function-pointers.hpp"
-
-void add_patient(std::vector<Patient> *patients);
-void delete_patient(std::vector<Patient> *patients);
-void find_patient(std::vector<Patient> *patients);
-void show_patient(std::vector<Patient> *patients);
 
 Tui::Tui(std::vector<Patient> *patients) {
 	this->patients = patients;
@@ -48,9 +44,29 @@ void Tui::clear_screen() {
 	std::cout.flush();
 }
 
-// TODO
 void add_patient(std::vector<Patient> *patients) {
-	std::cout << "NO SPACE LOL" << std::endl;
+	Patient patient;
+	std::cout << ">>> Name: ";
+	std::cin >> patient.name;
+	std::cout << ">>> Age: ";
+	std::cin >> patient.age;
+	std::cout << ">>> Disease: ";
+	std::cin >> patient.disease;
+	std::string severity;
+	std::cout << ">>> Severity: ";
+	std::cin >> severity;
+	std::transform(severity.begin(), severity.end(), severity.begin(), [](unsigned char c) {
+		return std::tolower(c);
+	});
+	if (severity == "low")
+		patient.severity = LowSeverity;
+	else if (severity == "medium")
+		patient.severity = MediumSeverity;
+	else if (severity == "high")
+		patient.severity = HighSeverity;
+	else
+		patient.severity = ExtremeSeverity;
+	patients->push_back(patient);
 }
 
 // TODO
@@ -72,9 +88,13 @@ start:
 	if (num == 0 || num > patients->size()) {
 		goto start;
 	} else {
-		std::cout << (*patients)[num-1].name << std::endl;
-		std::cout << (*patients)[num-1].age << " years" << std::endl;
-		std::cout << (*patients)[num-1].disease << std::endl;
-		std::cout << (*patients)[num-1].severity << std::endl;
+		print_patient((*patients)[num-1]);
 	}
+}
+
+void print_patient(Patient &patient) {
+	std::cout << patient.name << std::endl;
+	std::cout << patient.age << " years" << std::endl;
+	std::cout << "Disease: " << patient.disease << std::endl;
+	std::cout << patient.severity << std::endl;
 }
