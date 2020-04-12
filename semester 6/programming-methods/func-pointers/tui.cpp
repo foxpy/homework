@@ -69,9 +69,17 @@ void add_patient(std::vector<Patient> *patients) {
 	patients->push_back(patient);
 }
 
-// TODO
 void delete_patient(std::vector<Patient> *patients) {
-	std::cout << "YEET " << (*patients)[0].name << std::endl;
+	std::size_t num;
+start:
+	std::cout << "There are " << patients->size() << " patients" << std::endl;
+	std::cout << ">>> ";
+	std::cin >> num;
+	if (num == 0 || num > patients->size()) {
+		goto start;
+	} else {
+		patients->erase(patients->begin()+num-1);
+	}
 }
 
 // TODO
