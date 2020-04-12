@@ -2,8 +2,10 @@
 #include <string>
 #include <cstddef>
 #include <fstream>
+#include <ostream>
 #include <iterator>
 #include <vector>
+#include <array>
 
 enum StorageClass: unsigned char {
 	PatientClass,
@@ -17,11 +19,19 @@ enum Severity: unsigned char {
 	ExtremeSeverity,
 };
 
+std::ostream& operator<< (std::ostream &o, Severity s);
+
 struct Patient {
 	char name[32];
 	unsigned age;
 	char disease[32];
 	Severity severity;
+};
+
+struct Menu {
+	unsigned number;
+	std::string command;
+	void (*function)(std::vector<Patient> *patients);
 };
 
 struct Filesystem {
@@ -53,6 +63,9 @@ private:
 struct Tui {
 	Tui(std::vector<Patient> *patients);
 	void run();
+	void print_menu();
+	void clear_screen();
 private:
 	std::vector<Patient> *patients;
+	std::array<Menu, 4> menu_items;
 };
