@@ -32,7 +32,7 @@ void add_patient(std::vector<Patient> *patients);
 void delete_patient(std::vector<Patient> *patients);
 void find_patient(std::vector<Patient> *patients);
 void show_patient(std::vector<Patient> *patients);
-void print_patient(Patient &patient);
+void print_patient(const Patient &patient);
 
 struct Menu {
 	unsigned number;

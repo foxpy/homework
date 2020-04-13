@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cstddef>
 #include <algorithm>
+#include <string>
+#include <cstring>
 #include "function-pointers.hpp"
 
 Tui::Tui(std::vector<Patient> *patients) {
@@ -82,9 +84,47 @@ start:
 	}
 }
 
-// TODO
 void find_patient(std::vector<Patient> *patients) {
-	std::cout << "HAHA TOO LAZY" << std::endl;
+	std::cout << 1 << '\t' << "Find by name" << std::endl;
+	std::cout << 2 << '\t' << "Find by age" << std::endl;
+	std::cout << 3 << '\t' << "Find by disease" << std::endl;
+	std::cout << ">>> ";
+	std::vector<Patient>::const_iterator patient;
+	unsigned num;
+	std::string query;
+	unsigned age;
+	std::cin >> num;
+	switch (num) {
+	case 1:
+		std::cout << ">>> Name: ";
+		std::cin >> query;
+		patient = std::find_if(patients->cbegin(), patients->cend(), [query](const Patient &patient) {
+			return std::strstr(patient.name, query.c_str()) != nullptr;
+		});
+		if (patient != patients->cend())
+			print_patient(*patient);
+		break;
+	case 2:
+		std::cout << ">>> Age:";
+		std::cin >> age;
+		patient = std::find_if(patients->cbegin(), patients->cend(), [age](const Patient &patient) {
+			return patient.age == age;
+		});
+		if (patient != patients->cend())
+			print_patient(*patient);
+		break;
+	case 3:
+		std::cout << ">>> Disease: ";
+		std::cin >> query;
+		patient = std::find_if(patients->cbegin(), patients->cend(), [query](const Patient &patient) {
+			return std::strstr(patient.disease, query.c_str()) != nullptr;
+		});
+		if (patient != patients->cend())
+			print_patient(*patient);
+		break;
+	default:
+		break;
+	}
 }
 
 void show_patient(std::vector<Patient> *patients) {
@@ -100,7 +140,7 @@ start:
 	}
 }
 
-void print_patient(Patient &patient) {
+void print_patient(const Patient &patient) {
 	std::cout << patient.name << std::endl;
 	std::cout << patient.age << " years" << std::endl;
 	std::cout << "Disease: " << patient.disease << std::endl;
