@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <string>
 #include <cstring>
+#include <stdexcept>
 #include "function-pointers.hpp"
 
 Tui::Tui(std::vector<Patient> *patients) {
@@ -27,7 +28,11 @@ void Tui::run() {
 		if (cmd == 5)
 			exit = true;
 		else if (cmd > 0 && cmd < 5)
-			menu_items[cmd-1].function(patients);
+			try {
+				menu_items[cmd-1].function(patients);
+			} catch(const std::logic_error &e) {
+				std::cout << e.what() << std::endl;
+			}
 		std::cout << std::endl;
 		print_menu();
 	}
@@ -73,12 +78,11 @@ void add_patient(std::vector<Patient> *patients) {
 
 void delete_patient(std::vector<Patient> *patients) {
 	std::size_t num;
-start:
 	std::cout << "There are " << patients->size() << " patients" << std::endl;
 	std::cout << ">>> ";
 	std::cin >> num;
 	if (num == 0 || num > patients->size()) {
-		goto start;
+		throw std::logic_error("Wrong patient ID");
 	} else {
 		patients->erase(patients->begin()+num-1);
 	}
@@ -103,6 +107,8 @@ void find_patient(std::vector<Patient> *patients) {
 		});
 		if (patient != patients->cend())
 			print_patient(*patient);
+		else
+			throw std::logic_error("Patient not found");
 		break;
 	case 2:
 		std::cout << ">>> Age:";
@@ -112,6 +118,8 @@ void find_patient(std::vector<Patient> *patients) {
 		});
 		if (patient != patients->cend())
 			print_patient(*patient);
+		else
+			throw std::logic_error("Patient not found");
 		break;
 	case 3:
 		std::cout << ">>> Disease: ";
@@ -121,6 +129,8 @@ void find_patient(std::vector<Patient> *patients) {
 		});
 		if (patient != patients->cend())
 			print_patient(*patient);
+		else
+			throw std::logic_error("Patient not found");
 		break;
 	default:
 		break;
@@ -129,12 +139,11 @@ void find_patient(std::vector<Patient> *patients) {
 
 void show_patient(std::vector<Patient> *patients) {
 	std::size_t num;
-start:
 	std::cout << "There are " << patients->size() << " patients" << std::endl;
 	std::cout << ">>> ";
 	std::cin >> num;
 	if (num == 0 || num > patients->size()) {
-		goto start;
+		throw std::logic_error("Wrong patient ID");
 	} else {
 		print_patient((*patients)[num-1]);
 	}
