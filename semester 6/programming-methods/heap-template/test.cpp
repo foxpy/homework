@@ -24,6 +24,9 @@ int main() {
 		myq.push(i);
 	}
 
+	assert(stdq.size() == 9);
+	assert(myq.size() == 9);
+
 	while (!stdq.empty()) {
 		std::cout << stdq.top() << ' ';
 		stdq.pop();

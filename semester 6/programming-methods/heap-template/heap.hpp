@@ -17,6 +17,10 @@ public:
 		return length == 0;
 	}
 
+	std::size_t size() {
+		return length;
+	}
+
 	void push(const T &t) {
 		if (length < capacity) {
 			data[length] = t;
