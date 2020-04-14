@@ -30,17 +30,31 @@ public:
 	T& top() {
 		return data[0];
 	}
+
+	void pop() {
+		data[0] = data[length-1];
+		--length;
+		if (capacity > 1 && length < capacity / 2)
+			shrink();
+	}
 private:
 	void grow() {
-		std::size_t old_capacity = capacity;
-		capacity *= 2;
+		resize(capacity * 2);
+	}
+
+	void shrink() {
+		resize(capacity / 2);
+	}
+
+	void resize(std::size_t new_capacity) {
 		T *old_data = data;
-		T *new_data = new T[capacity];
-		for (std::size_t i = 0; i < old_capacity; ++i) {
+		T *new_data = new T[new_capacity];
+		for (std::size_t i = 0; i < length; ++i) {
 			new_data[i] = old_data[i];
 		}
 		delete[] data;
 		data = new_data;
+		capacity = new_capacity;
 	}
 	std::size_t capacity;
 	std::size_t length;

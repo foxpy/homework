@@ -29,4 +29,9 @@ int main() {
 		stdq.pop();
 	}
 	std::cout << std::endl;
+	while (!myq.empty()) {
+		std::cout << myq.top() << ' ';
+		myq.pop();
+	}
+	std::cout << std::endl;
 }
