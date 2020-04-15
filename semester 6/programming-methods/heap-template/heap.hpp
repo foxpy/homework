@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef>
+#include <algorithm>
 
 template<class T>
 struct heap {
@@ -22,13 +23,11 @@ public:
 	}
 
 	void push(const T &t) {
-		if (length < capacity) {
-			data[length] = t;
-		} else {
+		if (length >= capacity)
 			grow();
-			data[length] = t;
-		}
+		data[length] = t;
 		++length;
+		std::sort(&data[0], &data[length], [](T &t1, T &t2) { return t1 > t2; });
 	}
 
 	T& top() {
@@ -38,6 +37,7 @@ public:
 	void pop() {
 		data[0] = data[length-1];
 		--length;
+		std::sort(&data[0], &data[length], [](T &t1, T &t2) { return t1 > t2; });
 		if (capacity > 1 && length < capacity / 2)
 			shrink();
 	}
