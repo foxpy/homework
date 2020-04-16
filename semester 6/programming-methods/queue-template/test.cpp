@@ -7,7 +7,7 @@
 void test_int() {
 	std::array<int, 8> input = { 4, 2, 9, 6, 1, 8, 13, 2 };
 	std::queue<int> stdq;
-	heap<int> myq;
+	queue<int> myq;
 
 	assert(stdq.empty());
 	assert(myq.empty());
@@ -42,7 +42,7 @@ void test_int() {
 void test_char() {
 	std::array<char, 8> input = { 'a', 's', 'q', '0', '1', '8', 'p', 'c' };
 	std::queue<char> stdq;
-	heap<char> myq;
+	queue<char> myq;
 
 	assert(stdq.empty());
 	assert(myq.empty());
@@ -77,7 +77,7 @@ void test_char() {
 void test_float() {
 	std::array<float, 8> input = { 4.6, 7.5, 1.0, -0.4, 19.6, 83762.3093, -62.4, 0.01 };
 	std::queue<float> stdq;
-	heap<float> myq;
+	queue<float> myq;
 
 	assert(stdq.empty());
 	assert(myq.empty());

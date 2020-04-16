@@ -2,15 +2,15 @@
 #include <cstddef>
 
 template<class T>
-struct heap {
+struct queue {
 public:
-	heap() {
+	queue() {
 		capacity = 1;
 		length = 0;
 		offset = 0;
 		data = new T[capacity];
 	}
-	~heap() {
+	~queue() {
 		delete[] data;
 	}
 
