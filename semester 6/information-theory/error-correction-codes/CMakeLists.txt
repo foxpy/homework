@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.10)
+project(ErrorCorrectionCodes)
+add_subdirectory(noise-simulator)
+add_executable(main main.c)
+target_link_libraries(main PUBLIC NoiseSimulator)
