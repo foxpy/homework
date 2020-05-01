@@ -1,15 +1,25 @@
 #include <string.h>
+#include <stdint.h>
 #include "noise.h"
-
-#include <stdio.h>
 #include "random.h"
 
-// TODO: replace with actual implementation
+static void flip_specific_bit(uint8_t *byte, uint8_t nbit) {
+	uint8_t mask = 1;
+	mask <<= nbit;
+	*byte ^= mask;
+}
+
 static void apply_noise_bit_flip(void *ptr,
                                  size_t len,
                                  size_t num_bit_flips) {
-	char *data = ptr;
-	data[0] = rnd32();
+	size_t nbyte;
+	uint8_t nbit;
+	while (num_bit_flips--) {
+		nbyte = (len > UINT32_MAX) ? rnd64() : rnd32();
+		nbyte %= len;
+		nbit = rnd32() % 8;
+		flip_specific_bit((uint8_t*)(ptr) + nbyte, nbit);
+	}
 }
 
 // TODO: replace with actual implementation

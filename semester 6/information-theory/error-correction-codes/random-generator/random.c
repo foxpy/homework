@@ -21,3 +21,10 @@ uint32_t rnd32() {
 #	endif
 	return ret;
 }
+
+uint64_t rnd64() {
+	uint64_t ret = rnd32();
+	ret <<= 32;
+	ret |= rnd32();
+	return ret;
+}
