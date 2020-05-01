@@ -1,16 +1,23 @@
 #include <string.h>
 #include "noise.h"
 
+#include <stdio.h>
+#include "random.h"
+
+// TODO: replace with actual implementation
 static void apply_noise_bit_flip(void *ptr,
                                  size_t len,
                                  size_t num_bit_flips) {
-	memset(ptr, 1, len);
+	char *data = ptr;
+	data[0] = rnd32();
 }
 
+// TODO: replace with actual implementation
 static void apply_noise_linear(void *ptr,
                                size_t len,
                                size_t damage_length) {
-	memset(ptr, 2, len);
+	char *data = ptr;
+	data[0] = rnd32();
 }
 
 void apply_noise(void *ptr,
