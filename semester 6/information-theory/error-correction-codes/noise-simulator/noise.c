@@ -22,12 +22,15 @@ static void apply_noise_bit_flip(void *ptr,
 	}
 }
 
-// TODO: replace with actual implementation
 static void apply_noise_linear(void *ptr,
                                size_t len,
                                size_t damage_length) {
-	char *data = ptr;
-	data[0] = rnd32();
+	size_t start_bit = (len * 8) - damage_length;
+	start_bit = (len > UINT32_MAX) ? (rnd64() % start_bit) : (rnd32() % start_bit);
+	while (damage_length--) {
+		flip_specific_bit((uint8_t*)(ptr)+(start_bit/8), start_bit%8);
+		++start_bit;
+	}
 }
 
 void apply_noise(void *ptr,

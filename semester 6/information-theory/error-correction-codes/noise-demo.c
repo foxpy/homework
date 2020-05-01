@@ -15,7 +15,7 @@ int main() {
 	printf("This is how message looks after applying bit flip noise: %s\n", message);
 
 	ntype = NOISE_LINEAR;
-	nconfig.linear.damage_length = 3;
+	nconfig.linear.damage_length = 15;
 	apply_noise(message, strlen(message), ntype, nconfig);
 	printf("This is how message looks after applying linear noise:   %s\n", message);
 
