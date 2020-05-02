@@ -1,3 +1,7 @@
+```c
+#include "noise.h"
+```
+
 ### enum noise_t
 
 Describes type of noise applied:

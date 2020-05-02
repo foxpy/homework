@@ -1,3 +1,7 @@
+```c
+#include "bytes-to-string.h"
+```
+
 ### bytes_to_bitstring()
 
 ```c

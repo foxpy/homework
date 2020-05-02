@@ -1,3 +1,7 @@
+```c
+#include "random.h"
+```
+
 ### rnd32()
 
 ```c
