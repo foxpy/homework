@@ -8,4 +8,4 @@ add_subdirectory(random-generator)
 add_subdirectory(bytes-to-string)
 
 add_executable(noise-demo noise-demo.c)
-target_link_libraries(noise-demo PUBLIC NoiseSimulator)
+target_link_libraries(noise-demo PUBLIC NoiseSimulator BytesToString)

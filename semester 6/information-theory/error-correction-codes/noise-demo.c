@@ -2,22 +2,36 @@
 #include <stdlib.h>
 #include <string.h>
 #include "noise.h"
+#include "bytes-to-string.h"
+
+#define PRINT_MESSAGE(str) { \
+	fputs(str, stdout); \
+	fwrite(message, sizeof(char), sizeof(message)/sizeof(char), stdout); \
+	bytes_to_bitstring(bitstring, message, sizeof(message)); \
+	bytes_to_hexstring(hexstring, message, sizeof(message)); \
+	printf("\n0b%s\n0x%s\n", bitstring, hexstring); \
+}
 
 int main() {
-	char message[] = "The quick brown fox jumps over the lazy dog";
 	noise_t ntype ;
 	noise_cfg_t nconfig;
-	printf("Original message:                                        %s\n", message);
+	char message[] = "The quick";
+	char *bitstring = malloc(sizeof(message)*8+1);
+	char *hexstring = malloc(sizeof(message)*2+1);
+
+	PRINT_MESSAGE("Original message: ");
 
 	ntype = NOISE_BIT_FLIP;
-	nconfig.bit_flip.num_bit_flips = 2;
+	nconfig.bit_flip.num_bit_flips = 1;
 	apply_noise(message, strlen(message), ntype, nconfig);
-	printf("This is how message looks after applying bit flip noise: %s\n", message);
+	PRINT_MESSAGE("After bit flip: ");
 
 	ntype = NOISE_LINEAR;
-	nconfig.linear.damage_length = 15;
+	nconfig.linear.damage_length = 4;
 	apply_noise(message, strlen(message), ntype, nconfig);
-	printf("This is how message looks after applying linear noise:   %s\n", message);
+	PRINT_MESSAGE("After linear noise: ");
 
+	free(bitstring);
+	free(hexstring);
 	return EXIT_SUCCESS;
 }
