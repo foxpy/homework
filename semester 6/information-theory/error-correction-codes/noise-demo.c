@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "emalloc.h"
 #include "noise.h"
 #include "bytes-to-string.h"
 
@@ -16,8 +17,8 @@ int main() {
 	noise_t ntype ;
 	noise_cfg_t nconfig;
 	char message[] = "The quick";
-	char *bitstring = malloc(sizeof(message)*8+1);
-	char *hexstring = malloc(sizeof(message)*2+1);
+	char *bitstring = (char*) emalloc(sizeof(message)*8+1);
+	char *hexstring = (char*) emalloc(sizeof(message)*2+1);
 
 	PRINT_MESSAGE("Original message: ");
 

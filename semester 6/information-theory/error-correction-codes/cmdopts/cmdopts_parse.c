@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <string.h>
+#include "emalloc.h"
 #include "cmdopts.h"
 
 #define SAVE_OPT(opt) { \
 	if (opts->nopts == nopts_cap) { \
 		nopts_cap *= 2; \
-		opts->opts = (struct opt*) realloc(opts->opts, sizeof(struct opt) * nopts_cap); \
+		opts->opts = (struct opt*) erealloc(opts->opts, sizeof(struct opt) * nopts_cap); \
 	} \
 	memcpy(&(opts->opts[opts->nopts++]), &opt, sizeof(opt)); \
 }
@@ -21,7 +22,7 @@ void cmdopts_parse(opts_t *opts, int argc, char *argv[]) {
 	++argv; --argc;
 	opts->nopts = 0;
 	size_t nopts_cap = 2;
-	opts->opts = (struct opt*) malloc(sizeof(struct opt) * nopts_cap);
+	opts->opts = (struct opt*) emalloc(sizeof(struct opt) * nopts_cap);
 
 	while (argc--) {
 		switch (state) {
@@ -52,7 +53,7 @@ void cmdopts_parse(opts_t *opts, int argc, char *argv[]) {
 		opt.value = NULL;
 		SAVE_OPT(opt);
 	}
-	exit:
+exit:
 	opts->nposopts = argc + 1;
 	opts->posopts = argv;
 }
