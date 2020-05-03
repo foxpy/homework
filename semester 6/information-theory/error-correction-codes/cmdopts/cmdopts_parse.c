@@ -56,4 +56,5 @@ void cmdopts_parse(opts_t *opts, int argc, char *argv[]) {
 exit:
 	opts->nposopts = argc + 1;
 	opts->posopts = argv;
+	opts->opts = (struct opt*) erealloc(opts->opts, sizeof(struct opt) * opts->nopts);
 }
