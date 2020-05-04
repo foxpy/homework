@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
 #include "cmdopts.h"
 #include "noise.h"
+
+#define MIN(a, b) ((a < b) ? (a) : (b))
 
 void help(char *program_name) {
 	fprintf(stderr, "Usage: %s [OPTIONS] [INPUT] [OUTPUT]\n", program_name);
@@ -14,6 +17,7 @@ void help(char *program_name) {
 	fputs("\t\tSets damage type either to random bit flips or more linear damage\n", stderr);
 	fputs("\t--frequency <UINT> - defaults to 4 for bitflip and 20 for linear\n", stderr);
 	fputs("\t\tSets number of defects (0, 1024] per 1 KiB of data\n", stderr);
+	fprintf(stderr, "\t--skip <UINT> - skip N first bytes (0, %d] of input\n", INT_MAX);
 	fputs("\t--help - print this message\n", stderr);
 	fputs("Inputs with length less than 1 KiB have chance to remain unchanged\n", stderr);
 }
@@ -21,6 +25,8 @@ void help(char *program_name) {
 int main(int argc, char *argv[]) {
 	int status = EXIT_SUCCESS;
 	opts_t opts;
+	char buf[1024];
+	size_t nread;
 	cmdopts_parse(&opts, argc, argv);
 	if (cmdopts_exists(&opts, "--help")) {
 		help(argv[0]);
@@ -29,7 +35,7 @@ int main(int argc, char *argv[]) {
 
 	noise_t ntype;
 	noise_cfg_t nconfig;
-	unsigned frequency;
+	unsigned frequency, skip = 0;
 	if (cmdopts_exists(&opts, "--type")) {
 		char *val;
 		if ((val = cmdopts_get_opt(&opts, "--type")) == NULL) {
@@ -46,6 +52,18 @@ int main(int argc, char *argv[]) {
 		}
 	} else {
 		ntype = NOISE_BIT_FLIP;
+	}
+	if (cmdopts_exists(&opts, "--skip")) {
+		char *val;
+		if ((val = cmdopts_get_opt(&opts, "--skip")) == NULL) {
+			help(argv[0]);
+			return EXIT_FAILURE;
+		}
+		skip = atoi(val);
+		if (skip == 0 | skip > INT_MAX) {
+			help(argv[0]);
+			return EXIT_FAILURE;
+		}
 	}
 	if (cmdopts_exists(&opts, "--frequency")) {
 		char *val;
@@ -94,6 +112,11 @@ int main(int argc, char *argv[]) {
 		return EXIT_FAILURE;
 	}
 
+	while (skip > 0 && (nread = fread(buf, sizeof(char), MIN(skip, sizeof(buf)), input)) > 0) {
+		if (fwrite(buf, sizeof(char), nread, output) == 0)
+			break;
+		skip -= nread;
+	}
 	switch(ntype) {
 	case NOISE_BIT_FLIP:
 		nconfig.bit_flip.num_bit_flips = frequency;
@@ -102,9 +125,7 @@ int main(int argc, char *argv[]) {
 		nconfig.linear.damage_length = frequency;
 		break;
 	}
-	char buf[1024];
-	size_t nread;
-	while ((nread = fread(buf, sizeof(char), sizeof(buf)/sizeof(char), input)) > 0) {
+	while ((nread = fread(buf, sizeof(char), sizeof(buf), input)) > 0) {
 		apply_noise(buf, sizeof(buf), ntype, nconfig);
 		if (fwrite(buf, sizeof(char), nread, output) == 0) {
 			break;
