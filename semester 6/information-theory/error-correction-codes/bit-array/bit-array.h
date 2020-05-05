@@ -12,6 +12,7 @@ typedef struct bit_array {
 
 void bitarray_alloc(bits_t *bits);
 void bitarray_free(bits_t *bits);
+void bitarray_copy(bits_t *dst, bits_t *src);
 size_t bitarray_size(bits_t *bits);
 bool bitarray_empty(bits_t *bits);
 

@@ -28,6 +28,14 @@ void bitarray_free(bits_t *bits);
 Destroys `bits_t` object pointed to by `bits`.
 Double free is undefined behaviour.
 
+### bitarray_copy()
+
+```c
+void bitarray_copy(bits_t *dst, bits_t *src);
+```
+
+Initializes new `bits_t` object `dst` from `src`, copying data and allocating memory.
+
 ### bitarray_size()
 
 ```c
