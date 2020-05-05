@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 			return EXIT_FAILURE;
 		}
 		skip = atoi(val);
-		if (skip == 0 | skip > INT_MAX) {
+		if (skip == 0 || skip > INT_MAX) {
 			help(argv[0]);
 			return EXIT_FAILURE;
 		}
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 	while (skip > 0 && (nread = fread(buf, sizeof(char), MIN(skip, sizeof(buf)), input)) > 0) {
 		if (fwrite(buf, sizeof(char), nread, output) == 0)
 			break;
-		skip -= nread;
+		skip -= (unsigned) nread;
 	}
 	switch(ntype) {
 	case NOISE_BIT_FLIP:

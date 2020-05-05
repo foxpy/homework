@@ -4,7 +4,7 @@
 #include "cmdopts.h"
 
 #define SAVE_OPT(opt) { \
-	if (opts->nopts == nopts_cap) { \
+	if ((size_t) opts->nopts == nopts_cap) { \
 		nopts_cap *= 2; \
 		opts->opts = (struct opt*) erealloc(opts->opts, sizeof(struct opt) * nopts_cap); \
 	} \
