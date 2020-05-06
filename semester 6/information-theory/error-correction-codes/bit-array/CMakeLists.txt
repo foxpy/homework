@@ -10,5 +10,7 @@ add_library(BitArray
 	bitarray_front.c
 	bitarray_push_front.c
 	bitarray_pop_front.c
+	bitarray_fill_from_memory.c
+	bitarray_to_memory.c
 )
 target_include_directories(BitArray INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})

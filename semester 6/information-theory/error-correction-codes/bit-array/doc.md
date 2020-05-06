@@ -36,6 +36,26 @@ void bitarray_copy(bits_t *dst, bits_t *src);
 
 Initializes new `bits_t` object `dst` from `src`, copying data and allocating memory.
 
+### bitarray_fill_from_memory()
+
+```c
+void bitarray_fill_from_memory(bits_t *dst, void *src, size_t nbits);
+```
+
+Given pointer `src` to memory, fills `dst` object with `nbits` bits in sequential order.
+
+### bitarray_to_memory()
+
+```c
+void* bitarray_to_memory(bits_t *src, size_t *nbits);
+```
+
+Returns pointer to allocated memory storing bits copied from `src`.
+This memory should be freed via `free()` stdlib function.
+Stores number of copied bits in `nbits`.
+Unset bits are zeroed out.
+Destroys (frees) `src`.
+
 ### bitarray_size()
 
 ```c
