@@ -8,3 +8,6 @@ target_link_libraries(bit-test PUBLIC BitArray)
 
 add_executable(cmdopts-test cmdopts-test.c)
 target_link_libraries(cmdopts-test PUBLIC CmdOpts)
+
+add_executable(bytes-to-string-test bytes-to-string-test.c)
+target_link_libraries(bytes-to-string-test PUBLIC BytesToString)
