@@ -11,3 +11,6 @@ target_link_libraries(cmdopts-test PUBLIC CmdOpts)
 
 add_executable(bytes-to-string-test bytes-to-string-test.c)
 target_link_libraries(bytes-to-string-test PUBLIC BytesToString)
+
+add_executable(random-generator-test random-generator-test.c)
+target_link_libraries(random-generator-test PUBLIC RandomGenerator)
