@@ -14,7 +14,7 @@ Formats `src` bytes length of `len` to bit string representation written to `dst
 ### bytes_to_hexstring()
 
 ```c
-void bytes_to_hexstring(void 8dst, void *src, size_t len);
+void bytes_to_hexstring(void *dst, void *src, size_t len);
 ```
 
 Formats `src` bytes length of `len` to hex string representation written to `dst`.
