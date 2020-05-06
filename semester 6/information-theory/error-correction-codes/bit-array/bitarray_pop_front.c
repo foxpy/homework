@@ -7,7 +7,7 @@ void bitarray_pop_front(bits_t *bits) {
 	bit carry;
 	if (bits->len > 0) for (size_t i = 0; i < bits->len; ++i) {
 		carry = bits->data[i+1] & cmask;
-		bits->data[0] >>= 1;
+		bits->data[i] >>= 1;
 		if (carry)
 			bits->data[i] |= mask;
 		else
