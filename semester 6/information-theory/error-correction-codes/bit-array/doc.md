@@ -36,6 +36,14 @@ void bitarray_copy(bits_t *dst, bits_t *src);
 
 Initializes new `bits_t` object `dst` from `src`, copying data and allocating memory.
 
+### bitarray_clear()
+
+```c
+void bitarray_clear(bits_t *bits);
+```
+
+Empties, but not destroys, `bits` object.
+
 ### bitarray_fill_from_memory()
 
 ```c

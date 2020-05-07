@@ -86,6 +86,10 @@ int main() {
 	assert(memcmp(memory, new_memory, 4) == 0);
 	assert(nbits == 32);
 
+	bitarray_push_back(&bits, 1);
+	bitarray_clear(&bits);
+	assert(bitarray_empty(&bits) == true);
+
 	free(new_memory);
 	bitarray_free(&bits_copy);
 	return EXIT_SUCCESS;
