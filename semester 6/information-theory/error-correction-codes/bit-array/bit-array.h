@@ -15,7 +15,7 @@ void bitarray_free(bits_t *bits);
 void bitarray_copy(bits_t *dst, bits_t *src);
 void bitarray_clear(bits_t *bits);
 void bitarray_fill_from_memory(bits_t *dst, void *src, size_t nbits);
-void* bitarray_to_memory(bits_t *src, size_t *nbits);
+void* bitarray_to_memory(bits_t *src, size_t *nbits, size_t *nbytes);
 size_t bitarray_size(bits_t *bits);
 bool bitarray_empty(bits_t *bits);
 

@@ -55,12 +55,13 @@ Given pointer `src` to memory, fills `dst` object with `nbits` bits in sequentia
 ### bitarray_to_memory()
 
 ```c
-void* bitarray_to_memory(bits_t *src, size_t *nbits);
+void* bitarray_to_memory(bits_t *src, size_t *nbits, size_t *nbytes);
 ```
 
 Returns pointer to allocated memory storing bits copied from `src`.
 This memory should be freed via `free()` stdlib function.
 Stores number of copied bits in `nbits`.
+Stores size of returned memory in `nbytes`.
 Unset bits are zeroed out.
 Destroys (frees) `src`.
 

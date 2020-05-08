@@ -80,11 +80,12 @@ int main() {
 	assert(bitarray_empty(&bits) == true);
 
 	bitarray_fill_from_memory(&bits, memory, 32);
-	size_t nbits;
-	char *new_memory = bitarray_to_memory(&bits, &nbits);
+	size_t nbits, nbytes;
+	char *new_memory = bitarray_to_memory(&bits, &nbits, &nbytes);
 	assert(bitarray_empty(&bits) == true);
 	assert(memcmp(memory, new_memory, 4) == 0);
 	assert(nbits == 32);
+	assert(nbytes == 4);
 
 	bitarray_push_back(&bits, 1);
 	bitarray_clear(&bits);
