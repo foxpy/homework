@@ -14,3 +14,6 @@ target_link_libraries(bytes-to-string-test PUBLIC BytesToString)
 
 add_executable(random-generator-test random-generator-test.c)
 target_link_libraries(random-generator-test PUBLIC RandomGenerator)
+
+add_executable(serial-test serial-test.c)
+target_link_libraries(serial-test PUBLIC SerialEmulator BitArray BytesToString)
