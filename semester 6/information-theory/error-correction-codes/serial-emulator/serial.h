@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "bit-array.h"
 
-enum data_bits: unsigned char {
+enum data_bits {
 	DATA_BITS_5 = 5,
 	DATA_BITS_6 = 6,
 	DATA_BITS_7 = 7,
@@ -16,7 +16,7 @@ enum parity_bit {
 	PARITY_EVEN,
 };
 
-enum stop_bits: unsigned char {
+enum stop_bits {
 	STOP_BITS_1 = 1,
 	STOP_BITS_2 = 2,
 };
