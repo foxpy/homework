@@ -31,7 +31,7 @@ int main() {
 	assert(strncmp(bitstring, "0100011101011101110101010011010010011101", 40) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -46,7 +46,7 @@ int main() {
 	assert(strncmp(bitstring, "010001111001110111010101001011001001011100001", 45) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -61,7 +61,7 @@ int main() {
 	assert(strncmp(bitstring, "0100011011011101011110010101001100101001110100001", 49) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -76,7 +76,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111011011011101010100110010100111000001", 44) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -91,7 +91,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111011011101110110101001101100100111011", 44) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -106,7 +106,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111001011101110010100011001100100110011", 44) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -121,7 +121,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111011011101110110100011000100100110001", 44) == 0);
 	free(bitstring);
 	free(memory);
-	bitarray_clear(&input);
+	bitarray_free(&input);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -135,9 +135,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -151,9 +151,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -167,9 +167,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -183,9 +183,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -199,9 +199,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -215,9 +215,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -231,9 +231,9 @@ int main() {
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	bitarray_alloc(&input);
 	bitarray_alloc(&encoded);
@@ -249,9 +249,9 @@ int main() {
 	bitarray_fill_from_memory(&encoded, memory, nbits);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 3);
 	free(memory);
-	bitarray_clear(&input);
-	bitarray_clear(&encoded);
-	bitarray_clear(&decoded);
+	bitarray_free(&input);
+	bitarray_free(&encoded);
+	bitarray_free(&decoded);
 
 	return EXIT_SUCCESS;
 }
