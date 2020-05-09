@@ -3,28 +3,7 @@
 #include <stdlib.h>
 #include "bit-array.h"
 #include "serial.h"
-
-#define START_BIT 0
-#define STOP_BIT 1
-
-static bit next_bit(bits_t *bits) {
-	bit b;
-	if (bitarray_empty(bits)) {
-		return 0;
-	} else {
-		b = bitarray_front(bits);
-		bitarray_pop_front(bits);
-		return b;
-	}
-}
-
-static bit parity(uint8_t sum, enum parity_bit ptype) {
-	if (ptype == PARITY_EVEN) {
-		return (sum % 2) == 0;
-	} else {
-		return (sum % 2) == 1;
-	}
-}
+#include "serial_impl.h"
 
 void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 	uint8_t sum = 0;

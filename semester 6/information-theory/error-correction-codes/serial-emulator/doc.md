@@ -21,7 +21,7 @@ Fields:
 ### serial_encode()
 
 ```c
-int serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
+void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 ```
 
 Encodes `src` bits to `dst` bits, simulating
@@ -30,8 +30,10 @@ Serial port data flow according to settings pointed by `cfg`.
 ### serial_decode()
 
 ```c
-int serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
+size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 ```
 
 Decodes simulated Serial port data flow from `src` to `dst`
 using settings pointed by `cfg`.
+Packets with parity mismatch or broken start/stop bits are dropped.
+Returns number of successfully decoded packets.
