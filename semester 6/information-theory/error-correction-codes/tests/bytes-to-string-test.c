@@ -1,3 +1,7 @@
+#ifdef NDEBUG
+#undef NDEBUG
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>

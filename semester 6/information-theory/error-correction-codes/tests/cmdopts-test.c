@@ -1,3 +1,7 @@
+#ifdef NDEBUG
+#undef NDEBUG
+#endif
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
