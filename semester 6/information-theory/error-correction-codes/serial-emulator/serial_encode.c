@@ -29,9 +29,6 @@ static bit parity(uint8_t sum, enum parity_bit ptype) {
 void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 	uint8_t sum = 0;
 	bit b;
-	if (cfg->data_bits != DATA_BITS_8) {
-		exit(EXIT_FAILURE);
-	}
 	while (!bitarray_empty(src)) {
 		bitarray_push_back(dst, START_BIT);
 		for (unsigned char i = 0; i < cfg->data_bits; ++i) {

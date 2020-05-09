@@ -4,8 +4,6 @@
 
 Emulates Serial port data flow.
 
-**Warning**: currently only 8 data bits are supported.
-
 ### serial_cfg_t
 
 Stores configuration for Serial emulator.
@@ -13,7 +11,6 @@ Fields:
 
 `data_bits` - number of bits transmitted per packet. Possible values:
 `DATA_BITS_5`, `DATA_BITS_6`, `DATA_BITS_7`, `DATA_BITS_8` and `DATA_BITS_9`.
-Please check out warning above.
 
 `parity` - type of parity bit used for integrity check. Possible values:
 `PARITY_NONE`, `PARITY_ODD` and `PARITY_EVEN`.
