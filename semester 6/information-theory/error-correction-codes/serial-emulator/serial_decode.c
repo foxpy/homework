@@ -35,17 +35,18 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 	for (;;) {
 		bitarray_copy(&tmp, &window);
 		if (process_packet(dst, &tmp, cfg) != -1) {
+			bitarray_free(&tmp);
 			ret += 1;
-			if (bitarray_empty(src)) break;;
+			if (bitarray_empty(src)) break;
 			bitarray_clear(&window);
 			for (unsigned char i = 0; i < packet_length(cfg); ++i)
 				bitarray_push_back(&window, next_bit(src));
 		} else {
+			bitarray_free(&tmp);
 			if (bitarray_empty(src)) break;
 			bitarray_pop_front(&window);
 			bitarray_push_back(&window, next_bit(src));
 		}
-		bitarray_free(&tmp);
 	}
 	bitarray_free(&window);
 	return ret;
