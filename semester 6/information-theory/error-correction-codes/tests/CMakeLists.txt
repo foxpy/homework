@@ -17,3 +17,6 @@ target_link_libraries(random-generator-test PUBLIC RandomGenerator)
 
 add_executable(serial-test serial-test.c)
 target_link_libraries(serial-test PUBLIC SerialEmulator BitArray BytesToString)
+
+add_executable(ecc-repetition-test ecc-repetition-test.c)
+target_link_libraries(ecc-repetition-test PUBLIC ErrorCorrectionCodes)
