@@ -31,6 +31,7 @@ int main() {
 	assert(strncmp(bitstring, "0100011101011101110101010011010010011101", 40) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -46,6 +47,7 @@ int main() {
 	assert(strncmp(bitstring, "010001111001110111010101001011001001011100001", 45) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -61,6 +63,7 @@ int main() {
 	assert(strncmp(bitstring, "0100011011011101011110010101001100101001110100001", 49) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -76,6 +79,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111011011011101010100110010100111000001", 44) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -91,6 +95,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111011011101110110101001101100100111011", 44) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -106,6 +111,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111001011101110010100011001100100110011", 44) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -121,6 +127,7 @@ int main() {
 	assert(strncmp(bitstring, "01000111011011101110110100011000100100110001", 44) == 0);
 	free(bitstring);
 	free(memory);
+	bitarray_free(&encoded);
 	bitarray_free(&input);
 
 	bitarray_alloc(&input);
@@ -245,7 +252,6 @@ int main() {
 	serial_encode(&encoded, &input, &cfg);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	memory[0] |= 0b00000001; // make it skip first packet
-	bitarray_alloc(&encoded);
 	bitarray_fill_from_memory(&encoded, memory, nbits);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 3);
 	free(memory);

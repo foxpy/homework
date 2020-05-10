@@ -63,7 +63,7 @@ This memory should be freed via `free()` stdlib function.
 Stores number of copied bits in `nbits`.
 Stores size of returned memory in `nbytes`.
 Unset bits are zeroed out.
-Destroys (frees) `src`.
+After completion, `src` is left empty.
 
 ### bitarray_size()
 

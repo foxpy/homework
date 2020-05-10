@@ -96,6 +96,7 @@ int main() {
 	assert(bitarray_empty(&bits) == true);
 
 	free(new_memory);
+	bitarray_free(&bits);
 	bitarray_free(&bits_copy);
 	return EXIT_SUCCESS;
 }

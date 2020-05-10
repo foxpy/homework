@@ -25,6 +25,5 @@ void* bitarray_to_memory(bits_t *src, size_t *nbits, size_t *nbytes) {
 			}
 		}
 	}
-	bitarray_free(src);
 	return new_memory;
 }
