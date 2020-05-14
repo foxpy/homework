@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 if (MSVC)
 	add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
 else()
-	add_compile_options(-Wall -Wextra -Wno-unused-function)
+	add_compile_options(-Wall -Wextra)
 endif()
 
 include_directories(util)

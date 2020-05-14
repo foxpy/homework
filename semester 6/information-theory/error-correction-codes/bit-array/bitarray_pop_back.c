@@ -1,5 +1,5 @@
 #include "bit-array.h"
-#include "emalloc.h"
+#include "erealloc.h"
 
 void bitarray_pop_back(bits_t *bits) {
 	if (bits->bit == 0) {

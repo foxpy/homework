@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "emalloc.h"
+#include "erealloc.h"
 #include "cmdopts.h"
 
 #define SAVE_OPT(opt) { \

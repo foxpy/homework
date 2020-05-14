@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include "bit-array.h"
-#include "emalloc.h"
+#include "erealloc.h"
 
 void bitarray_push_back(bits_t *bits, bit b) {
 	if (bits->bit == 8) {
