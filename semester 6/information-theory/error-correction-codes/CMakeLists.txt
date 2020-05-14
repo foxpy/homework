@@ -17,6 +17,9 @@ add_subdirectory(cmdopts)
 add_subdirectory(serial-emulator)
 add_subdirectory(error-correction-codes)
 
+add_executable(random-gen random-gen.c)
+target_link_libraries(random-gen CmdOpts RandomGenerator)
+
 add_executable(noisify noisify.c)
 target_link_libraries(noisify PUBLIC CmdOpts NoiseSimulator)
 
