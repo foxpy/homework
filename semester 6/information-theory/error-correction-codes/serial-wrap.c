@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 	}
 	if (cmdopts_num_posopts(&opts) > 0) {
 		if (strcmp(cmdopts_get_posopt(&opts, 0), "-") != 0) {
-			if ((input = fopen(cmdopts_get_posopt(&opts, 0), "r")) == NULL) {
+			if ((input = fopen(cmdopts_get_posopt(&opts, 0), "rb")) == NULL) {
 				fprintf(stderr, "Failed to open file %s: %s\n", cmdopts_get_posopt(&opts, 0), strerror(errno));
 				status = EXIT_FAILURE;
 				goto error_open_input;
@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
 	}
 	if (cmdopts_num_posopts(&opts) > 1) {
 		if (strcmp(cmdopts_get_posopt(&opts, 1), "-") != 0) {
-			if ((output = fopen(cmdopts_get_posopt(&opts, 1), "w")) == NULL) {
+			if ((output = fopen(cmdopts_get_posopt(&opts, 1), "wb")) == NULL) {
 				fprintf(stderr, "Failed to open file %s: %s\n", cmdopts_get_posopt(&opts, 1), strerror(errno));
 				status = EXIT_FAILURE;
 				goto error_open_output;
