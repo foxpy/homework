@@ -23,6 +23,9 @@ target_link_libraries(random-gen CmdOpts RandomGenerator)
 add_executable(noisify noisify.c)
 target_link_libraries(noisify PUBLIC CmdOpts NoiseSimulator)
 
+add_executable(serial-wrap serial-wrap.c)
+target_link_libraries(serial-wrap PUBLIC CmdOpts BitArray SerialEmulator)
+
 add_executable(ecc-repetition ecc-repetition.c)
 target_link_libraries(ecc-repetition PUBLIC CmdOpts BitArray ErrorCorrectionCodes)
 
