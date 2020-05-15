@@ -37,3 +37,11 @@ Decodes simulated Serial port data flow from `src` to `dst`
 using settings pointed by `cfg`.
 Packets with parity mismatch or broken start/stop bits are dropped.
 Returns number of successfully decoded packets.
+
+### serial_packet_length()
+
+```c
+unsigned char serial_packet_length(serial_cfg_t *cfg);
+```
+
+Returns bit length of Serial packet encoded using `cfg` settings.

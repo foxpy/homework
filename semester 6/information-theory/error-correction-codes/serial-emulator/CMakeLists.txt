@@ -1,6 +1,7 @@
 add_library(SerialEmulator
 	serial_encode.c
 	serial_decode.c
+	serial_packet_length.c
 	serial_impl.c
 )
 target_link_libraries(SerialEmulator PUBLIC BitArray)

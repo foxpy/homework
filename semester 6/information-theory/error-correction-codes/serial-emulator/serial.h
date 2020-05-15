@@ -1,5 +1,4 @@
 #pragma once
-#include <stdlib.h>
 #include "bit-array.h"
 
 enum data_bits {
@@ -29,3 +28,4 @@ typedef struct serial_config {
 
 void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
+unsigned char serial_packet_length(serial_cfg_t *cfg);

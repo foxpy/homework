@@ -20,11 +20,3 @@ bit next_bit(bits_t *bits) {
 		return b;
 	}
 }
-
-uint8_t packet_length(serial_cfg_t *cfg) {
-	uint8_t len = 1; // start bit
-	len += cfg->data_bits;
-	len += (cfg->parity_bit == PARITY_NONE) ? 0 : 1;
-	len += cfg->stop_bits;
-	return len;
-}

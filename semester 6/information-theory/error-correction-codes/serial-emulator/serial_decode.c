@@ -30,7 +30,7 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 	size_t ret = 0;
 	bits_t window, tmp;
 	bitarray_alloc(&window);
-	for (uint8_t i = 0; i < packet_length(cfg); ++i)
+	for (unsigned char i = 0; i < serial_packet_length(cfg); ++i)
 		bitarray_push_back(&window, next_bit(src));
 	for (;;) {
 		bitarray_copy(&tmp, &window);
@@ -39,7 +39,7 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 			ret += 1;
 			if (bitarray_empty(src)) break;
 			bitarray_clear(&window);
-			for (uint8_t i = 0; i < packet_length(cfg); ++i)
+			for (unsigned char i = 0; i < serial_packet_length(cfg); ++i)
 				bitarray_push_back(&window, next_bit(src));
 		} else {
 			bitarray_free(&tmp);

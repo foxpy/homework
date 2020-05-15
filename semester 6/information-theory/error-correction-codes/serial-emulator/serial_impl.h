@@ -8,4 +8,3 @@
 
 bit parity(uint8_t sum, enum parity_bit ptype);
 bit next_bit(bits_t *bits);
-uint8_t packet_length(serial_cfg_t *cfg);
