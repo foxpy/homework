@@ -26,6 +26,7 @@ void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 
 Encodes `src` bits to `dst` bits, simulating
 Serial port data flow according to settings pointed by `cfg`.
+After completion, `src` is emptied.
 
 ### serial_decode()
 
@@ -37,6 +38,7 @@ Decodes simulated Serial port data flow from `src` to `dst`
 using settings pointed by `cfg`.
 Packets with parity mismatch or broken start/stop bits are dropped.
 Returns number of successfully decoded packets.
+After completion, `src` is emptied.
 
 ### serial_packet_length()
 
