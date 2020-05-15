@@ -1,4 +1,5 @@
 #pragma once
+#include <stdlib.h>
 #include "bit-array.h"
 
 enum data_bits {
