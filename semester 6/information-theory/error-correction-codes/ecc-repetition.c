@@ -5,6 +5,7 @@
 #include "cmdopts.h"
 #include "bit-array.h"
 #include "repetition-code.h"
+#include "reopen-binary.h"
 
 void encode_loop(FILE *input, FILE *output);
 void decode_loop(FILE *input, FILE *output);
@@ -18,6 +19,8 @@ void help(char *program_name) {
 }
 
 int main(int argc, char *argv[]) {
+	REOPEN_BINARY_READ(stdin);
+	REOPEN_BINARY_WRITE(stdout);
 	int status = EXIT_SUCCESS;
 	opts_t opts;
 	enum {

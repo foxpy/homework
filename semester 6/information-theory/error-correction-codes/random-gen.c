@@ -6,6 +6,7 @@
 #include <errno.h>
 #include "cmdopts.h"
 #include "random.h"
+#include "reopen-binary.h"
 
 #define MIN(a, b) ((a < b) ? (a) : (b))
 void help(char *program_name) {
@@ -15,6 +16,7 @@ void help(char *program_name) {
 }
 
 int main(int argc, char *argv[]) {
+	REOPEN_BINARY_WRITE(stdout);
 	long long rnd_len = 0;
 	opts_t opts;
 	FILE *output = stdout;

@@ -5,6 +5,7 @@
 #include <limits.h>
 #include "cmdopts.h"
 #include "noise.h"
+#include "reopen-binary.h"
 
 #define MIN(a, b) ((a < b) ? (a) : (b))
 
@@ -23,6 +24,8 @@ void help(char *program_name) {
 }
 
 int main(int argc, char *argv[]) {
+	REOPEN_BINARY_READ(stdin);
+	REOPEN_BINARY_WRITE(stdout);
 	int status = EXIT_SUCCESS;
 	opts_t opts;
 	char buf[1024];

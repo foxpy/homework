@@ -8,6 +8,7 @@
 #include "bit-array.h"
 #include "emalloc.h"
 #include "lcm.h"
+#include "reopen-binary.h"
 
 void help(char *program_name, int exit_status) {
 	fprintf(stderr, "Usage: %s [OPTIONS] [INPUT] [OUTPUT]\n", program_name);
@@ -25,6 +26,8 @@ void encode_loop(FILE *input, FILE *output, serial_cfg_t *cfg);
 void decode_loop(FILE *input, FILE *output, serial_cfg_t *cfg);
 
 int main(int argc, char *argv[]) {
+	REOPEN_BINARY_READ(stdin);
+	REOPEN_BINARY_WRITE(stdout);
 	opts_t opts;
 	serial_cfg_t cfg = { 8, PARITY_NONE, 1 };
 	enum {
