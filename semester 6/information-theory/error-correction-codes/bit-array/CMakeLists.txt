@@ -11,6 +11,8 @@ add_library(BitArray
 	bitarray_front.c
 	bitarray_push_front.c
 	bitarray_pop_front.c
+	bitarray_next_front.c
+	bitarray_next_back.c
 	bitarray_fill_from_memory.c
 	bitarray_to_memory.c
 )

@@ -9,14 +9,3 @@ bit parity(uint8_t sum, enum parity_bit ptype) {
 		return (sum % 2) == 1;
 	}
 }
-
-bit next_bit(bits_t *bits) {
-	bit b;
-	if (bitarray_empty(bits)) {
-		return 0;
-	} else {
-		b = bitarray_front(bits);
-		bitarray_pop_front(bits);
-		return b;
-	}
-}

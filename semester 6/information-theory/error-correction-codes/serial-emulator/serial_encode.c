@@ -11,7 +11,7 @@ void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 	while (!bitarray_empty(src)) {
 		bitarray_push_back(dst, START_BIT);
 		for (int i = 0; i < (int) cfg->data_bits; ++i) {
-			b = next_bit(src);
+			b = bitarray_next_front(src);
 			bitarray_push_back(dst, b);
 			sum += b;
 		}

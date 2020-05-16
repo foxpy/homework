@@ -25,3 +25,5 @@ void bitarray_pop_front(bits_t *bits);
 void bitarray_pop_back(bits_t *bits);
 bit bitarray_front(bits_t *bits);
 bit bitarray_back(bits_t *bits);
+bit bitarray_next_front(bits_t *bits);
+bit bitarray_next_back(bits_t *bits);

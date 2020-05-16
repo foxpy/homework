@@ -114,3 +114,14 @@ bit bitarray_back(bits_t *bits);
 Returns last bit stored.
 Accessing last bit of `bits_t` object for which `bitarray_empty()`
 returns `true` is undefined behaviour.
+
+### bitarray_next_front(), bitarray_next_back()
+
+```c
+bit bitarray_next_front(bits_t *bits);
+bit bitarray_next_back(bits_t *bits);
+```
+
+Safe implementations of `bitarray_front()` and `bitarray_back()`.
+Return first or last bit respectively, popping it from `bits` object.
+Returns `0` from empty object, leaving it unchanged.
