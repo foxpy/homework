@@ -10,6 +10,8 @@ typedef struct bit_array {
 	uint8_t bit;
 } bits_t;
 
+#define FLIP_BIT(x) { if (x == true) x = false; else x = true; }
+
 void bitarray_alloc(bits_t *bits);
 void bitarray_free(bits_t *bits);
 void bitarray_copy(bits_t *dst, bits_t *src);
