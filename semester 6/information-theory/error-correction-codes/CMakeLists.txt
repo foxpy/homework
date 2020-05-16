@@ -15,7 +15,7 @@ add_subdirectory(bytes-to-string)
 add_subdirectory(bit-array)
 add_subdirectory(cmdopts)
 add_subdirectory(serial-emulator)
-add_subdirectory(error-correction-codes)
+add_subdirectory(ecc)
 
 add_executable(random-gen random-gen.c)
 target_link_libraries(random-gen CmdOpts RandomGenerator)

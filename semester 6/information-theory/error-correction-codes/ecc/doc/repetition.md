@@ -1,5 +1,5 @@
 ```c
-#include repetition-code.h
+#include "repetition-code.h"
 ```
 
 ### repetition_encode(), repetition_decode()
