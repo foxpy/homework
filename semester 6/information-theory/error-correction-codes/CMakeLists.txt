@@ -29,6 +29,9 @@ target_link_libraries(serial-wrap PUBLIC CmdOpts BitArray SerialEmulator)
 add_executable(ecc-repetition ecc-repetition.c)
 target_link_libraries(ecc-repetition PUBLIC CmdOpts BitArray ErrorCorrectionCodes)
 
+add_executable(ecc-hamming ecc-hamming.c)
+target_link_libraries(ecc-hamming PUBLIC CmdOpts BitArray ErrorCorrectionCodes)
+
 add_subdirectory(tests)
 enable_testing()
 add_test(NAME NoiseTestRuns COMMAND tests/noise-test)
