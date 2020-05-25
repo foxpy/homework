@@ -27,6 +27,6 @@ typedef struct serial_config {
 	enum stop_bits stop_bits;
 } serial_cfg_t;
 
-void serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
+size_t serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 unsigned char serial_packet_length(serial_cfg_t *cfg);

@@ -25,7 +25,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 10);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -42,7 +42,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 9);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 5);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -59,7 +59,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 7);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 7);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -76,7 +76,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 11);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -93,7 +93,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_2;
 	assert(serial_packet_length(&cfg) == 11);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -110,7 +110,7 @@ int main() {
 	cfg.parity_bit = PARITY_ODD;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 11);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -127,7 +127,7 @@ int main() {
 	cfg.parity_bit = PARITY_EVEN;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 11);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	bitstring = (char*) emalloc(nbytes*8+1);
 	bytes_to_bitstring(bitstring, memory, nbytes);
@@ -145,7 +145,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 10);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -162,7 +162,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 9);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 5);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -179,7 +179,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 7);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 7);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -196,7 +196,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 11);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -213,7 +213,7 @@ int main() {
 	cfg.parity_bit = PARITY_EVEN;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 11);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -230,7 +230,7 @@ int main() {
 	cfg.parity_bit = PARITY_EVEN;
 	cfg.stop_bits = STOP_BITS_2;
 	assert(serial_packet_length(&cfg) == 12);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -247,7 +247,7 @@ int main() {
 	cfg.parity_bit = PARITY_ODD;
 	cfg.stop_bits = STOP_BITS_2;
 	assert(serial_packet_length(&cfg) == 12);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	assert(serial_decode(&decoded, &encoded, &cfg) == 0);
 	memory = (uint8_t*) bitarray_to_memory(&decoded, &nbits, &nbytes);
 	assert(strncmp((char*) memory, "qwer", 4) == 0);
@@ -264,7 +264,7 @@ int main() {
 	cfg.parity_bit = PARITY_NONE;
 	cfg.stop_bits = STOP_BITS_1;
 	assert(serial_packet_length(&cfg) == 10);
-	serial_encode(&encoded, &input, &cfg);
+	assert(serial_encode(&encoded, &input, &cfg) == 4);
 	memory = (uint8_t*) bitarray_to_memory(&encoded, &nbits, &nbytes);
 	memory[0] |= 0b00000001; // damage first packet
 	bitarray_fill_from_memory(&encoded, memory, nbits);
