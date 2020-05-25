@@ -7,8 +7,8 @@
 #include "cmdopts.h"
 #include "random.h"
 #include "reopen-binary.h"
+#include "cmp.h"
 
-#define MIN(a, b) ((a < b) ? (a) : (b))
 void help(char *program_name) {
 	fprintf(stderr, "Usage: %s [--size SIZE] [OUTPUT]\n", program_name);
 	fputs("OUTPUT - output file (stdout if \"-\" or omitted)\n", stderr);

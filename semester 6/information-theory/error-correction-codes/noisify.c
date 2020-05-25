@@ -6,8 +6,7 @@
 #include "cmdopts.h"
 #include "noise.h"
 #include "reopen-binary.h"
-
-#define MIN(a, b) ((a < b) ? (a) : (b))
+#include "cmp.h"
 
 void help(char *program_name) {
 	fprintf(stderr, "Usage: %s [OPTIONS] [INPUT] [OUTPUT]\n", program_name);
