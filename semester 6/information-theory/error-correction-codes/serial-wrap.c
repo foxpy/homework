@@ -19,6 +19,8 @@ void help(char *program_name, int exit_status) {
 	fputs("\t--data-bits <5 | 6 | 7 | 8 | 9> - defaults to 8\n", stderr);
 	fputs("\t--parity <none | odd | even> - defaults to none\n", stderr);
 	fputs("\t--stop-bits <1 | 2> - defaults to 1\n", stderr);
+	fputs("In encode mode, program prints number of encoded packets to stderr.\n", stderr);
+	fputs("In decode mode, program prints number of detected errors to stderr.\n", stderr);
 	exit(exit_status);
 }
 
@@ -117,15 +119,15 @@ error_open_input:
 }
 
 void encode_loop(FILE *input, FILE *output, serial_cfg_t *cfg) {
-	size_t buf_size = lcm(serial_packet_length(cfg), 8) / 8;
-	size_t nread, nbits, nbytes;
+	size_t buf_size = lcm(lcm(serial_packet_length(cfg), cfg->data_bits), 8) / 8;
+	size_t nread, nbits, nbytes, npackets = 0;
 	uint8_t *encoded, *buf = (uint8_t*) emalloc(buf_size);
 	bits_t bit_input, bit_output;
 	bitarray_alloc(&bit_input);
 	bitarray_alloc(&bit_output);
 	while ((nread = fread(buf, sizeof(uint8_t), buf_size, input)) > 0) {
 		bitarray_fill_from_memory(&bit_input, buf, nread * sizeof(uint8_t) * 8);
-		serial_encode(&bit_output, &bit_input, cfg);
+		npackets += serial_encode(&bit_output, &bit_input, cfg);
 		encoded = bitarray_to_memory(&bit_output, &nbits, &nbytes);
 		fwrite(encoded, sizeof(uint8_t), nbytes, output);
 		free(encoded);
@@ -133,6 +135,7 @@ void encode_loop(FILE *input, FILE *output, serial_cfg_t *cfg) {
 	bitarray_free(&bit_input);
 	bitarray_free(&bit_output);
 	free(buf);
+	fprintf(stderr, "%zu\n", npackets);
 }
 
 void decode_loop(FILE *input, FILE *output, serial_cfg_t *cfg) {
