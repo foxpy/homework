@@ -36,8 +36,9 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);
 
 Decodes simulated Serial port data flow from `src` to `dst`
 using settings pointed by `cfg`.
-Packets with parity mismatch or broken start/stop bits are dropped.
-Returns number of successfully decoded packets.
+Packets with parity mismatch or broken start/stop bits are still
+decoded as is, and number of malformed packets +
+possible retransmissions is returned.
 After completion, `src` is emptied.
 
 ### serial_packet_length()
