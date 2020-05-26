@@ -62,6 +62,7 @@ Returns pointer to allocated memory storing bits copied from `src`.
 This memory should be freed via `free()` stdlib function.
 Stores number of copied bits in `nbits`.
 Stores size of returned memory in `nbytes`.
+Pointers to `nbits` anf `nbytes` **should not** be the same.
 Unset bits are zeroed out.
 After completion, `src` is left empty.
 
