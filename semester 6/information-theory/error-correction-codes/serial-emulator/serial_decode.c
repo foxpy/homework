@@ -11,7 +11,7 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 	bits_t data;
 	bit b;
 	bitarray_alloc(&data);
-	while (!bitarray_empty(src)) {
+	while (bitarray_size(src) >= serial_packet_length(cfg)) {
 		sum = 0;
 		dirty = 0;
 		b = bitarray_next_front(src);
