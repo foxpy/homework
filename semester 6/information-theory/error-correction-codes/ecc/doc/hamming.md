@@ -1,14 +1,24 @@
 ```c
 #include "hamming-code.h"
 
-### hamming_decode(), hamming_encode()
+### hamming_encode()
 
 ```c
 void hamming_encode(bits_t *dst, bits_t *src);
-void hamming_decode(bits_t *dst, bits_t *src);
 ```
 
-Encodes and decodes `src` data to `dst` using
+Encodes `src` data to `dst` using
 [Hamming code](https://en.wikipedia.org/wiki/Hamming(7,4)).
-After completion, `src` is always emptied.
-Length of `src` should be divisible by 4.
+If there are insufficient (less than 4) bits left in `src`,
+they are left unchanged.
+
+### hamming_decode()
+
+```c
+size_t hamming_decode(bits_t *dst, bits_t *src);
+```
+
+Decodes `src` data to `dst` using
+[Hamming code](https://en.wikipedia.org/wiki/Hamming(7,4)).
+If there are insufficient (less than 8) bits left in `src`,
+they are left unchanged.

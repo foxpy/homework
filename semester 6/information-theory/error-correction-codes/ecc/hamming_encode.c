@@ -4,7 +4,7 @@
 
 void hamming_encode(bits_t *dst, bits_t *src) {
 	bit a, b, c, d, x, y, z, p;
-	while (!bitarray_empty(src)) {
+	while (bitarray_size(src) >= 4) {
 		a = bitarray_next_front(src);
 		b = bitarray_next_front(src);
 		c = bitarray_next_front(src);
