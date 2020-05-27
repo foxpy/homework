@@ -103,6 +103,29 @@ void encode_loop(FILE *input, FILE *output) {
 }
 
 void decode_loop(FILE *input, FILE *output) {
-	fputs("Not implemented yet...\n", stderr);
+	int c;
+	bits_t bit_input, bit_output;
+	unsigned char buf, *mem;
+	size_t nbits, nbytes;
+	bitarray_alloc(&bit_input);
+	bitarray_alloc(&bit_output);
+	while ((c = fgetc(input)) != EOF) {
+		buf = c;
+		bitarray_fill_from_memory(&bit_input, &buf, 8);
+		hamming_decode(&bit_output, &bit_input);
+		if (bitarray_size(&bit_output) == 8) {
+			mem = bitarray_to_memory(&bit_output, &nbits, &nbytes);
+			if (fwrite(mem, sizeof(unsigned char), nbytes, output) != nbytes) break;
+			free(mem);
+		}
+	}
+	if (bitarray_size(&bit_output) == 4) {
+		for (int i = 0; i < 4; ++i) bitarray_push_back(&bit_output, 0);
+		mem = bitarray_to_memory(&bit_output, &nbits, &nbytes);
+		fwrite(mem, sizeof(unsigned char), nbytes, output);
+		free(mem);
+	}
+	bitarray_free(&bit_input);
+	bitarray_free(&bit_output);
 	exit(EXIT_SUCCESS);
 }
