@@ -6,8 +6,6 @@
 #include "cmdopts.h"
 #include "serial.h"
 #include "bit-array.h"
-#include "emalloc.h"
-#include "lcm.h"
 #include "reopen-binary.h"
 
 void help(char *program_name, int exit_status) {
@@ -118,27 +116,58 @@ error_open_input:
 	return status;
 }
 
+void write_bytes(FILE *output, bits_t *input) {
+	unsigned char byte;
+	while (bitarray_size(input) >= 8) {
+		byte = 0;
+		for (int i = 0; i < 8; ++i)
+			byte |= bitarray_next_front(input) << i;
+		fputc(byte, output);
+	}
+}
+
 void encode_loop(FILE *input, FILE *output, serial_cfg_t *cfg) {
-	size_t buf_size = lcm(lcm(serial_packet_length(cfg), cfg->data_bits), 8) / 8;
-	size_t nread, nbits, nbytes, npackets = 0;
-	uint8_t *encoded, *buf = (uint8_t*) emalloc(buf_size);
+	int c;
+	size_t nbits, nbytes, npackets = 0;
 	bits_t bit_input, bit_output;
 	bitarray_alloc(&bit_input);
 	bitarray_alloc(&bit_output);
-	while ((nread = fread(buf, sizeof(uint8_t), buf_size, input)) > 0) {
-		bitarray_fill_from_memory(&bit_input, buf, nread * sizeof(uint8_t) * 8);
+	while ((c = fgetc(input)) != EOF) {
+		unsigned char buf = (unsigned char) c;
+		bitarray_fill_from_memory(&bit_input, &buf, 8);
 		npackets += serial_encode(&bit_output, &bit_input, cfg);
-		encoded = bitarray_to_memory(&bit_output, &nbits, &nbytes);
-		fwrite(encoded, sizeof(uint8_t), nbytes, output);
-		free(encoded);
+		write_bytes(output, &bit_output);
 	}
+	unsigned char *last_byte;
+	if (bitarray_size(&bit_output) > 0) {
+		last_byte = (unsigned char*) bitarray_to_memory(&bit_output, &nbits, &nbytes);
+		fwrite(last_byte, sizeof(unsigned char), nbytes, output);
+		free(last_byte);
+	}
+	fprintf(stderr, "%zu\n", npackets);
 	bitarray_free(&bit_input);
 	bitarray_free(&bit_output);
-	free(buf);
-	fprintf(stderr, "%zu\n", npackets);
 }
 
 void decode_loop(FILE *input, FILE *output, serial_cfg_t *cfg) {
-	fputs("Unimplemented\n", stderr);
-	fputs("Current Serial API is not designed well to support stream decoding\n", stderr);
+	int c;
+	size_t nbits, nbytes, nissues = 0;
+	bits_t bit_input, bit_output;
+	bitarray_alloc(&bit_input);
+	bitarray_alloc(&bit_output);
+	while ((c = fgetc(input)) != EOF) {
+		unsigned char buf = (unsigned char) c;
+		bitarray_fill_from_memory(&bit_input, &buf, 8);
+		nissues += serial_decode(&bit_output, &bit_input, cfg);
+		write_bytes(output, &bit_output);
+	}
+	unsigned char *last_byte;
+	if (bitarray_size(&bit_output) > 0) {
+		last_byte = (unsigned char*) bitarray_to_memory(&bit_output, &nbits, &nbytes);
+		fwrite(last_byte, sizeof(unsigned char), nbytes, output);
+		free(last_byte);
+	}
+	fprintf(stderr, "%zu\n", nissues);
+	bitarray_free(&bit_input);
+	bitarray_free(&bit_output);
 }
