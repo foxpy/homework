@@ -2,7 +2,7 @@
 #	define _CRT_RAND_S
 #endif
 
-#ifdef __linux__
+#if defined __linux__ || defined __ANDROID_API__
 #	include <sys/random.h>
 #endif
 
@@ -16,6 +16,12 @@ uint32_t rnd32() {
 		rand_s(&ret);
 #	elif defined __linux__
 		getrandom(&ret, sizeof(ret), 0);
+#	elif defined __ANDROID_API__
+#		if __ANDROID_API__ < 28
+			ret = arc4random();
+#		else
+			getrandom(&ret, sizeof(ret), 0);
+#		endif
 #	else
 		ret = rand();
 #	endif
