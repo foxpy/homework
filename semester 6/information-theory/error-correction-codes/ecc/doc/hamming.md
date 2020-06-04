@@ -1,5 +1,6 @@
 ```c
 #include "hamming-code.h"
+```
 
 ### hamming_encode()
 
