@@ -1,4 +1,5 @@
 ```c
+#include "random.h"
 #include "noise.h"
 ```
 
@@ -27,7 +28,8 @@ For `NOISE_LINEAR`:
 ### apply_noise()
 
 ```c
-void apply_noise(void *ptr, size_t len, noise_t ntype, noise_conf_t nconfig);
+void apply_noise(void *ptr, size_t len, noise_t ntype, noise_conf_t nconfig, rnd_state_t *rnd);
 ```
 
 Applies `ntype` noise to `ptr` bytes length of `len`. Noise simulator settings are passed in `nconfig`.
+Uses `rnd` seed as random source.

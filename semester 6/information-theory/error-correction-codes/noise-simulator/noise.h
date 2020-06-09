@@ -1,5 +1,6 @@
 #pragma once
 #include <stdlib.h>
+#include "random.h"
 
 typedef enum noise_type {
 	NOISE_BIT_FLIP,
@@ -22,4 +23,5 @@ typedef union noise_config {
 void apply_noise(void *ptr,
                  size_t len,
                  noise_t ntype,
-                 noise_cfg_t nconfig);
+                 noise_cfg_t nconfig,
+                 rnd_state_t *rnd);

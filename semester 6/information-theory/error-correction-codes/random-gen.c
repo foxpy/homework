@@ -49,16 +49,18 @@ int main(int argc, char *argv[]) {
 		return EXIT_FAILURE;
 	}
 
-	uint64_t rnd;
+	rnd_state_t rnd;
+	rnd_init(&rnd);
+	uint64_t buf;
 	if (rnd_len == 0) {
 		for (;;) {
-			rnd = rnd64();
-			if (fwrite(&rnd, sizeof(uint64_t), 1, output) != 1) return EXIT_FAILURE;
+			buf = rnd64(&rnd);
+			if (fwrite(&buf, sizeof(uint64_t), 1, output) != 1) return EXIT_FAILURE;
 		}
 	}
 	while (rnd_len > 0) {
-		rnd = rnd64();
-		if (fwrite(&rnd, MIN(rnd_len, (long long) sizeof(uint64_t)), 1, output) != 1) return EXIT_FAILURE;
+		buf = rnd64(&rnd);
+		if (fwrite(&buf, MIN(rnd_len, (long long) sizeof(uint64_t)), 1, output) != 1) return EXIT_FAILURE;
 		rnd_len -= sizeof(uint64_t);
 	}
 

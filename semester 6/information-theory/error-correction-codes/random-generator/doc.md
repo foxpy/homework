@@ -2,18 +2,34 @@
 #include "random.h"
 ```
 
-### rnd32()
+Implements [xorshift64 PRNG](https://www.jstatsoft.org/article/view/v008i14).
+Uses high quality random for seeding on these platforms:
+- Windows
+- Linux
+- Android
+
+Seeding does not work on other platforms.
+
+### rnd_state_t
+
+Holds state for PRNG. Should be seeded with `rnd_init()` before using.
+
+### rnd_init
 
 ```c
-uint32_t rnd32();
+void rnd_init(rnd_state_t *state);
 ```
 
-Returns 32 bits of high quality random on Windows and Linux. Falls back to low quality non-seeded random for other platforms.
+Seeds `state` with cryptographic quality random bytes on supported platforms.
+Seeds with all zeroes on unsupported platforms.
 
-### rnd64()
+### rnd8(), rnd16(), rnd32(), rnd64()
 
 ```c
-uint64_t rnd64()
+uint8_t rnd8(rnd_state_t *state);
+uint16_t rnd16(rnd_state_t *state);
+uint32_t rnd32(rnd_state_t *state);
+uint64_t rnd64(rnd_state_t *state);
 ```
 
-Returns 64 bits of high quality random on Windows and Linux. Falls back to low quality non-seeded random for other platforms.
+Returns 8/16/32/64 bits of random using xorshift output seeded by `state`.

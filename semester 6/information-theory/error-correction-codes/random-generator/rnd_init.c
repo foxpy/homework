@@ -10,27 +10,19 @@
 #include <stdint.h>
 #include "random.h"
 
-uint32_t rnd32() {
-	uint32_t ret;
+void rnd_init(rnd_state_t *state) {
 #	ifdef _WIN32
-		rand_s(&ret);
+		rand_s(&state->s32[0]);
+		rand_s(&state->s32[1]);
 #	elif defined __ANDROID_API__
 #		if __ANDROID_API__ < 28
-			ret = arc4random();
+			arc4random_buf(&state->s64, sizeof(uint64_t));
 #		else
-			getrandom(&ret, sizeof(ret), 0);
+			getrandom(&state->s64, sizeof(uint64_t), 0);
 #		endif
 #	elif defined __linux__
-		getrandom(&ret, sizeof(ret), 0);
+		getrandom(&state->s64, sizeof(uint64_t), 0);
 #	else
-		ret = rand();
+		state->s64 = 0;
 #	endif
-	return ret;
-}
-
-uint64_t rnd64() {
-	uint64_t ret = rnd32();
-	ret <<= 32;
-	ret |= rnd32();
-	return ret;
 }

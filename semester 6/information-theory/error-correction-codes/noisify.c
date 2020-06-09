@@ -127,8 +127,11 @@ int main(int argc, char *argv[]) {
 		nconfig.linear.damage_length = frequency;
 		break;
 	}
+
+	rnd_state_t rnd;
+	rnd_init(&rnd);
 	while ((nread = fread(buf, sizeof(char), sizeof(buf), input)) > 0) {
-		apply_noise(buf, sizeof(buf), ntype, nconfig);
+		apply_noise(buf, sizeof(buf), ntype, nconfig, &rnd);
 		if (fwrite(buf, sizeof(char), nread, output) == 0) {
 			break;
 		}
