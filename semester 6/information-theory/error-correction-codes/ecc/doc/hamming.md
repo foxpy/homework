@@ -5,13 +5,14 @@
 ### hamming_encode()
 
 ```c
-void hamming_encode(bits_t *dst, bits_t *src);
+size_t hamming_encode(bits_t *dst, bits_t *src);
 ```
 
 Encodes `src` data to `dst` using
 [Hamming code](https://en.wikipedia.org/wiki/Hamming(7,4)).
 If there are insufficient (less than 4) bits left in `src`,
 they are left unchanged.
+Returns number of encoded packets.
 
 ### hamming_decode()
 
@@ -23,3 +24,4 @@ Decodes `src` data to `dst` using
 [Hamming code](https://en.wikipedia.org/wiki/Hamming(7,4)).
 If there are insufficient (less than 8) bits left in `src`,
 they are left unchanged.
+Returns number of uncorrectable errors.

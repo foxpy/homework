@@ -2,7 +2,8 @@
 #include "hamming-code.h"
 #include "hamming_impl.h"
 
-void hamming_encode(bits_t *dst, bits_t *src) {
+size_t hamming_encode(bits_t *dst, bits_t *src) {
+	size_t ret = 0;
 	bit a, b, c, d, x, y, z, p;
 	while (bitarray_size(src) >= 4) {
 		a = bitarray_next_front(src);
@@ -18,5 +19,7 @@ void hamming_encode(bits_t *dst, bits_t *src) {
 		bitarray_push_back(dst, y);
 		bitarray_push_back(dst, z);
 		bitarray_push_back(dst, p);
+		++ret;
 	}
+	return ret;
 }

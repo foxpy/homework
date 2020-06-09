@@ -25,7 +25,7 @@ void test_encoding() {
 	bitarray_alloc(&out);
 	for (int i = 0; i < 16; ++i) bitarray_push_back(&in, input_cases[i]);
 	bitarray_push_back(&in, 0);
-	hamming_encode(&out, &in);
+	assert(hamming_encode(&out, &in) == 4);
 	assert(bitarray_size(&in) == 1);
 	assert(bitarray_back(&in) == 0);
 	assert(bitarray_size(&out) == 32);
@@ -52,7 +52,7 @@ void test_decoding() {
 	bitarray_alloc(&out);
 	for (int i = 0; i < 32; ++i) bitarray_push_back(&in, input_cases[i]);
 	bitarray_push_back(&in, 0);
-	hamming_decode(&out, &in);
+	assert(hamming_decode(&out, &in) == 0);
 	assert(bitarray_size(&in) == 1);
 	assert(bitarray_back(&in) == 0);
 	assert(bitarray_size(&out) == 16);

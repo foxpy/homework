@@ -14,6 +14,8 @@ void help(char *program_name, int status) {
 	fputs("\tINPUT - input file (stdin if \"-\" or omitted)\n", stderr);
 	fputs("\tOUTPUT - output file (stdout if \"-\" or omitted)\n", stderr);
 	fputs("\tDefault mode is encode\n", stderr);
+	fputs("Program prints number of encoded packets to stderr in encode mode\n", stderr);
+	fputs("Program prints number of uncorrectable errors to stderr in decode mode\n", stderr);
 	exit(status);
 }
 
@@ -88,16 +90,17 @@ error_open_input:
 void encode_loop(FILE *input, FILE *output) {
 	unsigned char buf, *mem;
 	bits_t bit_input, bit_output;
-	size_t nbits, nbytes;
+	size_t nbits, nbytes, npackets = 0;
 	bitarray_alloc(&bit_input);
 	bitarray_alloc(&bit_output);
 	while (fread(&buf, sizeof(unsigned char), 1, input) == 1) {
 		bitarray_fill_from_memory(&bit_input, &buf, 8);
-		hamming_encode(&bit_output, &bit_input);
+		npackets += hamming_encode(&bit_output, &bit_input);
 		mem = bitarray_to_memory(&bit_output, &nbits, &nbytes);
 		if (fwrite(mem, sizeof(unsigned char), nbytes, output) != nbytes) break;
 		free(mem);
 	}
+	fprintf(stderr, "%zu\n", npackets);
 	bitarray_free(&bit_input);
 	bitarray_free(&bit_output);
 }
@@ -106,13 +109,13 @@ void decode_loop(FILE *input, FILE *output) {
 	int c;
 	bits_t bit_input, bit_output;
 	unsigned char buf, *mem;
-	size_t nbits, nbytes;
+	size_t nbits, nbytes, uncorrectable = 0;
 	bitarray_alloc(&bit_input);
 	bitarray_alloc(&bit_output);
 	while ((c = fgetc(input)) != EOF) {
 		buf = c;
 		bitarray_fill_from_memory(&bit_input, &buf, 8);
-		hamming_decode(&bit_output, &bit_input);
+		uncorrectable += hamming_decode(&bit_output, &bit_input);
 		if (bitarray_size(&bit_output) == 8) {
 			mem = bitarray_to_memory(&bit_output, &nbits, &nbytes);
 			if (fwrite(mem, sizeof(unsigned char), nbytes, output) != nbytes) break;
@@ -125,6 +128,7 @@ void decode_loop(FILE *input, FILE *output) {
 		fwrite(mem, sizeof(unsigned char), nbytes, output);
 		free(mem);
 	}
+	fprintf(stderr, "%zu\n", uncorrectable);
 	bitarray_free(&bit_input);
 	bitarray_free(&bit_output);
 	exit(EXIT_SUCCESS);
