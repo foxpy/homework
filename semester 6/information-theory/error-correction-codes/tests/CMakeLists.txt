@@ -19,7 +19,7 @@ add_executable(serial-test serial-test.c)
 target_link_libraries(serial-test PUBLIC SerialEmulator BitArray BytesToString)
 
 add_executable(ecc-repetition-test ecc-repetition-test.c)
-target_link_libraries(ecc-repetition-test PUBLIC BitArray ErrorCorrectionCodes)
+target_link_libraries(ecc-repetition-test PUBLIC BitArray RepetitionCode)
 
 add_executable(ecc-hamming-test ecc-hamming-test.c)
-target_link_libraries(ecc-hamming-test PUBLIC BitArray ErrorCorrectionCodes)
+target_link_libraries(ecc-hamming-test PUBLIC BitArray HammingCode)

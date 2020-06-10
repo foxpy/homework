@@ -27,10 +27,10 @@ add_executable(serial-wrap serial-wrap.c)
 target_link_libraries(serial-wrap PUBLIC CmdOpts BitArray SerialEmulator)
 
 add_executable(ecc-repetition ecc-repetition.c)
-target_link_libraries(ecc-repetition PUBLIC CmdOpts BitArray ErrorCorrectionCodes)
+target_link_libraries(ecc-repetition PUBLIC CmdOpts BitArray RepetitionCode)
 
 add_executable(ecc-hamming ecc-hamming.c)
-target_link_libraries(ecc-hamming PUBLIC CmdOpts BitArray ErrorCorrectionCodes)
+target_link_libraries(ecc-hamming PUBLIC CmdOpts BitArray HammingCode)
 
 add_subdirectory(tests)
 enable_testing()
