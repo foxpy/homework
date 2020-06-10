@@ -1,6 +1,6 @@
 #include <string.h>
 #include "bit-array.h"
-#include "emalloc.h"
+#include "util.h"
 
 void bitarray_alloc(bits_t *bits) {
 	bits->len = 0;

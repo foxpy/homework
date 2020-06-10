@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdint.h>
 #include "bit-array.h"
-#include "emalloc.h"
+#include "util.h"
 
 void* bitarray_to_memory(bits_t *src, size_t *nbits, size_t *nbytes) {
 	*nbits = bitarray_size(src);

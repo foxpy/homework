@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <string.h>
 #include "cmdopts.h"
-#include "reopen-binary.h"
+#include "util.h"
 #include "hamming-code.h"
 
 void encode_loop(FILE *input, FILE *output);
@@ -20,8 +20,8 @@ void help(char *program_name, int status) {
 }
 
 int main(int argc, char *argv[]) {
-	REOPEN_BINARY_READ(stdin);
-	REOPEN_BINARY_WRITE(stdout);
+	reopen_binary_read(stdin);
+	reopen_binary_write(stdout);
 	int status = EXIT_SUCCESS;
 	opts_t opts;
 	FILE *input = stdin;

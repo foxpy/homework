@@ -9,7 +9,7 @@
 #include "bit-array.h"
 #include "serial.h"
 #include "bytes-to-string.h"
-#include "emalloc.h"
+#include "util.h"
 
 int main() {
 	bits_t input, encoded, decoded;

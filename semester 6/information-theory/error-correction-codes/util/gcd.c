@@ -1,6 +1,6 @@
-#pragma once
+#include "util.h"
 
-static unsigned gcd(unsigned a, unsigned b) {
+unsigned gcd(unsigned a, unsigned b) {
 	if (a == b) return a;
 	if (a > b)
 		return gcd(a - b, b);

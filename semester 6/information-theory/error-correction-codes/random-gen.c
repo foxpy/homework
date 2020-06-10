@@ -6,8 +6,7 @@
 #include <errno.h>
 #include "cmdopts.h"
 #include "random.h"
-#include "reopen-binary.h"
-#include "cmp.h"
+#include "util.h"
 
 void help(char *program_name) {
 	fprintf(stderr, "Usage: %s [--size SIZE] [OUTPUT]\n", program_name);
@@ -16,7 +15,7 @@ void help(char *program_name) {
 }
 
 int main(int argc, char *argv[]) {
-	REOPEN_BINARY_WRITE(stdout);
+	reopen_binary_write(stdout);
 	long long rnd_len = 0;
 	opts_t opts;
 	FILE *output = stdout;

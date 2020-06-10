@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "bit-array.h"
-#include "emalloc.h"
+#include "util.h"
 
 void bitarray_copy(bits_t *dst, bits_t *src) {
 	dst->data = (uint8_t*) emalloc(src->cap);

@@ -7,7 +7,7 @@
 #include <assert.h>
 #include "random.h"
 #include "noise.h"
-#include "emalloc.h"
+#include "util.h"
 
 char original_message[] = "The quick brown fox jumps over the lazy dog";
 

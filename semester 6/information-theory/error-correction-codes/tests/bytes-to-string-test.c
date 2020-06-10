@@ -6,9 +6,7 @@
 #include <string.h>
 #include <assert.h>
 #include "bytes-to-string.h"
-#include "emalloc.h"
-
-#include <stdio.h>
+#include "util.h"
 
 int main() {
 	char *data = "The quick brown fox jumps over the lazy dog\n";
