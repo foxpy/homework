@@ -4,6 +4,7 @@ This project holds various libraries and tools I have written for my course work
 
 Libraries:
 
+- [util](util/doc.md)
 - [bit-array](bit-array/doc.md)
 - [bytes-to-string](bytes-to-string/doc.md)
 - [cmdopts](cmdopts/doc.md)
