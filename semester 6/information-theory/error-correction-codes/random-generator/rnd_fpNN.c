@@ -23,8 +23,8 @@ float rnd_fp32(rnd_state_t *state) {
 	xorshift64(&state->s64);
 	rnd_state_t tmp;
 	memcpy(&tmp, state, sizeof(rnd_state_t));
-	tmp.s32[0] &= FLOAT_FRACTION_MASK;
-	tmp.s32[0] |= FLOAT_ONE_EXPONENT;
-	tmp.fp32[0] -= 1.0f;
-	return tmp.fp32[0];
+	tmp.s32[1] &= FLOAT_FRACTION_MASK;
+	tmp.s32[1] |= FLOAT_ONE_EXPONENT;
+	tmp.fp32[1] -= 1.0f;
+	return tmp.fp32[1];
 }
