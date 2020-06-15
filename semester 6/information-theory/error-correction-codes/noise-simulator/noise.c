@@ -37,7 +37,7 @@ static void apply_noise_linear(void *ptr,
 
 void apply_noise(void *ptr,
                  size_t len,
-                 noise_t ntype,
+                 int ntype,
                  noise_cfg_t nconfig,
                  rnd_state_t *rnd) {
 	switch(ntype) {

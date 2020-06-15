@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include "random.h"
 
-typedef enum noise_type {
+enum noise_type {
 	NOISE_BIT_FLIP,
 	NOISE_LINEAR,
-} noise_t;
+};
 
 struct noise_bit_flip_config {
 	size_t num_bit_flips;
@@ -22,6 +22,6 @@ typedef union noise_config {
 
 void apply_noise(void *ptr,
                  size_t len,
-                 noise_t ntype,
+                 int ntype,
                  noise_cfg_t nconfig,
                  rnd_state_t *rnd);

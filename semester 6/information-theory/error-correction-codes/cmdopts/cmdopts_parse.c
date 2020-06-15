@@ -11,13 +11,13 @@
 	memcpy(&(opts->opts[opts->nopts++]), &opt, sizeof(opt)); \
 }
 
-typedef enum state {
+enum state {
 	OUT_OPT,
 	IN_OPT,
-} state_t;
+};
 
 void cmdopts_parse(opts_t *opts, int argc, char *argv[]) {
-	state_t state = OUT_OPT;
+	int state = OUT_OPT;
 	struct opt opt;
 	++argv; --argc;
 	opts->nopts = 0;

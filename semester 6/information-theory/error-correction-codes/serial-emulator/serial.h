@@ -22,9 +22,9 @@ enum stop_bits {
 };
 
 typedef struct serial_config {
-	enum data_bits data_bits;
-	enum parity_bit parity_bit;
-	enum stop_bits stop_bits;
+	int data_bits;
+	int parity_bit;
+	int stop_bits;
 } serial_cfg_t;
 
 size_t serial_encode(bits_t *dst, bits_t *src, serial_cfg_t *cfg);

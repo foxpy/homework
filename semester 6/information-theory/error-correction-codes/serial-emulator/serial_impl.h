@@ -6,4 +6,4 @@
 #define START_BIT 0
 #define STOP_BIT 1
 
-bit parity(uint8_t sum, enum parity_bit ptype);
+bit parity(uint8_t sum, int ptype);

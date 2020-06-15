@@ -16,7 +16,7 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 		dirty = 0;
 		b = bitarray_next_front(src);
 		if (b != START_BIT) dirty = 1;
-		for (int i = 0; i < (int) cfg->data_bits; ++i) {
+		for (int i = 0; i < cfg->data_bits; ++i) {
 			b = bitarray_next_front(src);
 			sum += b;
 			bitarray_push_back(&data, b);
@@ -26,7 +26,7 @@ size_t serial_decode(bits_t *dst, bits_t *src, serial_cfg_t *cfg) {
 			b = bitarray_next_front(src);
 			if (b != parity(sum, cfg->parity_bit)) dirty = 1;
 		}
-		for (int i = 0; i < (int) cfg->stop_bits; ++i)
+		for (int i = 0; i < cfg->stop_bits; ++i)
 			if ((b = bitarray_next_front(src)) != STOP_BIT) dirty = 1;
 		if (dirty > 0) ++ret;
 	}
