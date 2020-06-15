@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 		return EXIT_SUCCESS;
 	}
 
-	noise_t ntype;
+	int ntype;
 	noise_cfg_t nconfig;
 	unsigned frequency, skip = 0;
 	if (cmdopts_exists(&opts, "--type")) {

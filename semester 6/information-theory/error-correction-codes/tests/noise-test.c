@@ -14,7 +14,7 @@ char original_message[] = "The quick brown fox jumps over the lazy dog";
 int main() {
 	rnd_state_t rnd;
 	rnd_init(&rnd);
-	noise_t ntype ;
+	int ntype ;
 	noise_cfg_t nconfig;
 	char *message = (char*) emalloc(strlen(original_message)+1);
 
