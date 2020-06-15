@@ -1,11 +1,6 @@
 #include <stdint.h>
 #include "random.h"
-
-static void xorshift64(uint64_t *s) {
-	*s ^= *s << 21;
-	*s ^= *s >> 15;
-	*s ^= *s << 29;
-}
+#include "random_impl.h"
 
 uint8_t rnd8(rnd_state_t *state) {
 	xorshift64(&state->s64);

@@ -33,3 +33,12 @@ uint64_t rnd64(rnd_state_t *state);
 ```
 
 Returns 8/16/32/64 bits of random using xorshift output seeded by `state`.
+
+### rnd_fp64(), rnd_fp32()
+
+```c
+double rnd_fp64(rnd_state_t *state);
+float rnd_fp32(rnd_state_t *state);
+```
+
+Returns random floating point value in range `[0.0, 1.0)`.
