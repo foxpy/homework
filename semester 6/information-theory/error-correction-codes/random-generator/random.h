@@ -17,3 +17,4 @@ uint32_t rnd32(rnd_state_t *state);
 uint64_t rnd64(rnd_state_t *state);
 double rnd_fp64(rnd_state_t *state);
 float rnd_fp32(rnd_state_t *state);
+double normal_distribution(double mu, double sigma, rnd_state_t *state);

@@ -17,6 +17,7 @@ int main() {
 	uint64_t arru64[8];
 	float arrfp32[8];
 	double arrfp64[8];
+	double normaldistr[8];
 	for (int i = 0; i < 8; ++i) {
 		arru8[i] = rnd8(&rnd);
 		arru16[i] = rnd16(&rnd);
@@ -24,6 +25,7 @@ int main() {
 		arru64[i] = rnd64(&rnd);
 		arrfp32[i] = rnd_fp32(&rnd);
 		arrfp64[i] = rnd_fp64(&rnd);
+		normaldistr[i] = normal_distribution(10.0, 5.0, &rnd);
 		assert(arrfp32[i] >= 0.0f && arrfp32[i] < 1.0f);
 		assert(arrfp64[i] >= 0.0 && arrfp64[i] < 1.0);
 	}
@@ -38,5 +40,6 @@ int main() {
 	assert(memcmp(&arru64[0], &arru64[4], 4 * sizeof(uint64_t)) != 0);
 	assert(memcmp(&arrfp32[0], &arrfp32[4], 4 * sizeof(float)) != 0);
 	assert(memcmp(&arrfp64[0], &arrfp64[4], 4 * sizeof(double)) != 0);
+	assert(memcmp(&normaldistr[0], &normaldistr[4], 4 * sizeof(double)) != 0);
 	return EXIT_SUCCESS;
 }

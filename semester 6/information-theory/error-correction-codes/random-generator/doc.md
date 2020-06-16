@@ -42,3 +42,12 @@ float rnd_fp32(rnd_state_t *state);
 ```
 
 Returns random floating point value in range `[0.0, 1.0)`.
+
+### normal_distribution()
+
+```c
+double normal_distribution(double mu, double sigma, rnd_state_t *state);
+```
+
+Returns random floating point value distributed normally.
+The mean value of random is `mu` and standard deviation is `sigma`.
