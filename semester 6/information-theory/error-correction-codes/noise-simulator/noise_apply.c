@@ -3,6 +3,11 @@
 #include "bit-array.h"
 #include "random.h"
 
+// Thanks Microsoft
+#ifdef _MSC_VER
+#pragma warning( disable : 4244 )
+#endif
+
 static size_t bit_flip_loop(
 	bits_t *dst,
 	bits_t *src,

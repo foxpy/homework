@@ -2,12 +2,11 @@
 #include "random.h"
 #include "random_impl.h"
 
-enum {
-	DOUBLE_ONE_EXPONENT  = 0x3ff0000000000000,
-	DOUBLE_FRACTION_MASK = 0x000fffffffffffff,
-	FLOAT_ONE_EXPONENT   = 0x3f800000,
-	FLOAT_FRACTION_MASK  = 0x007fffff,
-};
+#define DOUBLE_ONE_EXPONENT  0x3ff0000000000000UL
+#define DOUBLE_FRACTION_MASK 0x000fffffffffffffUL
+#define FLOAT_ONE_EXPONENT   0x3f800000
+#define FLOAT_FRACTION_MASK  0x007fffff
+
 
 double rnd_fp64(rnd_state_t *state) {
 	xorshift64(&state->s64);
