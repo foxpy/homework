@@ -1,27 +1,15 @@
 #pragma once
 #include <stdlib.h>
-#include "random.h"
+#include "bit-array.h"
 
-enum noise_type {
-	NOISE_BIT_FLIP,
-	NOISE_LINEAR,
+enum {
+	NOISE_BURST_UP,
+	NOISE_BURST_DOWN,
 };
+typedef struct noise_generator noise_t;
 
-struct noise_bit_flip_config {
-	size_t num_bit_flips;
-};
-
-struct noise_linear_config {
-	size_t damage_length;
-};
-
-typedef union noise_config {
-	struct noise_bit_flip_config bit_flip;
-	struct noise_linear_config linear;
-} noise_cfg_t;
-
-void apply_noise(void *ptr,
-                 size_t len,
-                 int ntype,
-                 noise_cfg_t nconfig,
-                 rnd_state_t *rnd);
+noise_t* noise_init_bit_flip(double frequency);
+noise_t* noise_init_temporal(size_t interval);
+noise_t* noise_init_burst(int type, double frequency, size_t mean_length, size_t length_st_dev);
+void noise_free(noise_t *generator);
+size_t noise_apply(bits_t *dst, bits_t *src, noise_t *generator);
