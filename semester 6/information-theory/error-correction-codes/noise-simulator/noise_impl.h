@@ -27,7 +27,7 @@ union noise_settings {
 };
 
 struct noise_bit_flip_state {
-	// intended to be empty
+	int unused;
 };
 struct noise_temporal_state {
 	size_t consumed;
