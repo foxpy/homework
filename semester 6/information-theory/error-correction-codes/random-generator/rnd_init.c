@@ -3,7 +3,8 @@
 #endif
 
 #if defined __linux__ || defined __ANDROID_API__
-#	include <sys/random.h>
+#	include <unistd.h>
+#	include <sys/syscall.h>
 #endif
 
 #include <stdlib.h>
@@ -21,7 +22,7 @@ void rnd_init(rnd_state_t *state) {
 			getrandom(&state->s64, sizeof(uint64_t), 0);
 #		endif
 #	elif defined __linux__
-		getrandom(&state->s64, sizeof(uint64_t), 0);
+		syscall(SYS_getrandom, &state->s64, sizeof(uint64_t), 0);
 #	else
 		state->s64 = 0;
 #	endif
