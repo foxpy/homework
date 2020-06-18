@@ -36,6 +36,9 @@ target_link_libraries(ecc-repetition PUBLIC CmdOpts BitArray RepetitionCode)
 add_executable(ecc-hamming ecc-hamming.c)
 target_link_libraries(ecc-hamming PUBLIC CmdOpts BitArray HammingCode)
 
+add_executable(error-count error-count.c)
+target_link_libraries(error-count PUBLIC CmdOpts BitArray)
+
 add_subdirectory(tests)
 enable_testing()
 add_test(NAME RandomGeneratorTestRuns COMMAND tests/random-generator-test)
