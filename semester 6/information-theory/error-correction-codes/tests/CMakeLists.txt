@@ -23,3 +23,6 @@ target_link_libraries(ecc-repetition-test PUBLIC BitArray RepetitionCode)
 
 add_executable(ecc-hamming-test ecc-hamming-test.c)
 target_link_libraries(ecc-hamming-test PUBLIC BitArray HammingCode)
+
+add_executable(ecc-interleaver-test ecc-interleaver-test.c)
+target_link_libraries(ecc-interleaver-test PUBLIC BitArray Interleaver)

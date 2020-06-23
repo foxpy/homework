@@ -12,3 +12,12 @@ add_library(HammingCode
 )
 target_link_libraries(HammingCode PUBLIC BitArray)
 target_include_directories(HammingCode INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/hamming84)
+
+add_library(Interleaver
+	interleaver/interleaver_free.c
+	interleaver/interleaver_init.c
+	interleaver/interleaver_process_data.c
+	interleaver/interleaver_impl.c
+)
+target_link_libraries(Interleaver PUBLIC BitArray)
+target_include_directories(Interleaver INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/interleaver)

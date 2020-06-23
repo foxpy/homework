@@ -36,6 +36,9 @@ target_link_libraries(ecc-repetition PUBLIC CmdOpts BitArray RepetitionCode)
 add_executable(ecc-hamming ecc-hamming.c)
 target_link_libraries(ecc-hamming PUBLIC CmdOpts BitArray HammingCode)
 
+add_executable(ecc-interleaver ecc-interleaver.c)
+target_link_libraries(ecc-interleaver PUBLIC CmdOpts BitArray Interleaver)
+
 add_executable(error-count error-count.c)
 target_link_libraries(error-count PUBLIC CmdOpts BitArray)
 
@@ -49,3 +52,4 @@ add_test(NAME BytesToStringTestRuns COMMAND tests/bytes-to-string-test)
 add_test(NAME SerialTestRuns COMMAND tests/serial-test)
 add_test(NAME EccRepetitionTestRuns COMMAND tests/ecc-repetition-test)
 add_test(NAME EccHammingTestRuns COMMAND tests/ecc-hamming-test)
+add_test(NAME EccInterleaverTestRuns COMMAND tests/ecc-interleaver-test)
