@@ -1,12 +1,12 @@
 #include <string.h>
+#include <stdint.h>
 #include "random.h"
 #include "random_impl.h"
 
-#define DOUBLE_ONE_EXPONENT  0x3ff0000000000000UL
-#define DOUBLE_FRACTION_MASK 0x000fffffffffffffUL
-#define FLOAT_ONE_EXPONENT   0x3f800000
-#define FLOAT_FRACTION_MASK  0x007fffff
-
+#define DOUBLE_ONE_EXPONENT  UINT64_C(0x3ff0000000000000)
+#define DOUBLE_FRACTION_MASK UINT64_C(0x000fffffffffffff)
+#define FLOAT_ONE_EXPONENT   UINT32_C(0x3f800000)
+#define FLOAT_FRACTION_MASK  UINT32_C(0x007fffff)
 
 double rnd_fp64(rnd_state_t *state) {
 	xorshift64(&state->s64);
