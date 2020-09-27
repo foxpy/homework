@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.1)
+project(Detect)
+add_executable(detect detect.cpp detecter.cpp detecter.hpp)
+add_executable(detecter-test test.cpp detecter.cpp)
+enable_testing()
+add_test(NAME DetecterWorks COMMAND detecter-test)
