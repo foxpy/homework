@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.1)
-project(Detect)
-add_executable(detect detect.cpp detecter.cpp detecter.hpp)
-add_executable(detecter-test test.cpp detecter.cpp)
-enable_testing()
-add_test(NAME DetecterWorks COMMAND detecter-test)
+project(FormalLanguages)
+
+option(FL_TESTS "Build tests" OFF)
+if(FL_TESTS)
+    enable_testing()
+endif()
+
+add_subdirectory(1)
