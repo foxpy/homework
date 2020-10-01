@@ -5,3 +5,5 @@
 .vscode/
 __pycache__/
 .gdb_history
+.idea/
+build/
