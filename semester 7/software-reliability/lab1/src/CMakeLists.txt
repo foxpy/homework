@@ -6,3 +6,6 @@ target_include_directories(work15 INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(work4 SHARED 4.cpp)
 target_include_directories(work4 INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_library(work18 SHARED 18.cpp)
+target_include_directories(work18 INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})

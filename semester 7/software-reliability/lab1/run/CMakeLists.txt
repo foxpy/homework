@@ -6,3 +6,6 @@ target_link_libraries(15 PUBLIC work15)
 
 add_executable(4 4.cpp)
 target_link_libraries(4 PUBLIC work4)
+
+add_executable(18 18.cpp)
+target_link_libraries(18 PUBLIC work18)
