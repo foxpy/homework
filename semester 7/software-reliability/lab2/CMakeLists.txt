@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.1)
+project(Lab1 LANGUAGES C CXX)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+if(NOT MSVC)
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+if(NOT WIN32)
+    link_libraries(m)
+endif()
+
+add_subdirectory(qc)
+
+add_subdirectory(lib)
+add_subdirectory(run)
