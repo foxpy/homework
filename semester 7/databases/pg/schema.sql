@@ -67,9 +67,16 @@ $$
 	SELECT $1 || $2 || $3;
 $$ LANGUAGE 'sql' STRICT;
 
+CREATE FUNCTION my_string_concat_final(text)
+RETURNS text AS
+$$
+	SELECT substr($1, 1, length($1) - 1);
+$$ LANGUAGE 'sql' STRICT;
+
 CREATE AGGREGATE cat(text, text)
 (
 	sfunc = my_string_concat,
 	stype = text,
+	finalfunc = my_string_concat_final,
 	initcond = ''
 );
