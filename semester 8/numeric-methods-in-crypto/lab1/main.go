@@ -28,7 +28,6 @@ func factorize(number *big.Int) {
 	loop.SetUint64(1)
 
 	if number.Cmp(one) == 0 {
-		fmt.Println(number)
 		return
 	}
 
@@ -49,7 +48,7 @@ func factorize(number *big.Int) {
 			break
 		}
 	}
-	fmt.Print(factor, "*")
+	fmt.Print(" ", factor)
 	number.Div(number, factor)
 	factorize(number)
 }
@@ -64,7 +63,9 @@ func main() {
 		if !s {
 			fmt.Println(os.Args[1], "does not look like integer")
 		} else {
+			fmt.Print(n, ":")
 			factorize(n)
+			fmt.Println()
 		}
 	}
 }

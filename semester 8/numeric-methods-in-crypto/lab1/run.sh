@@ -10,5 +10,5 @@ limit="1125899906842624"
 if (( number < limit )); then
 	go run main.go "$number"
 else
-	maxima --very-quiet --batch-string "factor($number);" | grep -v "Loading"
+	factor "$number"
 fi
