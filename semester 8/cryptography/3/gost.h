@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
+#include <time.h>
 
 typedef struct {
 	uint32_t key[8];
