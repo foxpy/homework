@@ -29,13 +29,13 @@ static size_t get_input(uint32_t** dst, int argc, char** argv) {
 	}
 }
 
-size_t ticks(gost* g, uint32_t buf[2]) {
+size_t ecb_ticks(gost* g, volatile uint32_t buf[2]) {
 	unsigned lo0 = 0, hi0 = 0;
 	unsigned lo1 = 0, hi1 = 0;
 	__asm__ __volatile__ (
 		"lfence;rdtsc" : "=a"(lo0), "=d"(hi0) : : "memory"
 	);
-	gost_encrypt(g, buf, 2);
+	gost_encrypt(g, (uint32_t*) buf, 2);
 	__asm__ __volatile__ (
 		"lfence;rdtsc" : "=a"(lo1), "=d"(hi1) : : "memory"
 	);
@@ -44,7 +44,25 @@ size_t ticks(gost* g, uint32_t buf[2]) {
 	return end - start;
 }
 
-#define NUM_SAMPLES 100
+size_t cbc_ticks(gost* g, volatile uint32_t iv[2], volatile uint32_t buf[2]) {
+	unsigned lo0 = 0, hi0 = 0;
+	unsigned lo1 = 0, hi1 = 0;
+	__asm__ __volatile__ (
+		"lfence;rdtsc" : "=a"(lo0), "=d"(hi0) : : "memory"
+	);
+	buf[0] ^= iv[0]; buf[1] ^= iv[1];
+	gost_encrypt(g, (uint32_t*) buf, 2);
+	iv[0] = buf[0]; iv[1] = buf[1];
+	__asm__ __volatile__ (
+		"lfence;rdtsc" : "=a"(lo1), "=d"(hi1) : : "memory"
+	);
+	unsigned long start = lo0 | ((unsigned long) hi0 << 32);
+	unsigned long end = lo1 | ((unsigned long) hi1 << 32);
+	return end - start;
+}
+
+#define WARMUP_ITERATIONS 1000
+#define NUM_SAMPLES 200
 
 int main(int argc, char* argv[]) {
 	uint32_t* data;
@@ -60,29 +78,64 @@ int main(int argc, char* argv[]) {
 	print_data("Ciphertext", (uint8_t*) data, len * 8);
 	gost_decrypt(&g, data, len);
 	print_data("Plaintext", (uint8_t*) data, len * 8);
-	printf("Output data: %s\n", (char*) data);
+	printf("Output string: %s\n", (char*) data);
 
-	size_t samples[NUM_SAMPLES] = {0};
+	size_t ecb_samples[NUM_SAMPLES] = {0};
+	for (size_t i = 0; i < WARMUP_ITERATIONS; ++i) {
+		ecb_ticks(&g, data);
+	}
 	for (size_t i = 0; i < NUM_SAMPLES; ++i) {
-		samples[i] = ticks(&g, data);
+		ecb_samples[i] = ecb_ticks(&g, data);
 	}
 	size_t min = SIZE_MAX, max = 0;
 	double sum = 0.0;
+	printf("\nECB Samples: ");
 	for (size_t i = 0; i < NUM_SAMPLES; ++i) {
-		if (samples[i] > max) max = samples[i];
-		if (samples[i] < min) min = samples[i];
-		sum += samples[i];
-		printf("Run %8zu, time: %8zu\n", i, samples[i]);
+		if (ecb_samples[i] > max) max = ecb_samples[i];
+		if (ecb_samples[i] < min) min = ecb_samples[i];
+		sum += ecb_samples[i];
+		printf("%zu, ", ecb_samples[i]);
 	}
+	printf("\n");
 	double avg = sum / NUM_SAMPLES;
-	double disp = 0.0;
+	double std = 0.0;
 	for (size_t i = 0; i < NUM_SAMPLES; ++i) {
-		disp += pow(avg - samples[i], 2);
+		std += pow(avg - ecb_samples[i], 2);
 	}
-	disp /= NUM_SAMPLES;
-	double std = sqrt(disp);
-	printf("Min: %zu, max: %zu, avg: %.0f, dev: %.2f, std: %.2f\n",
-			min, max, avg, disp, std);
+	std /= NUM_SAMPLES;
+	std = sqrt(std);
+	printf("Min: %zu, max: %zu, avg: %.0f, stddev: %.2f\n",
+			min, max, avg, std);
+
+	uint32_t iv[2];
+	memmove(iv, key, sizeof(uint32_t) * 2);
+	gost_key(&g, key);
+	size_t cbc_samples[NUM_SAMPLES] = {0};
+	for (size_t i = 0; i < WARMUP_ITERATIONS; ++i) {
+		cbc_ticks(&g, iv, data);
+	}
+	for (size_t i = 0; i < NUM_SAMPLES; ++i) {
+		cbc_samples[i] = cbc_ticks(&g, iv, data);
+	}
+	min = SIZE_MAX, max = 0;
+	sum = 0.0;
+	printf("\nCBC Samples: ");
+	for (size_t i = 0; i < NUM_SAMPLES; ++i) {
+		if (cbc_samples[i] > max) max = cbc_samples[i];
+		if (cbc_samples[i] < min) min = cbc_samples[i];
+		sum += cbc_samples[i];
+		printf("%zu, ", cbc_samples[i]);
+	}
+	printf("\n");
+	avg = sum / NUM_SAMPLES;
+	std = 0.0;
+	for (size_t i = 0; i < NUM_SAMPLES; ++i) {
+		std += pow(avg - cbc_samples[i], 2);
+	}
+	std /= NUM_SAMPLES;
+	std = sqrt(std);
+	printf("Min: %zu, max: %zu, avg: %.0f, stddev: %.2f\n",
+			min, max, avg, std);
 
 	return EXIT_SUCCESS;
 }
