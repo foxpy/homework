@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <title>Решение квадратного уравнения</title>
+    <meta charset="UTF-8">
+    <style>
+        .everything {
+            max-width: 960px;
+            margin: auto;
+            font-size: 14px;
+            color: #222;
+            padding: 0% 1%;
+        }
+
+        .formula {
+            display: inline-block;
+            font-size: 16px;
+            font-family: serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="everything">
+        <h1>Квадратное уравнение</h1>
+        <p>
+            Квадратным уравнением является уравнение следующего вида:
+            <span class="formula">ax² + bx + c = 0</span>
+            <br>
+            Квадратное уравнение может иметь один или два корня, а может и не иметь корней.
+            <br>
+            Для решения квадратного уравнения необходимо в начале вычислить дискриминант:
+            <span class="formula">D = b² – 4ac</span>
+            <br>
+            Если дискриминант отрицательный, то уравнение не имеет корней.
+            <br>
+            Если дискриминант равен нулю, то уравнение имеет единственный корень:
+            <span class="formula">x = –b ÷ 2a</span>
+            <br>
+            Если дискриминант положительный, то уравнение имеет два корня:
+            <br>
+            <span class="formula">x₁ = (–b + √D) ÷ 2a</span>
+            <br>
+            <span class="formula">x₂ = (–b – √D) ÷ 2a</span>
+        </p>
+
+        <h2>Функция решения квадратного уравнения на языке Pascal</h2>
+        <p>
+            <code><pre>
+uses
+	math;
+
+type
+	dptr = ^double;
+
+procedure solveEquation(a: double; b: double; c: double; x1: dptr; x2: dptr);
+var
+	d: double;
+	nan: double;
+begin
+	nan := 0.0 / 0.0;
+	d := b*b - 4.0*a*c;
+	if (d < 0.0) then begin
+		x1^ := nan;
+		x2^ := nan;
+	end else if (d < 0.00001) then begin
+		x1^ := -b / 2.0 / a;
+		x2^ := -b / 2.0 / a;
+	end else begin
+		x1^ := (-b + sqrt(d)) / 2.0 / a;
+		x2^ := (-b - sqrt(d)) / 2.0 / a;
+	end;
+end;
+    </pre></code>
+        </p>
+
+        <h2>Функция решения квадратного уравнения на языке C</h2>
+        <p>
+            <code><pre>
+#include &lt;math.h&gt;
+
+void solveEquation(double a, double b, double c, double* x1, double* x2) {
+    double d = b*b - 4.0*a*c;
+    if (d < 0.0) {
+        *x1 = NAN;
+        *x2 = NAN;
+    } else if (d < 0.00001) {
+        *x1 = -b / 2.0 / a;
+        *x2 = -b / 2.0 / a;
+    } else {
+        *x1 = (-b + sqrt(d)) / 2.0 / a;
+        *x2 = (-b - sqrt(d)) / 2.0 / a;
+    }
+}
+        </pre></code>
+        </p>
+
+        <h2>Пример решения квадратного уравнения</h2>
+        <p>
+            В качестве примера, решим следующее квадратное уравнение:
+            <span class="formula">2x² – 8x + 6 = 0</span>
+            <br>
+            Вычислим дискриминант:
+            <span class="formula">D = b² – 4ac = 8² – 4·2·6 = 64 – 48 = 16</span>
+            <br>
+            Дискриминант больше нуля, а значит уравнение имеет два корня:
+            <br>
+            <span class="formula">x₁ = (–b + √D) ÷ 2a = (–8 + √16) ÷ 2·2 = (8 + 4) ÷ 4 = 3</span>
+            <br>
+            <span class="formula">x₂ = (–b - √D) ÷ 2a = (–8 - √16) ÷ 2·2 = (8 - 4) ÷ 4 = 1</span>
+        </p>
+    </div>
+</body>
+
+</html>
