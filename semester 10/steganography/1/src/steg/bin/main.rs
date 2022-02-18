@@ -1,5 +1,5 @@
-use std::{env, fs, process};
 use std::collections::VecDeque;
+use std::{env, fs, process};
 use xml::reader::{EventReader, XmlEvent};
 
 fn help(prog_name: &str, exit_code: i32) {
@@ -15,24 +15,26 @@ fn eat<R: std::io::Read>(xml: &mut EventReader<R>, data: &mut VecDeque<bool>) {
                 name,
                 attributes: _,
                 namespace: _,
-            } => if name.local_name == "t" {
-                match xml.next().unwrap() {
-                    XmlEvent::Characters(s) | XmlEvent::Whitespace(s) => {
-                        for _ in 0..s.chars().count() {
-                            data.push_back(up);
+            } => {
+                if name.local_name == "t" {
+                    match xml.next().unwrap() {
+                        XmlEvent::Characters(s) | XmlEvent::Whitespace(s) => {
+                            for _ in 0..s.chars().count() {
+                                data.push_back(up);
+                            }
+                            return;
                         }
-                        return;
-                    },
-                    _ => (),
+                        _ => (),
+                    }
+                } else if name.local_name == "w" {
+                    up = true;
                 }
-            } else if name.local_name == "w" {
-                up = true;
-            },
-            XmlEvent::EndElement {
-                name,
-            } => if name.local_name == "r" {
-                break;
-            },
+            }
+            XmlEvent::EndElement { name } => {
+                if name.local_name == "r" {
+                    break;
+                }
+            }
             _ => (),
         }
     }
@@ -74,7 +76,7 @@ fn main() {
                     if name.local_name == "r" {
                         eat(&mut xml, &mut data);
                     }
-                },
+                }
                 XmlEvent::EndDocument => break,
                 _ => (),
             }
