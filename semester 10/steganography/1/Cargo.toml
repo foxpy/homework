@@ -2,8 +2,15 @@
 name = "steg"
 version = "0.1.0"
 edition = "2021"
+default-run = "steg"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "steg"
+path = "src/steg/bin/main.rs"
+
+[[bin]]
+name = "bodo"
+path = "src/bodo/bin/main.rs"
 
 [dependencies]
 zip = "0.5.13"
