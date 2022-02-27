@@ -1,7 +1,7 @@
 use bitvec::prelude::*;
-use std::{fs, io::prelude::*, collections::HashMap};
-use ux::u5;
 use clap::Parser;
+use std::{collections::HashMap, fs, io::prelude::*};
+use ux::u5;
 
 fn bodo_extract_bits(input: &[u8]) -> Vec<u5> {
     let mut ret = Vec::<u5>::new();
@@ -100,7 +100,7 @@ struct Args {
 fn main() {
     let args = Args::parse();
     let mut file = fs::File::open(args.path).unwrap();
-    let mut input: Vec<u8> = vec!();
+    let mut input: Vec<u8> = vec![];
     file.read_to_end(&mut input).unwrap();
     let bodo_extracted = bodo_extract_bits(&input);
     let output = bodo_decode(BodoState::Latin, &bodo_extracted);
@@ -143,11 +143,7 @@ mod tests {
 
     #[test]
     fn bodo_decode_latin() {
-        let input = vec![
-            u5::new(0b00101),
-            u5::new(0b11000),
-            u5::new(0b00101),
-        ];
+        let input = vec![u5::new(0b00101), u5::new(0b11000), u5::new(0b00101)];
         let expected = "SOS";
         let output = bodo_decode(BodoState::Latin, &input);
         assert_eq!(expected, output);
