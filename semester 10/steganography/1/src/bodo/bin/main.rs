@@ -23,6 +23,30 @@ fn bodo_extract_bits(input: &[u8]) -> Vec<u5> {
     ret
 }
 
+fn bodo_pack_bits(input: &[u5]) -> Vec<u8> {
+    let mut ret = Vec::<u8>::new();
+    let input_bits: Vec<u8> = input.iter().map(|x| u8::from(*x)).collect();
+    let mut bit_iter = input_bits
+        .view_bits::<Msb0>()
+        .iter()
+        .by_vals()
+        .map(|x| x as u8)
+        .enumerate()
+        .filter(|(i, _)| i % 8 > 2)
+        .map(|(_, v)| v)
+        .peekable();
+    while bit_iter.peek() != None {
+        let mut bits: Vec<u8> = bit_iter.by_ref().take(8).collect();
+        bits.resize(8, u8::MIN);
+        let mut byte = 0u8;
+        for (shift, val) in bits.iter().rev().enumerate() {
+            byte |= *val << shift;
+        }
+        ret.push(byte);
+    }
+    ret
+}
+
 enum BodoState {
     Latin,
     Cyrillic,
@@ -121,6 +145,14 @@ mod tests {
             u5::new(0b10000),
         ];
         let output = bodo_extract_bits(input);
+        assert_eq!(expected, output);
+    }
+
+    #[test]
+    fn bodo_pack() {
+        let input = vec![u5::new(0b10101), u5::new(0b10011)];
+        let expected: Vec<u8> = vec![0b10101100, 0b11000000];
+        let output = bodo_pack_bits(&input);
         assert_eq!(expected, output);
     }
 
