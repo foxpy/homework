@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.1)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+project(UniBooks)
+add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+if(NOT MSVC)
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+add_subdirectory(qc)
+find_package(FLTK CONFIG REQUIRED)
+find_package(SQLite3 REQUIRED)
+find_package(unofficial-sodium CONFIG REQUIRED)
+
+add_subdirectory(database-wrapper)
+add_subdirectory(gui)
+
+option(UB_TESTS "Build tests" OFF)
+if(UB_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
