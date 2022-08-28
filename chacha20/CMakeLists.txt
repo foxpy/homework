@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.1)
+project(ChaCha20)
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED True)
+add_compile_options(-Wall -Wextra -Wpedantic)
+add_subdirectory(dependencies)
+
+option(CC20_TESTS OFF "Build tests")
+if (CC20_TESTS)
+    enable_testing()
+    function(cc20_add_test target)
+        add_executable(${target} ${target}.c)
+        target_link_libraries(${target} PUBLIC qc ChaCha20 Poly1305)
+        add_test(NAME ${target} COMMAND ${target})
+    endfunction()
+endif ()
+
+add_subdirectory(src)
+if (CC20_TESTS)
+    add_subdirectory(tests)
+endif ()
+add_subdirectory(cmd)

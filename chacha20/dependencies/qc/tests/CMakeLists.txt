@@ -1,0 +1,20 @@
+set(RUNTIME_OUTPUT_DIRECTORY tests)
+
+function(qc_add_test target)
+    add_executable(${target} ${target}.c)
+    target_link_libraries(${target} PUBLIC qc)
+    add_test(NAME ${target} COMMAND ${target})
+endfunction()
+
+function(qc_add_failing_test target)
+    qc_add_test(${target})
+    set_tests_properties(${target} PROPERTIES WILL_FAIL ON)
+endfunction()
+
+add_subdirectory(args)
+add_subdirectory(random)
+add_subdirectory(math)
+add_subdirectory(utils)
+add_subdirectory(error)
+add_subdirectory(string)
+add_subdirectory(endian)
