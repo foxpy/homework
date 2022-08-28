@@ -1,0 +1,11 @@
+# C
+build/
+.vscode/
+.gdb_history
+
+# Rust
+target
+Cargo.lock
+
+# JetBrains
+.idea/
