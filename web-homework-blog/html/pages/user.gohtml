@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts of {{.Username}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" media="all">
+</head>
+<body>
+{{.Header}}
+{{with .PageData}}
+    <main class="left">
+        <section>
+            {{range .Articles}}
+                <article>
+                    <h3><a href="/article/{{.Id}}">{{.Name}}</a></h3>
+                    <h4>Written by {{.Username}} at {{.Date}}</h4>
+                    <p>{{.Brief}}</p>
+                    <div class="gap">
+                        <form method="post" action="/delete/{{.Id}}">
+                            <input type="submit" value="Delete post">
+                        </form>
+                        <form method="get" action="/edit/{{.Id}}">
+                            <input type="submit" value="Edit post">
+                        </form>
+                    </div>
+                </article>
+            {{end}}
+        </section>
+    </main>
+    <aside class="right">
+        <div>
+            <h3>Authors</h3>
+            {{range .Users}}
+                <article>
+                    <p><a href="/user/{{.Username}}">{{.Username}}</a> ({{.NumArticles}} posts)</p>
+                </article>
+            {{end}}
+        </div>
+    </aside>
+{{end}}
+{{.Footer}}
+</body>
+</html>

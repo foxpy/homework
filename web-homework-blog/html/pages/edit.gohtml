@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit {{.PageData.Name}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" media="all">
+</head>
+<body>
+{{.Header}}
+{{with .PageData}}
+    <main>
+        <form class="editorpage">
+            <ul>
+                <li>
+                    <label for="name">Post name:</label>
+                    <input type="text" id="name" name="name" value="{{.Name}}" required>
+                </li>
+                <li>
+                    <label for="username">Author:</label>
+                    <input type="text" id="username" name="username" value="{{.Username}}"
+                           pattern="^[a-zA-Z0-9_]+$" title="only English letters and underscores">
+                </li>
+                <li>
+                    <label for="brief">Short description:</label>
+                    <input type="text" id="brief" name="brief" value="{{.Brief}}" required>
+                </li>
+                <li>
+                    <label for="content">Post contents:</label>
+                    <textarea id="content" name="content" required>{{.Content}}</textarea>
+                </li>
+                <li class="editorpage">
+                    <button type="submit" formaction="/edit/{{.Id}}" formmethod="post" formtarget="_self">Submit
+                    </button>
+                    <button type="submit" formaction="/preview" formmethod="post" formtarget="_blank">Preview</button>
+                </li>
+            </ul>
+        </form>
+    </main>
+{{end}}
+{{.Footer}}
+</body>
+</html>

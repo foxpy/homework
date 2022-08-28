@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview {{.PageData.Name}}</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" media="all">
+</head>
+<body>
+{{.Header}}
+{{with .PageData}}
+    <main>
+        <h1>{{.Name}}</h1>
+        <h2>{{.Username}} at {{.Date}}</h2>
+        <h4>{{.Brief}}</h4>
+        <hr>
+        {{.Content}}
+    </main>
+{{end}}
+{{.Footer}}
+</body>
+</html>

@@ -1,0 +1,116 @@
+article h3, article h4, article p {
+    padding: 1px;
+    margin: 1.5% 0 1.5% 0;
+}
+
+main.left {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 70%;
+}
+
+aside.right {
+    float: right;
+    margin: 0;
+    padding: 0;
+    width: 30%;
+}
+
+aside.right div {
+    margin: 1% 1% 0.5% 0.5%;
+    padding: 0;
+    background-color: beige;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+aside.right h3 {
+    margin: 0.5em 0;
+}
+
+footer {
+    clear: both;
+}
+
+section {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+section article {
+    background-color: lightsteelblue;
+    flex: 300px;
+    margin: 0.5%;
+    padding: 0.5%;
+}
+
+footer p {
+    margin: 0;
+}
+
+nav {
+    background-color: lightskyblue;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0.75rem;
+}
+
+nav a.current {
+    color: floralwhite !important;
+}
+
+nav a, nav a:visited, nav a:hover, nav a:focus {
+    text-decoration: none;
+    color: black;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.gap {
+    display: flex;
+    gap: 1em;
+}
+
+form.editorpage {
+    margin: 0 auto;
+    padding: 1em;
+    width: 90%;
+    border: 1px solid lightgrey;
+}
+
+form.editorpage ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+form.editorpage li + li {
+    margin-top: 0.75em;
+}
+
+form.editorpage label {
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+}
+
+form.editorpage input, form.editorpage textarea {
+    font: 1em sans-serif;
+    width: 75%;
+    box-sizing: border-box;
+}
+
+form.editorpage textarea {
+    vertical-align: top;
+    height: 20em;
+}
+
+li.editorpage {
+    padding-left: 20%;
+}
+
+form.editorpage button {
+    margin-left: .5em;
+}
