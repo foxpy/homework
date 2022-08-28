@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.9)
+project(qc)
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED True)
+if (MSVC)
+    add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+else()
+    add_compile_options(-Wall -Wextra -pedantic)
+endif()
+
+if (NOT WIN32)
+    link_libraries(m)
+endif()
+
+option(QC_LTO "Use link time optimization" OFF)
+if (QC_LTO)
+    include(CheckIPOSupported)
+    check_ipo_supported()
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+endif()
+
+option(QC_TESTS "Build tests" OFF)
+if(QC_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+option(QC_EXAMPLES "Build examples" OFF)
+if(QC_EXAMPLES)
+    add_subdirectory(examples)
+endif()
+
+add_subdirectory(src)
